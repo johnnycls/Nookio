@@ -8,7 +8,7 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
   manifest: {
     name: "Nookio",
     short_name: "Nookio",
-    description: "Try Me!",
+    description: "",
     theme_color: "#ffffff",
     background_color: "#ffffff",
     display: "standalone",

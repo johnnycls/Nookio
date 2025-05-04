@@ -23,7 +23,7 @@ async function verifyGoogleToken(token: string) {
   }
 }
 
-// publisher register/login;
+// register/login;
 router.post("/login", async (req: Request, res: Response) => {
   try {
     const { clientId, credential } = req?.body?.credentials;
