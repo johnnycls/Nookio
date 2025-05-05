@@ -2,6 +2,7 @@ import express from "express";
 import Stripe from "stripe";
 import bodyParser from "body-parser";
 import { STRIPE_PRIVATE_KEY, STRIPE_ENDPOINT_SECRET } from "../config";
+import User from "../models/user.model";
 
 const router = express.Router();
 const stripe = new Stripe(STRIPE_PRIVATE_KEY || "");
@@ -32,7 +33,15 @@ router.post(
           event.data.object.id
         );
 
-        const { metadata, payment_intent } = session;
+        const { metadata, customer_email } = session;
+
+        if (metadata?.credits && customer_email) {
+          const credits = parseInt(metadata.credits);
+          await User.findOneAndUpdate(
+            { email: customer_email },
+            { $inc: { credit: credits } }
+          );
+        }
 
         res.status(200).end();
       }
@@ -41,4 +50,5 @@ router.post(
     }
   }
 );
+
 export default router;

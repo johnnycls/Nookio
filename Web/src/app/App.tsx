@@ -1,20 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { PrimeReactProvider } from "primereact/api";
 import { useAppDispatch } from "./store";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GOOGLE_CLIENT_ID } from "../config";
+import useLogin from "../hooks/useLogin";
+import PromptInstallIfNotStandalone from "../components/PromptInstallIfNotStandalone";
+import LoadingScreen from "../components/LoadingScreen";
+import Error from "../components/Error";
+import { useTranslation } from "react-i18next";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { isLoading, isError, isSuccess } = useLogin();
+  const { t } = useTranslation();
 
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+    <PromptInstallIfNotStandalone>
       <PrimeReactProvider>
-        <RouterProvider router={router} />
+        {isError ? (
+          <Error onReload={() => {}} errorText={t("error.error")} />
+        ) : (
+          <>
+            <LoadingScreen isLoading={isLoading} />
+            {isSuccess && <RouterProvider router={router} />}
+          </>
+        )}
       </PrimeReactProvider>
-    </GoogleOAuthProvider>
+    </PromptInstallIfNotStandalone>
   );
 };
 

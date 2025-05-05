@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../app/store";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
 import { useThemeColor } from "../../hooks/useThemeColor";
 import Content from "./Content";
+import { useGetProfileQuery } from "../../slices/userSlice";
+import Error from "../../components/Error";
 
 const Home: React.FC = () => {
   useThemeColor("#FFFFFF");
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { data: profile, isLoading, isError, refetch } = useGetProfileQuery({});
 
-  return (
-    <PromptInstallIfNotStandalone>
-      <>
-        <LoadingScreen isLoading={false} />
-        <Content />
-      </>
-    </PromptInstallIfNotStandalone>
+  return isError ? (
+    <Error onReload={refetch} errorText={t("error.error")} />
+  ) : (
+    <>
+      <LoadingScreen isLoading={isLoading} />
+      <Content />
+    </>
   );
 };
 

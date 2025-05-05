@@ -14,6 +14,7 @@ export const apiSlice = createApi({
     },
   }),
   reducerPath: "api",
+  tagTypes: ["Profile"],
   endpoints: (builder) => ({}),
 });
 
