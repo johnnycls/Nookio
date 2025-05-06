@@ -44,29 +44,22 @@ export async function createPaymentSession(packageId: string, email: string) {
     throw new Error("Invalid package ID");
   }
 
-  return await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    mode: "payment",
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: Math.round(creditPackage.price * 100), // Convert to cents
+    currency: "usd",
     metadata: {
       credits: creditPackage.credits.toString(),
+      packageId: creditPackage.id,
+      customerEmail: email,
     },
-    customer_email: email,
-    // allow_promotion_codes: true,
-    // payment_intent_data: { capture_method: "manual" },
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: creditPackage.label,
-          },
-          unit_amount: Math.round(creditPackage.price * 100), // Convert to cents
-        },
-        quantity: 1,
-      },
-    ],
-    success_url: `${WEB_URL}`,
+    automatic_payment_methods: {
+      enabled: true,
+    },
   });
+
+  return {
+    clientSecret: paymentIntent.client_secret,
+  };
 }
 
 export async function capturePayment(paymentIntent: string) {

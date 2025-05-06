@@ -1,34 +1,36 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface IChat {
-  from: string;
-  time: Date;
+export interface IMessage {
   content: string;
+  sender: "user" | "friend";
+  timestamp: Date;
 }
 
 export interface IChatroom extends Document {
-  friendId: mongoose.Types.ObjectId;
-  userId: mongoose.Types.ObjectId;
-  lastSeen: Date;
-  chats: IChat[];
+  userId: Schema.Types.ObjectId;
+  friendId: Schema.Types.ObjectId;
+  messages: IMessage[];
+  lastReadPosition: number;
+  unreadCount: number;
 }
 
-const ChatSchema: Schema = new Schema({
-  from: { type: String, required: true },
-  time: { type: Date, default: Date.now },
+const messageSchema = new Schema({
   content: { type: String, required: true },
+  sender: { type: String, enum: ["user", "friend"], required: true },
+  timestamp: { type: Date, default: Date.now },
 });
 
-const ChatroomSchema: Schema = new Schema(
+const chatroomSchema = new Schema(
   {
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     friendId: { type: Schema.Types.ObjectId, ref: "Friend", required: true },
-    userId: { type: Schema.Types.ObjectId, ref: "Profile", required: true },
-    lastSeen: { type: Date, default: Date.now },
-    chats: [ChatSchema],
+    messages: [messageSchema],
+    lastReadPosition: { type: Number, default: 0 },
+    unreadCount: { type: Number, default: 0 },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model<IChatroom>("Chatroom", ChatroomSchema);
+export default mongoose.model<IChatroom>("Chatroom", chatroomSchema);

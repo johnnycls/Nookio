@@ -12,6 +12,7 @@ import { Toast } from "primereact/toast";
 import { useTranslation } from "react-i18next";
 import { useRef } from "react";
 import PurchaseDialog from "./PurchaseDialog";
+import { InputSwitch } from "primereact/inputswitch";
 
 const Content: React.FC = () => {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const Content: React.FC = () => {
     gender: "",
     dob: undefined as Date | undefined,
     lang: "",
+    isPublic: false,
   });
 
   React.useEffect(() => {
@@ -36,6 +38,7 @@ const Content: React.FC = () => {
         gender: profile.gender,
         dob: new Date(profile.dob),
         lang: profile.lang,
+        isPublic: profile.isPublic,
       });
     }
   }, [profile]);
@@ -60,6 +63,7 @@ const Content: React.FC = () => {
         gender: editableProfile.gender,
         dob: editableProfile.dob,
         lang: editableProfile.lang,
+        isPublic: editableProfile.isPublic,
       }).unwrap();
 
       toast.current?.show({
@@ -181,6 +185,27 @@ const Content: React.FC = () => {
               }
               className="w-full"
             />
+          </div>
+
+          <div className="field">
+            <div className="flex items-center gap-2">
+              <InputSwitch
+                id="isPublic"
+                checked={editableProfile.isPublic}
+                onChange={(e) =>
+                  setEditableProfile({
+                    ...editableProfile,
+                    isPublic: e.value,
+                  })
+                }
+              />
+              <label htmlFor="isPublic" className="text-lg">
+                {t("profile.isPublic")}
+              </label>
+            </div>
+            <small className="text-gray-500 block mt-1">
+              {t("profile.isPublicDescription")}
+            </small>
           </div>
 
           <div className="flex justify-end mt-4">

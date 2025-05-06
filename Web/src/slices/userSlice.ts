@@ -9,18 +9,16 @@ export type profile = {
   gender: string;
   dob: Date;
   credit: number;
-  chats: string[];
   lang: string;
+  isPublic: boolean;
 };
 
 type profileResponse = profile;
 
-type updateProfileRequest = Partial<
-  Omit<profile, "_id" | "email" | "credit" | "chats">
->;
+type updateProfileRequest = Partial<Omit<profile, "_id" | "email" | "credit">>;
 
 type purchaseResponse = {
-  url: string;
+  clientSecret: string;
 };
 
 const userSlice = apiSlice.injectEndpoints({

@@ -5,6 +5,9 @@ import { PORT, WEB_URL } from "./config";
 import userRouter from "./routes/user";
 import stripeRouter from "./routes/stripe";
 import { rateLimit } from "express-rate-limit";
+import chatRoutes from "./routes/chat";
+import chatroomRoutes from "./routes/chatroom";
+import { queueService } from "./services/queue.service";
 
 const limiter = rateLimit({
   windowMs: 1000,
@@ -32,6 +35,8 @@ app.use("/stripe", stripeRouter);
 app.use(express.json({ limit: "1mb" }));
 
 app.use("/user", userRouter);
+app.use("/chat", chatRoutes);
+app.use("/chatroom", chatroomRoutes);
 
 app.use("*", (req: Request, res: Response, next: NextFunction) => {
   const error = {
@@ -40,6 +45,9 @@ app.use("*", (req: Request, res: Response, next: NextFunction) => {
   };
   next(error);
 });
+
+// Start queue processing
+queueService.startProcessing();
 
 app.listen(port, () => {
   console.log(`${port}`);

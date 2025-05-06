@@ -5,6 +5,12 @@ import { Toast } from "primereact/toast";
 import { useTranslation } from "react-i18next";
 import { useRef } from "react";
 import { usePurchaseCreditsMutation } from "../../slices/userSlice";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { STRIPE_PUBLISHABLE_KEY } from "../../config";
+import PaymentForm from "./PaymentForm";
+
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 interface CreditPackage {
   id: string;
@@ -23,6 +29,7 @@ const PurchaseDialog: React.FC<PurchaseDialogProps> = ({ visible, onHide }) => {
   const toast = useRef<Toast>(null);
   const [purchaseCredits] = usePurchaseCreditsMutation();
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   const creditPackages: CreditPackage[] = [
@@ -64,10 +71,10 @@ const PurchaseDialog: React.FC<PurchaseDialogProps> = ({ visible, onHide }) => {
 
     try {
       setIsPurchasing(true);
-      const { url } = await purchaseCredits({
+      const { clientSecret } = await purchaseCredits({
         packageId: selectedPackage,
       }).unwrap();
-      window.location.href = url;
+      setClientSecret(clientSecret);
     } catch (error) {
       toast.current?.show({
         severity: "error",
@@ -78,7 +85,24 @@ const PurchaseDialog: React.FC<PurchaseDialogProps> = ({ visible, onHide }) => {
     }
   };
 
-  const footer = (
+  const handlePaymentSuccess = () => {
+    toast.current?.show({
+      severity: "success",
+      summary: t("profile.paymentSuccess"),
+      detail: t("profile.creditsAdded"),
+    });
+    onHide();
+  };
+
+  const handlePaymentError = (error: string) => {
+    toast.current?.show({
+      severity: "error",
+      summary: t("profile.paymentError"),
+      detail: error,
+    });
+  };
+
+  const footer = !clientSecret ? (
     <div>
       <Button
         label={t("common.cancel")}
@@ -95,7 +119,7 @@ const PurchaseDialog: React.FC<PurchaseDialogProps> = ({ visible, onHide }) => {
         autoFocus
       />
     </div>
-  );
+  ) : null;
 
   return (
     <>
@@ -106,27 +130,37 @@ const PurchaseDialog: React.FC<PurchaseDialogProps> = ({ visible, onHide }) => {
         style={{ width: "450px" }}
         footer={footer}
         onHide={onHide}
-        closable={!isPurchasing}
+        closable={!isPurchasing && !clientSecret}
       >
-        <div className="grid gap-4">
-          {creditPackages.map((pkg) => (
-            <div key={pkg.id} className="flex items-center gap-2">
-              <input
-                type="radio"
-                id={pkg.id}
-                name="creditPackage"
-                value={pkg.id}
-                checked={selectedPackage === pkg.id}
-                onChange={(e) => setSelectedPackage(e.target.value)}
-                className="w-4 h-4"
-                disabled={isPurchasing}
-              />
-              <label htmlFor={pkg.id} className="text-lg">
-                {pkg.label}
-              </label>
-            </div>
-          ))}
-        </div>
+        {!clientSecret ? (
+          <div className="grid gap-4">
+            {creditPackages.map((pkg) => (
+              <div key={pkg.id} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id={pkg.id}
+                  name="creditPackage"
+                  value={pkg.id}
+                  checked={selectedPackage === pkg.id}
+                  onChange={(e) => setSelectedPackage(e.target.value)}
+                  className="w-4 h-4"
+                  disabled={isPurchasing}
+                />
+                <label htmlFor={pkg.id} className="text-lg">
+                  {pkg.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <PaymentForm
+              clientSecret={clientSecret}
+              onSuccess={handlePaymentSuccess}
+              onError={handlePaymentError}
+            />
+          </Elements>
+        )}
       </Dialog>
     </>
   );

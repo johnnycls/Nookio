@@ -78,8 +78,8 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       gender: user.gender || "",
       dob: user.dob || new Date(),
       credit: user.credit || 0,
-      chats: user.chats || [],
       lang: user.lang || "en",
+      isPublic: user.isPublic,
     };
 
     return res.status(200).json(profile);
@@ -96,7 +96,7 @@ router.patch(
   async (req: Request, res: Response) => {
     try {
       const email = res.locals.email as string;
-      const { name, description, gender, dob, lang } = req.body;
+      const { name, description, gender, dob, lang, isPublic } = req.body;
 
       const user = await User.findOneAndUpdate(
         { email },
@@ -107,6 +107,7 @@ router.patch(
             ...(gender !== undefined && { gender }),
             ...(dob !== undefined && { dob }),
             ...(lang !== undefined && { lang }),
+            ...(isPublic !== undefined && { isPublic }),
           },
         },
         { new: true }
@@ -124,8 +125,8 @@ router.patch(
         gender: user.gender || "",
         dob: user.dob || new Date(),
         credit: user.credit || 0,
-        chats: user.chats || [],
         lang: user.lang || "en",
+        isPublic: user.isPublic,
       };
 
       return res.status(200).json(profile);
@@ -151,7 +152,7 @@ router.post(
       }
 
       const session = await createPaymentSession(packageId, user.email);
-      return res.status(200).json({ url: session.url });
+      return res.status(200).json({ clientSecret: session.clientSecret });
     } catch (error) {
       console.error(error);
       if (error instanceof Error && error.message === "Invalid package ID") {
