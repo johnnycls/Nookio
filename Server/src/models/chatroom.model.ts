@@ -11,12 +11,13 @@ export interface IChatroom extends Document {
   friendId: Schema.Types.ObjectId;
   messages: IMessage[];
   lastReadPosition: number;
-  unreadCount: number;
+  summaries: string[];
+  lastSummaryPosition: number;
 }
 
 const messageSchema = new Schema({
   content: { type: String, required: true },
-  sender: { type: String, enum: ["user", "friend"], required: true },
+  sender: { type: String, enum: ["user", "model"], required: true },
   timestamp: { type: Date, default: Date.now },
 });
 
@@ -26,7 +27,8 @@ const chatroomSchema = new Schema(
     friendId: { type: Schema.Types.ObjectId, ref: "Friend", required: true },
     messages: [messageSchema],
     lastReadPosition: { type: Number, default: 0 },
-    unreadCount: { type: Number, default: 0 },
+    summaries: { type: [String], default: [] },
+    lastSummaryPosition: { type: Number, default: 0 },
   },
   {
     timestamps: true,

@@ -3,14 +3,10 @@ import authMiddleware from "../middlewares/auth";
 import User from "../models/user.model";
 import Chatroom from "../models/chatroom.model";
 import Queue from "../models/queue.model";
-import { MIN_CREDITS_FOR_RESPONSE } from "../config";
+import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS } from "../config";
+import { calculateTokens } from "../utils/token";
 
 const router = express.Router();
-
-// Simple token calculation (rough estimate: 1 token ≈ 4 characters)
-const calculateTokens = (message: string): number => {
-  return Math.ceil(message.length / 4);
-};
 
 // Send message to chatroom
 router.post("/:chatroomId", authMiddleware, async (req, res) => {
@@ -18,6 +14,11 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
     const { chatroomId } = req.params;
     const { message } = req.body;
     const email = res.locals.email;
+
+    const messageTokens = calculateTokens(message);
+    if (messageTokens > MAX_INPUT_TOKENS) {
+      return res.status(400).json({ message: "Message too long" });
+    }
 
     if (
       !message ||
@@ -44,8 +45,7 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
     }
 
     // Calculate required credits based on message tokens
-    const messageTokens = calculateTokens(message);
-    const requiredCredits = MIN_CREDITS_FOR_RESPONSE(messageTokens);
+    const requiredCredits = CREDITS_FOR_RESPONSE(chatroom.messages.length);
 
     if (user.credit < requiredCredits) {
       return res.status(400).json({
@@ -80,7 +80,7 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
       message: "Message sent and queued for response",
       queueId: queueItem._id,
       remainingCredits: user.credit,
-      creditUsed: requiredCredits,
+      creditUse: requiredCredits,
       messageTokens,
     });
   } catch (error) {

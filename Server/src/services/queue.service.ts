@@ -36,7 +36,7 @@ class QueueService {
       try {
         if (queueItem.type === "create") {
           await this.handleCreateRequest(queueItem as unknown as IQueueItem);
-        } else if (queueItem.type === "respond") {
+        } else if (queueItem.type === "response") {
           await this.handleResponseRequest(queueItem as unknown as IQueueItem);
         }
 
@@ -111,9 +111,7 @@ class QueueService {
       throw new Error("Chatroom ID is required for response request");
     }
 
-    const chatroom = await Chatroom.findById(queueItem.chatroomId).populate<{
-      userId: { lang: string };
-    }>("userId", "lang");
+    const chatroom = await Chatroom.findById(queueItem.chatroomId);
 
     if (!chatroom) throw new Error("Chatroom not found");
 
@@ -132,10 +130,7 @@ class QueueService {
       user,
       friend,
       lastUserMessage.content,
-      chatroom.messages.slice(0, -1).map((msg) => ({
-        role: msg.sender === "user" ? "user" : "model",
-        parts: [{ text: msg.content }],
-      }))
+      chatroom
     );
 
     // Add response to chatroom

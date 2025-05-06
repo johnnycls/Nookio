@@ -4,9 +4,15 @@ import type { Request, Response } from "express";
 import User from "../models/user.model";
 import { OAuth2Client } from "google-auth-library";
 import jwt from "jsonwebtoken";
-import { GOOGLE_CLIENT_ID, JWT_SECRET } from "../config";
+import {
+  GOOGLE_CLIENT_ID,
+  JWT_SECRET,
+  MIN_CREDITS_FOR_AUTO_CHAT,
+  MAX_CHATROOMS,
+} from "../config";
 import authMiddleware from "../middlewares/auth";
 import { createPaymentSession } from "../utils/payment";
+import Queue from "../models/queue.model";
 
 const router: Router = express.Router();
 
@@ -28,7 +34,7 @@ async function verifyGoogleToken(token: string) {
 // register/login;
 router.post("/login", async (req: Request, res: Response) => {
   try {
-    const { clientId, credential } = req?.body?.credentials;
+    const { credential } = req?.body?.credentials;
     if (credential) {
       const verificationResponse = await verifyGoogleToken(credential);
 
@@ -79,7 +85,7 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       dob: user.dob || new Date(),
       credit: user.credit || 0,
       lang: user.lang || "en",
-      isPublic: user.isPublic,
+      targetChatrooms: user.targetChatrooms || 0,
     };
 
     return res.status(200).json(profile);
@@ -96,26 +102,61 @@ router.patch(
   async (req: Request, res: Response) => {
     try {
       const email = res.locals.email as string;
-      const { name, description, gender, dob, lang, isPublic } = req.body;
+      const { name, description, gender, dob, lang, targetChatrooms } =
+        req.body;
 
-      const user = await User.findOneAndUpdate(
-        { email },
-        {
-          $set: {
-            ...(name !== undefined && { name }),
-            ...(description !== undefined && { description }),
-            ...(gender !== undefined && { gender }),
-            ...(dob !== undefined && { dob }),
-            ...(lang !== undefined && { lang }),
-            ...(isPublic !== undefined && { isPublic }),
-          },
-        },
-        { new: true }
-      );
-
+      const user = await User.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
+
+      // Update basic profile fields
+      if (name !== undefined) user.name = name;
+      if (description !== undefined) user.description = description;
+      if (gender !== undefined) user.gender = gender;
+      if (dob !== undefined) user.dob = dob;
+      if (lang !== undefined) user.lang = lang;
+
+      // Handle targetChatrooms update
+      if (targetChatrooms !== undefined) {
+        const currentChatrooms = user.chatrooms.length;
+        const newTarget = Math.min(targetChatrooms, MAX_CHATROOMS);
+
+        // Calculate how many new chatrooms to create
+        const additionalChatrooms = Math.max(0, newTarget - currentChatrooms);
+
+        // Check if user has enough credits
+        const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
+        if (user.credit < requiredCredits) {
+          return res.status(400).json({
+            message: "Not enough credits",
+            required: requiredCredits,
+            available: user.credit,
+          });
+        }
+
+        // Create queue requests for new chatrooms
+        if (additionalChatrooms > 0) {
+          // Deduct credits
+          user.credit -= requiredCredits;
+
+          // Create queue requests
+          await Queue.insertMany(
+            Array(additionalChatrooms)
+              .fill(null)
+              .map(() => ({
+                userId: user._id,
+                type: "create",
+                creditUse: MIN_CREDITS_FOR_AUTO_CHAT,
+                status: "pending",
+              }))
+          );
+        }
+
+        user.targetChatrooms = newTarget;
+      }
+
+      await user.save();
 
       const profile = {
         _id: user._id,
@@ -126,7 +167,7 @@ router.patch(
         dob: user.dob || new Date(),
         credit: user.credit || 0,
         lang: user.lang || "en",
-        isPublic: user.isPublic,
+        targetChatrooms: user.targetChatrooms || 0,
       };
 
       return res.status(200).json(profile);

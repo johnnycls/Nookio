@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export type RequestType = "create" | "respond";
+export type RequestType = "create" | "response";
 
 export interface IQueueItem extends Document {
   userId: mongoose.Types.ObjectId;
@@ -19,7 +19,7 @@ const QueueSchema: Schema = new Schema(
     chatroomId: { type: Schema.Types.ObjectId, ref: "Chatroom" },
     type: {
       type: String,
-      enum: ["create", "respond"],
+      enum: ["create", "response"],
       required: true,
     },
     creditUse: { type: Number, required: true },
