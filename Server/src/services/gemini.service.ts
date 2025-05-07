@@ -106,7 +106,11 @@ const getOptimizedChatHistory = async (
         ]
       : [];
 
-  const recentMessages = messages.slice(Math.max(0, -NO_SUMMARY_MSG - 1), -1); // Exclude the last message
+  let msgLength = Math.min(
+    SUMMARY_MSG,
+    totalMessages - chatroom.lastSummaryPosition + NO_SUMMARY_MSG
+  );
+  const recentMessages = messages.slice(Math.max(0, -msgLength - 1), -1); // Exclude the last message
   return [...contextMessages, ...recentMessages.map(convertToChatMessage)];
 };
 

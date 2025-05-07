@@ -2,9 +2,10 @@ import express from "express";
 import authMiddleware from "../middlewares/auth";
 import User from "../models/user.model";
 import Chatroom from "../models/chatroom.model";
-import Queue from "../models/queue.model";
+import Friend from "../models/friend.model";
 import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS } from "../config";
 import { calculateTokens } from "../utils/token";
+import { generateResponse } from "../services/gemini.service";
 
 const router = express.Router();
 
@@ -15,11 +16,6 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
     const { message } = req.body;
     const email = res.locals.email;
 
-    const messageTokens = calculateTokens(message);
-    if (messageTokens > MAX_INPUT_TOKENS) {
-      return res.status(400).json({ message: "Message too long" });
-    }
-
     if (
       !message ||
       typeof message !== "string" ||
@@ -28,10 +24,19 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Invalid message" });
     }
 
+    const messageTokens = calculateTokens(message);
+    if (messageTokens > MAX_INPUT_TOKENS) {
+      return res.status(400).json({ message: "Message too long" });
+    }
+
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.chatrooms.map((id) => id.toString()).includes(chatroomId)) {
+      return res.status(400).json({ message: "Chatroom not found" });
     }
 
     // Find chatroom and verify ownership
@@ -52,36 +57,39 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
         message: "Insufficient credits",
         requiredCredits,
         currentCredits: user.credit,
-        messageTokens,
       });
     }
 
-    // Deduct credits and create queue item
-    user.credit -= requiredCredits;
-    await user.save();
+    const friend = await Friend.findById(chatroom.friendId);
 
-    const queueItem = await Queue.create({
-      userId: user._id,
-      chatroomId: chatroomId,
-      type: "response",
-      creditUse: requiredCredits,
-      status: "pending",
-    });
+    if (!friend) {
+      return res.status(404).json({ message: "Friend not found" });
+    }
 
-    // Add message to chatroom
+    const response = await generateResponse(user, friend, message, chatroom);
+
     chatroom.messages.push({
       content: message,
       sender: "user",
       timestamp: new Date(),
     });
+
+    chatroom.messages.push({
+      content: response,
+      sender: "model",
+      timestamp: new Date(),
+    });
+    chatroom.lastReadPosition = chatroom.messages.length - 1;
     await chatroom.save();
 
+    user.credit -= requiredCredits;
+    await user.save();
+
     res.status(200).json({
-      message: "Message sent and queued for response",
-      queueId: queueItem._id,
+      message: message,
+      response: response,
+      lastReadPosition: chatroom.lastReadPosition,
       remainingCredits: user.credit,
-      creditUse: requiredCredits,
-      messageTokens,
     });
   } catch (error) {
     console.error("Error sending message:", error);

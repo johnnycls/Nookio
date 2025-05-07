@@ -12,7 +12,7 @@ import {
 } from "../config";
 import authMiddleware from "../middlewares/auth";
 import { createPaymentSession } from "../utils/payment";
-import Queue from "../models/queue.model";
+import { handleCreateRequest } from "../services/open_chatroom_service";
 
 const router: Router = express.Router();
 
@@ -135,22 +135,9 @@ router.patch(
           });
         }
 
-        // Create queue requests for new chatrooms
         if (additionalChatrooms > 0) {
-          // Deduct credits
           user.credit -= requiredCredits;
-
-          // Create queue requests
-          await Queue.insertMany(
-            Array(additionalChatrooms)
-              .fill(null)
-              .map(() => ({
-                userId: user._id,
-                type: "create",
-                creditUse: MIN_CREDITS_FOR_AUTO_CHAT,
-                status: "pending",
-              }))
-          );
+          await handleCreateRequest(user, additionalChatrooms);
         }
 
         user.targetChatrooms = newTarget;

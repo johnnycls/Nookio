@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IMessage {
   content: string;
-  sender: "user" | "friend";
+  sender: "user" | "model";
   timestamp: Date;
 }
 

@@ -7,7 +7,7 @@ import stripeRouter from "./routes/stripe";
 import { rateLimit } from "express-rate-limit";
 import chatRoutes from "./routes/chat";
 import chatroomRoutes from "./routes/chatroom";
-import { queueService } from "./services/queue.service";
+// import { queueService } from "./services/queue.service";
 
 const limiter = rateLimit({
   windowMs: 1000,
@@ -47,7 +47,7 @@ app.use("*", (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Start queue processing
-queueService.startProcessing();
+// queueService.startProcessing();
 
 app.listen(port, () => {
   console.log(`${port}`);

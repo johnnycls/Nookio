@@ -30,7 +30,6 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
       friend: {
         _id: chatroom.friendId._id,
         name: chatroom.friendId.name,
-        description: chatroom.friendId.description || "",
         gender: chatroom.friendId.gender || "",
         dob: chatroom.friendId.dob || null,
       },
@@ -64,22 +63,20 @@ router.get(
         return res.status(404).json({ message: "Chatroom not found" });
       }
 
-      const chatroom = await Chatroom.findById(chatroomId).populate(
-        "friendId",
-        "name description"
-      );
+      const chatroom = await Chatroom.findById(chatroomId);
 
       if (!chatroom) {
         return res.status(404).json({ message: "Chatroom not found" });
       }
 
       // Update lastReadPosition to the latest message
-      chatroom.lastReadPosition = chatroom.messages.length - 1;
-      await chatroom.save();
+      if (chatroom.lastReadPosition < chatroom.messages.length - 1) {
+        chatroom.lastReadPosition = chatroom.messages.length - 1;
+        await chatroom.save();
+      }
 
       return res.status(200).json({
         _id: chatroom._id,
-        friendId: chatroom.friendId,
         messages: chatroom.messages,
         lastReadPosition: chatroom.lastReadPosition,
       });
