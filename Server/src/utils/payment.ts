@@ -11,22 +11,22 @@ export interface CreditPackage {
 
 export const creditPackages: CreditPackage[] = [
   {
-    id: "basic",
+    id: "0",
     credits: 3000,
     price: 2.49,
   },
   {
-    id: "standard",
+    id: "1",
     credits: 8000,
     price: 4.99,
   },
   {
-    id: "premium",
+    id: "2",
     credits: 20000,
     price: 9.99,
   },
   {
-    id: "ultimate",
+    id: "3",
     credits: 50000,
     price: 19.99,
   },

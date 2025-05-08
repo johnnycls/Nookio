@@ -27,31 +27,81 @@ i18n
     resources: {
       en: {
         translation: {
-          settings: {
-            settings: "Settings",
-            aboutUs: "About Us",
-            faq: "FAQ",
+          error: {
+            title: "Error",
+            message: "An error occurred",
           },
-          error:
-            "An error has occurred. Please ensure you are connected to the network and try reloading. If the issue persists, please try again later.",
-          language: "Language",
-          copiedToClipboard: "Copied to clipboard",
-          success: "Success",
-        },
-      },
-      "zh-TW": {
-        translation: {
-          settings: {
-            settings: "設定",
-            aboutUs: "關於我們",
-            faq: "常見問題",
+          account: {
+            title: "Account",
+            remainingCredit: "Remaining Credits",
+            buyCredits: "Buy Credits",
+            package: "${{price}} - {{credits}} Credits",
+            buyCreditsError: "An error occurred while buying credits",
+            payment: {
+              title: "Complete Payment",
+              submit: "Pay Now",
+              success: "Payment successful!",
+              error: "Payment failed. Please try again.",
+            },
+          },
+          profile: {
+            title: "Profile",
+            basicInfo: {
+              title: "Basic Information",
+              language: {
+                label: "Select a Language",
+                placeholder: "Select a Language",
+              },
+              name: {
+                label: "Name",
+                placeholder: "Name",
+              },
+              gender: {
+                label: "Gender",
+                placeholder: "Gender",
+                options: {
+                  male: "Male",
+                  female: "Female",
+                  other: "Other",
+                },
+              },
+              dob: {
+                label: "Date of Birth",
+                placeholder: "Date of Birth",
+              },
+            },
+            description: {
+              title: "Description",
+              placeholder:
+                "Please describe yourself. MBTI, hobbies, interests, occupation, nationality, things you like, things you dislike, etc.",
+            },
+            matchSettings: {
+              title: "Match Settings",
+              gender: {
+                label: "Match Gender",
+                placeholder: "Match Gender",
+                options: {
+                  male: "Male",
+                  female: "Female",
+                  both: "Both",
+                },
+              },
+              targetChatrooms: {
+                label: "Number of People to Match",
+                placeholder: "Number of People to Match",
+              },
+            },
+            navigation: {
+              back: "Back",
+              next: "Next",
+              finish: "Finish",
+            },
+            error: {
+              title: "Error",
+              message: "An error occurred while updating your profile",
+            },
           },
         },
-        error:
-          "發生錯誤。請確保您已連接到網路並重新載入。如果問題持續存在，請稍後再試。",
-        language: "語言",
-        copiedToClipboard: "已複製到剪貼簿",
-        success: "成功",
       },
     },
   });

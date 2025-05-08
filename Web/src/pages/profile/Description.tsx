@@ -2,12 +2,14 @@ import { Button } from "primereact/button";
 import React, { useState } from "react";
 import { profile, useUpdateProfileMutation } from "../../slices/userSlice";
 import { InputTextarea } from "primereact/inputtextarea";
+import { useTranslation } from "react-i18next";
 
 const Description: React.FC<{
   prevCallback: () => void;
   nextCallback: () => void;
   profile?: profile;
 }> = ({ prevCallback, nextCallback, profile }) => {
+  const { t } = useTranslation();
   const [updateProfile] = useUpdateProfileMutation();
   const [description, setDescription] = useState<string>(
     profile?.description || ""
@@ -21,12 +23,12 @@ const Description: React.FC<{
           onChange={(e) => setDescription(e.target.value)}
           rows={4}
           autoResize
-          placeholder="Please describe yourself. MBTI, hobbies, interests, occupation, nationality, things you like, things you dislike, etc."
+          placeholder={t("profile.description.placeholder")}
         />
 
         <div className="flex justify-between">
           <Button
-            label="Back"
+            label={t("profile.navigation.back")}
             icon="pi pi-arrow-left"
             iconPos="left"
             onClick={() => {
@@ -35,7 +37,7 @@ const Description: React.FC<{
           />
           <Button
             disabled={!description}
-            label="Next"
+            label={t("profile.navigation.next")}
             iconPos="right"
             icon="pi pi-arrow-right"
             onClick={() => {

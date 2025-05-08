@@ -11,14 +11,21 @@ const Home: React.FC = () => {
   useThemeColor("#FFFFFF");
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { data: profile, isLoading, isError, refetch } = useGetProfileQuery({});
+  const {
+    data: profile,
+    isLoading,
+    isError,
+    isSuccess,
+    refetch,
+  } = useGetProfileQuery({});
 
   useEffect(() => {
     if (
-      profile?.name === "" ||
-      profile?.description === "" ||
-      profile?.gender === "" ||
-      profile?.dob === undefined
+      isSuccess &&
+      (profile?.name === "" ||
+        profile?.description === "" ||
+        profile?.gender === "" ||
+        profile?.dob === undefined)
     ) {
       navigate("/profile");
     }

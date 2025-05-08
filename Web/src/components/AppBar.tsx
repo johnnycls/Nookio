@@ -16,17 +16,19 @@ const AppBar: React.FC<{ children?: React.ReactNode; onBack?: () => void }> = ({
         color: "var(--primary-color-text)",
       }}
     >
-      <Button
-        icon="pi pi-chevron-left"
-        className="p-0 w-auto"
-        onClick={() => {
-          if (onBack) {
-            onBack();
-          } else {
-            navigate("/");
-          }
-        }}
-      />
+      {onBack && (
+        <Button
+          icon="pi pi-chevron-left"
+          className="p-0 w-auto"
+          onClick={() => {
+            if (onBack) {
+              onBack();
+            } else {
+              navigate("/");
+            }
+          }}
+        />
+      )}
       <div className="flex-1">{children}</div>
     </div>
   );
