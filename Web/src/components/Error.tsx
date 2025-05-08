@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import React from "react";
 
-const Error: React.FC<{ onReload: () => void; errorText: string }> = ({
+const Error: React.FC<{ onReload?: () => void; errorText: string }> = ({
   onReload,
   errorText,
 }) => {
@@ -9,7 +9,7 @@ const Error: React.FC<{ onReload: () => void; errorText: string }> = ({
     <div className="w-full h-full flex justify-center items-center p-4">
       <div className="flex flex-col items-center">
         <h3>{errorText}</h3>
-        <Button icon="pi pi-refresh" text onClick={onReload} />
+        {onReload && <Button icon="pi pi-refresh" text onClick={onReload} />}
       </div>
     </div>
   );

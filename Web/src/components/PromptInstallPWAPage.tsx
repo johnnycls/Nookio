@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import usePlatform, { Platform } from "../hooks/usePlatform";
 
 interface InstructionStep {
@@ -139,22 +139,6 @@ const PromptInstallPWAPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      {/* <div className="absolute top-4 right-4">
-        <Message
-          text={
-            <>
-              Click here if it is installed already
-              <br />
-              請按這裏如果你已經下載了
-            </>
-          }
-          className="cursor-pointer underline !max-w-[85vw]"
-          onClick={() => {
-            openPWA();
-          }}
-        />
-      </div> */}
-
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <h1
           className="text-4xl font-light text-center mb-8"

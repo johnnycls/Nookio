@@ -2,7 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 
-const AppBar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+const AppBar: React.FC<{ children?: React.ReactNode; onBack?: () => void }> = ({
+  children,
+  onBack,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +20,11 @@ const AppBar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
         icon="pi pi-chevron-left"
         className="p-0 w-auto"
         onClick={() => {
-          navigate("/");
+          if (onBack) {
+            onBack();
+          } else {
+            navigate("/");
+          }
         }}
       />
       <div className="flex-1">{children}</div>

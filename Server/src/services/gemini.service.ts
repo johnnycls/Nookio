@@ -103,7 +103,7 @@ export const generateGreeting = async (
   try {
     const result = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: openingPrompt(user.name),
+      contents: model.greetingPrompt,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,

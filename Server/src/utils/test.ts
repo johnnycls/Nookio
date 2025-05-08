@@ -108,3 +108,16 @@ This is the **very first time** you are messaging ${username}. You have never sp
 Generate a short, friendly, authentic, and engaging **first proactive message** to send to ${username}.
 `;
 }
+
+function renderTemplate(templateStr: string, data: Object) {
+  const paramNames = Object.keys(data);
+  const functionBody = `return \`${templateStr}\`;`;
+  try {
+    const renderFunc = new Function(...paramNames, functionBody);
+    const paramValues = Object.values(data);
+    return renderFunc(...paramValues);
+  } catch (error) {
+    console.error("渲染模板時出錯:", error);
+    return "模板渲染錯誤";
+  }
+}

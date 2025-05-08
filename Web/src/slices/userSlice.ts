@@ -8,10 +8,10 @@ export type profile = {
   description: string; // occupation, nationality, hobbies, etc.
   preferedGender: "male" | "female" | "both";
   gender: string;
-  dob: Date;
+  dob: string;
   credit: number;
   lang: string;
-  targetChatrooms: string[];
+  targetChatrooms: number;
 };
 
 type profileResponse = profile;
@@ -26,9 +26,8 @@ const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query<profileResponse, {}>({
       query: () => ({
-        url: "user/profile/",
+        url: "user/profile",
       }),
-      providesTags: [{ type: "Profile" }],
       transformResponse: (response: profileResponse) => {
         if (response.lang) {
           i18next.changeLanguage(response.lang);
@@ -38,16 +37,21 @@ const userSlice = apiSlice.injectEndpoints({
     }),
     updateProfile: builder.mutation<profileResponse, updateProfileRequest>({
       query: (profileData) => ({
-        url: "user/profile/",
+        url: "user/profile",
         method: "PATCH",
         body: profileData,
       }),
-      invalidatesTags: [{ type: "Profile" }],
-      async onQueryStarted({ lang }, { dispatch, queryFulfilled }) {
+      async onQueryStarted(profileData, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
-          if (lang) {
-            i18next.changeLanguage(lang);
+          const { data: updatedProfile } = await queryFulfilled;
+          // Update the cache with the new profile data
+          dispatch(
+            userSlice.util.updateQueryData("getProfile", {}, (draft) => {
+              Object.assign(draft, updatedProfile);
+            })
+          );
+          if (profileData.lang) {
+            i18next.changeLanguage(profileData.lang);
           }
         } catch {
           // Error handling is done by the mutation hook
@@ -56,7 +60,7 @@ const userSlice = apiSlice.injectEndpoints({
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({
       query: ({ packageId }) => ({
-        url: "user/purchase/",
+        url: "user/purchase",
         method: "POST",
         body: { packageId },
       }),

@@ -18,7 +18,7 @@ const App: React.FC = () => {
     <PromptInstallIfNotStandalone>
       <PrimeReactProvider>
         {isError ? (
-          <Error onReload={() => {}} errorText={t("error.error")} />
+          <Error errorText={t("login.error")} />
         ) : (
           <>
             <LoadingScreen isLoading={isLoading} />

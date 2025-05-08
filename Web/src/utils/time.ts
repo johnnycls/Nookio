@@ -41,15 +41,41 @@ export function displayDate(date: Date) {
   return formattedDateTime;
 }
 
-export function isTimeConflict(newDateRange: {startDate: Date, endDate: Date}, existingDateRanges: {startDate: Date, endDate: Date}[]): boolean {
+export function isTimeConflict(
+  newDateRange: { startDate: Date; endDate: Date },
+  existingDateRanges: { startDate: Date; endDate: Date }[]
+): boolean {
   for (const existingDateRange of existingDateRanges) {
     if (
-      (newDateRange.startDate >= existingDateRange.startDate && newDateRange.startDate < existingDateRange.endDate) ||
-      (newDateRange.endDate > existingDateRange.startDate && newDateRange.endDate <= existingDateRange.endDate) ||
-      (newDateRange.startDate <= existingDateRange.startDate && newDateRange.endDate >= existingDateRange.endDate)
+      (newDateRange.startDate >= existingDateRange.startDate &&
+        newDateRange.startDate < existingDateRange.endDate) ||
+      (newDateRange.endDate > existingDateRange.startDate &&
+        newDateRange.endDate <= existingDateRange.endDate) ||
+      (newDateRange.startDate <= existingDateRange.startDate &&
+        newDateRange.endDate >= existingDateRange.endDate)
     ) {
-      return true; 
+      return true;
     }
   }
-  return false; 
+  return false;
+}
+
+export function formatRelativeTime(date: Date): string {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInSeconds < 60) {
+    return "just now";
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes}m ago`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}h ago`;
+  } else if (diffInDays < 7) {
+    return `${diffInDays}d ago`;
+  } else {
+    return displayDate(date);
+  }
 }
