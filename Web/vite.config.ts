@@ -42,6 +42,7 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     ],
   },
   workbox: {
+    maximumFileSizeToCacheInBytes: 15 * 1024 * 1024,
     globPatterns: [
       "**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,otf}",
       "src/assets/**/*",
