@@ -8,7 +8,7 @@ export interface IMessage {
 
 export interface IChatroom extends Document {
   userId: Schema.Types.ObjectId;
-  modelId: Schema.Types.ObjectId;
+  modelId: string;
   messages: IMessage[];
   lastReadPosition: number;
   summaries: string[];
@@ -24,7 +24,7 @@ const messageSchema = new Schema({
 const chatroomSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    modelId: { type: Schema.Types.ObjectId, ref: "Model", required: true },
+    modelId: { type: String, required: true },
     messages: [messageSchema],
     lastReadPosition: { type: Number, default: 0 },
     summaries: { type: [String], default: [] },

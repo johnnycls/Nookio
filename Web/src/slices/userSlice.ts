@@ -5,7 +5,7 @@ export type profile = {
   _id: string;
   email: string;
   name: string;
-  description: string; // occupation, nationality, hobbies, etc.
+  description: string;
   preferedGender: "male" | "female" | "both";
   gender: string;
   dob: string;
@@ -44,7 +44,6 @@ const userSlice = apiSlice.injectEndpoints({
       async onQueryStarted(profileData, { dispatch, queryFulfilled }) {
         try {
           const { data: updatedProfile } = await queryFulfilled;
-          // Update the cache with the new profile data
           dispatch(
             userSlice.util.updateQueryData("getProfile", {}, (draft) => {
               Object.assign(draft, updatedProfile);
@@ -53,9 +52,7 @@ const userSlice = apiSlice.injectEndpoints({
           if (profileData.lang) {
             i18next.changeLanguage(profileData.lang);
           }
-        } catch {
-          // Error handling is done by the mutation hook
-        }
+        } catch {}
       },
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({

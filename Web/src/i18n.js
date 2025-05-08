@@ -32,9 +32,7 @@ i18n
             message: "An error occurred",
           },
           account: {
-            title: "Account",
             remainingCredit: "Remaining Credits",
-            buyCredits: "Buy Credits",
             package: "${{price}} - {{credits}} Credits",
             buyCreditsError: "An error occurred while buying credits",
             payment: {

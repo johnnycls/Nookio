@@ -12,7 +12,6 @@ import {
   summarizePrompt,
   summarizeSystemInstruction,
 } from "../utils/summarize";
-
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY || "" });
 
 interface ChatMessage {
@@ -25,8 +24,26 @@ const convertToChatMessage = (message: IMessage): ChatMessage => ({
   parts: [{ text: message.content }],
 });
 
-const generateSystemInstruction = (user: IUser, model: IModel): string => {
-  return model.systemInstruction;
+const generateSystemInstruction = (
+  user: IUser,
+  model: IModel,
+  summaries: string[]
+): string => {
+  return model.systemInstruction({
+    username: user.name,
+    userGender: user.gender,
+    userDescription: user.description,
+    userDob: user.dob,
+    userLang: user.lang,
+    summaries: summaries.join("\n"),
+  });
+};
+
+const generateGreetingPrompt = (user: IUser, model: IModel): string => {
+  return model.greetingPrompt({
+    username: user.name,
+    modelName: model.name,
+  });
 };
 
 export const generateSummary = async (
@@ -82,7 +99,11 @@ export const generateResponse = async (
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
-        systemInstruction: generateSystemInstruction(user, model),
+        systemInstruction: generateSystemInstruction(
+          user,
+          model,
+          chatroom.summaries
+        ),
       },
     });
 
@@ -103,11 +124,11 @@ export const generateGreeting = async (
   try {
     const result = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: model.greetingPrompt,
+      contents: generateGreetingPrompt(user, model),
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
-        systemInstruction: generateSystemInstruction(user, model),
+        systemInstruction: generateSystemInstruction(user, model, []),
       },
     });
 

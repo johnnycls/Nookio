@@ -1,26 +1,26 @@
-import mongoose, { Schema, Document } from "mongoose";
+// import mongoose, { Schema, Document } from "mongoose";
 
-export interface IModel extends Document {
-  name: string;
-  systemInstruction: string;
-  greetingPrompt: string;
-  gender: string;
-  dob: Date;
-  temperature: number;
-}
+// export interface IModel extends Document {
+//   name: string;
+//   gender: string;
+//   dob: Date;
+//   temperature: number;
+//   greetingPrompt: Function;
+//   systemInstruction: Function;
+// }
 
-const ModelSchema: Schema = new Schema(
-  {
-    name: { type: String, required: true },
-    systemInstruction: { type: String, required: true },
-    greetingPrompt: { type: String, required: true },
-    gender: { type: String, required: true },
-    dob: { type: Date, required: true },
-    temperature: { type: Number, required: true },
-  },
-  {
-    timestamps: true,
-  }
-);
+// const ModelSchema: Schema = new Schema(
+//   {
+//     name: { type: String, required: true },
+//     gender: { type: String, required: true },
+//     dob: { type: Date, required: true },
+//     temperature: { type: Number, required: true },
+//     greetingPrompt: { type: Function, required: true },
+//     systemInstruction: { type: Function, required: true },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
 
-export default mongoose.model<IModel>("Model", ModelSchema);
+// export default mongoose.model<IModel>("Model", ModelSchema);
