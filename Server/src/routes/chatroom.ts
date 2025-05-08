@@ -3,7 +3,7 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import Chatroom from "../models/chatroom.model";
 import User from "../models/user.model";
-import { IFriend } from "../models/friend.model";
+import { IModel } from "../models/model.model";
 import authMiddleware from "../middlewares/auth";
 
 const router: Router = express.Router();
@@ -20,18 +20,15 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
 
     const chatrooms = await Chatroom.find({
       _id: { $in: user.chatrooms },
-    }).populate<{ friendId: IFriend }>(
-      "friendId",
-      "name description gender dob"
-    );
+    }).populate<{ modelId: IModel }>("modelId", "name description gender dob");
 
     const chatList = chatrooms.map((chatroom) => ({
       _id: chatroom._id,
-      friend: {
-        _id: chatroom.friendId._id,
-        name: chatroom.friendId.name,
-        gender: chatroom.friendId.gender || "",
-        dob: chatroom.friendId.dob || null,
+      model: {
+        _id: chatroom.modelId._id,
+        name: chatroom.modelId.name,
+        gender: chatroom.modelId.gender || "",
+        dob: chatroom.modelId.dob || null,
       },
       lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
       lastReadPosition: chatroom.lastReadPosition,

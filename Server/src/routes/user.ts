@@ -83,6 +83,7 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       description: user.description || "",
       gender: user.gender || "",
       dob: user.dob || new Date(),
+      preferedGender: user.preferedGender || "both",
       credit: user.credit || 0,
       lang: user.lang || "en",
       targetChatrooms: user.targetChatrooms || 0,
@@ -102,8 +103,15 @@ router.patch(
   async (req: Request, res: Response) => {
     try {
       const email = res.locals.email as string;
-      const { name, description, gender, dob, lang, targetChatrooms } =
-        req.body;
+      const {
+        name,
+        description,
+        gender,
+        dob,
+        lang,
+        targetChatrooms,
+        preferedGender,
+      } = req.body;
 
       const user = await User.findOne({ email });
       if (!user) {
@@ -116,6 +124,7 @@ router.patch(
       if (gender !== undefined) user.gender = gender;
       if (dob !== undefined) user.dob = dob;
       if (lang !== undefined) user.lang = lang;
+      if (preferedGender !== undefined) user.preferedGender = preferedGender;
 
       // Handle targetChatrooms update
       if (targetChatrooms !== undefined) {

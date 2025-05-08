@@ -5,12 +5,13 @@ export type profile = {
   _id: string;
   email: string;
   name: string;
-  description: string;
+  description: string; // occupation, nationality, hobbies, etc.
+  preferedGender: "male" | "female" | "both";
   gender: string;
   dob: Date;
   credit: number;
   lang: string;
-  isPublic: boolean;
+  targetChatrooms: string[];
 };
 
 type profileResponse = profile;
@@ -24,7 +25,7 @@ type purchaseResponse = {
 const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query<profileResponse, {}>({
-      query: ({}) => ({
+      query: () => ({
         url: "user/profile/",
       }),
       providesTags: [{ type: "Profile" }],

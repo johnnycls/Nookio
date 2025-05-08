@@ -1,17 +1,19 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface IFriend extends Document {
+export interface IModel extends Document {
   name: string;
-  description: string;
+  systemInstruction: string;
+  greetingPrompt: string;
   gender: string;
   dob: Date;
   temperature: number;
 }
 
-const FriendSchema: Schema = new Schema(
+const ModelSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    systemInstruction: { type: String, required: true },
+    greetingPrompt: { type: String, required: true },
     gender: { type: String, required: true },
     dob: { type: Date, required: true },
     temperature: { type: Number, required: true },
@@ -21,4 +23,4 @@ const FriendSchema: Schema = new Schema(
   }
 );
 
-export default mongoose.model<IFriend>("Friend", FriendSchema);
+export default mongoose.model<IModel>("Model", ModelSchema);

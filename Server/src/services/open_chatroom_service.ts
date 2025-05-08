@@ -1,6 +1,6 @@
 import User, { IUser } from "../models/user.model";
 import Chatroom, { IChatroom } from "../models/chatroom.model";
-import Friend from "../models/friend.model";
+import Model from "../models/model.model";
 import { generateGreeting } from "./gemini.service";
 
 export async function handleCreateRequest(user: IUser, chatroomNum: number) {
@@ -8,40 +8,44 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
   let userChatrooms = await Chatroom.find({
     id: { $in: user.chatrooms },
   });
-  const existingChatroomFriendIds = userChatrooms.map(
-    (chatroom: IChatroom) => chatroom.friendId
+  const existingChatroomModelIds = userChatrooms.map(
+    (chatroom: IChatroom) => chatroom.modelId
   );
 
-  const availableFriends = await Friend.aggregate([
-    { $match: { _id: { $nin: existingChatroomFriendIds } } },
+  const availableModels = await Model.aggregate([
+    { $match: { _id: { $nin: existingChatroomModelIds } } },
+    {
+      $match: {
+        $or: [{ gender: user.preferedGender }, { gender: "both" }],
+      },
+    },
     { $sample: { size: chatroomNum } },
   ]);
-
-  if (!availableFriends || availableFriends.length < chatroomNum) {
+  if (!availableModels || availableModels.length < chatroomNum) {
     throw new Error("No available friends found");
   }
 
-  const initialMessages = await Promise.all(
-    availableFriends.map(async (friend) => {
-      return await generateGreeting(user, friend);
+  const chatrooms = await Promise.all(
+    availableModels.map(async (model) => {
+      const greeting = await generateGreeting(user, model);
+
+      const chatroom = await Chatroom.create({
+        userId: user._id,
+        modelId: model._id,
+        messages: [
+          {
+            content: greeting,
+            sender: "model",
+            timestamp: new Date(),
+          },
+        ],
+      });
+
+      await chatroom.save();
+
+      return chatroom;
     })
   );
-
-  // Create chatroom
-  const chatrooms = await Chatroom.create(
-    availableFriends.map((friend, index) => ({
-      userId: user._id,
-      friendId: friend._id,
-      messages: [
-        {
-          content: initialMessages[index],
-          sender: "model",
-          timestamp: new Date(),
-        },
-      ],
-    }))
-  );
-  await Promise.all(chatrooms.map(async (chatroom) => await chatroom.save()));
 
   // Add chatroom to user's list
   await User.findByIdAndUpdate(user._id, {

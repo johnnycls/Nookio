@@ -11,13 +11,11 @@ export const JWT_SECRET = process.env.JWT_SECRET;
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-export const MAX_INPUT_TOKENS = 850;
-export const MAX_OUTPUT_TOKENS = 850;
+export const MAX_INPUT_TOKENS = 750;
+export const MAX_OUTPUT_TOKENS = 750;
 
 export const SUMMARY_TEMPERATURE = 0.3;
-export const SUMMARY_LENGTH = 100;
 export const SUMMARY_MSG = 20;
-export const NO_SUMMARY_MSG = 10;
 
 export const MAX_CHATROOMS = 10;
 export const MIN_CREDITS_FOR_AUTO_CHAT = 5;

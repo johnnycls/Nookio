@@ -32,6 +32,7 @@ const useGoogleLogin: () => {
   };
 
   useGoogleOneTapLogin({
+    use_fedcm_for_prompt: true,
     cancel_on_tap_outside: false,
     auto_select: true,
     onSuccess: (credentialResponse) => {

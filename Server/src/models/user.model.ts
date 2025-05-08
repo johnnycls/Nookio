@@ -6,6 +6,7 @@ export interface IUser extends Document {
   description?: string;
   gender?: string;
   dob?: Date;
+  preferedGender?: "male" | "female" | "both";
   credit: number;
   lang: string;
   chatrooms: Schema.Types.ObjectId[];
@@ -19,6 +20,11 @@ const userSchema: Schema = new Schema(
     description: { type: String, default: "" },
     gender: { type: String, default: "" },
     dob: { type: Date, default: null },
+    preferedGender: {
+      type: String,
+      enum: ["male", "female", "both"],
+      default: "both",
+    },
     credit: { type: Number, default: 1000 },
     lang: { type: String, default: "en" },
     chatrooms: { type: [Schema.Types.ObjectId], default: [] },

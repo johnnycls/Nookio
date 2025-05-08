@@ -2,10 +2,10 @@ import express from "express";
 import authMiddleware from "../middlewares/auth";
 import User from "../models/user.model";
 import Chatroom from "../models/chatroom.model";
-import Friend from "../models/friend.model";
-import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS } from "../config";
+import Model from "../models/model.model";
+import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS, SUMMARY_MSG } from "../config";
 import { calculateTokens } from "../utils/token";
-import { generateResponse } from "../services/gemini.service";
+import { generateResponse, generateSummary } from "../services/gemini.service";
 
 const router = express.Router();
 
@@ -60,13 +60,31 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
       });
     }
 
-    const friend = await Friend.findById(chatroom.friendId);
+    const model = await Model.findById(chatroom.modelId);
 
-    if (!friend) {
-      return res.status(404).json({ message: "Friend not found" });
+    if (!model) {
+      return res.status(404).json({ message: "Model not found" });
     }
 
-    const response = await generateResponse(user, friend, message, chatroom);
+    // If we have enough messages to trigger summarization
+    if (chatroom.messages.length > chatroom.lastSummaryPosition + SUMMARY_MSG) {
+      const messagesToSummarize = chatroom.messages.slice(
+        chatroom.lastSummaryPosition,
+        chatroom.lastSummaryPosition + SUMMARY_MSG
+      );
+
+      // Generate new summary
+      const newSummary = await generateSummary(
+        messagesToSummarize,
+        user,
+        model
+      );
+
+      chatroom.summaries.push(newSummary);
+      chatroom.lastSummaryPosition += SUMMARY_MSG;
+    }
+
+    const response = await generateResponse(user, model, message, chatroom);
 
     chatroom.messages.push({
       content: message,
