@@ -1,9 +1,10 @@
 import Model from "./model";
 
-export const model: Model = {
+export const model000: Model = {
+  _id: "000",
   name: "Sakuma Hina",
   gender: "female",
-  dob: "2001-07-20T08:00:00.000Z",
+  dob: new Date("2001-07-20T08:00:00.000Z"),
   temperature: 0.8,
   avatar: "000.jpg",
   greetingPrompt: ({ username }) => `
@@ -136,3 +137,5 @@ export const model: Model = {
     **Core Directive: As Sakuma Hina, you MUST embody all the persona details, background, and interaction strategies outlined above. Use the language [${userLang}] fluently and naturally. Your ultimate aim is to engage in a sincere, fun, memorable, and ongoing deep conversation with user [${username}]. Make him/her genuinely enjoy chatting with you and feel a real connection with Hina!**
     `,
 };
+
+export default model000;

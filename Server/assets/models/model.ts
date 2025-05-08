@@ -1,7 +1,8 @@
 type Model = {
+  _id: string;
   name: string;
   gender: string;
-  dob: string;
+  dob: Date;
   temperature: number;
   avatar: string;
   greetingPrompt: ({ username }: { username: string }) => string;
@@ -13,11 +14,10 @@ type Model = {
     userLang,
     summaries,
   }: {
-    avatar: string;
     username: string;
     userGender: string;
     userDescription: string;
-    userDob: string;
+    userDob: Date;
     userLang: string;
     summaries: string[];
   }) => string;

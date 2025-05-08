@@ -3,8 +3,8 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import Chatroom from "../models/chatroom.model";
 import User from "../models/user.model";
-import { IModel } from "../models/model.model";
 import authMiddleware from "../middlewares/auth";
+import models from "../../assets/models/models";
 
 const router: Router = express.Router();
 
@@ -20,19 +20,22 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
 
     const chatrooms = await Chatroom.find({
       _id: { $in: user.chatrooms },
-    }).populate<{ modelId: IModel }>("modelId", "name description gender dob");
+    });
 
-    const chatList = chatrooms.map((chatroom) => ({
-      _id: chatroom._id,
-      model: {
-        _id: chatroom.modelId._id,
-        name: chatroom.modelId.name,
-        gender: chatroom.modelId.gender || "",
-        dob: chatroom.modelId.dob || null,
-      },
-      lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
-      lastReadPosition: chatroom.lastReadPosition,
-    }));
+    const chatList = chatrooms.map((chatroom) => {
+      const model = models[chatroom.modelId];
+      ({
+        _id: chatroom._id,
+        model: {
+          _id: model._id,
+          name: model.name,
+          gender: model.gender || "",
+          dob: model.dob || null,
+        },
+        lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
+        lastReadPosition: chatroom.lastReadPosition,
+      });
+    });
 
     return res.status(200).json(chatList);
   } catch (error) {

@@ -2,10 +2,10 @@ import express from "express";
 import authMiddleware from "../middlewares/auth";
 import User from "../models/user.model";
 import Chatroom from "../models/chatroom.model";
-import Model from "../models/model.model";
 import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS, SUMMARY_MSG } from "../config";
 import { calculateTokens } from "../utils/token";
 import { generateResponse, generateSummary } from "../services/gemini.service";
+import models from "../../assets/models/models";
 
 const router = express.Router();
 
@@ -60,11 +60,11 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
       });
     }
 
-    const model = await Model.findById(chatroom.modelId);
-
-    if (!model) {
+    if (!(chatroom.modelId in models)) {
       return res.status(404).json({ message: "Model not found" });
     }
+
+    const model = models[chatroom.modelId];
 
     // If we have enough messages to trigger summarization
     if (chatroom.messages.length > chatroom.lastSummaryPosition + SUMMARY_MSG) {

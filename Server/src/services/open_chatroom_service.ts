@@ -1,32 +1,32 @@
 import User, { IUser } from "../models/user.model";
 import Chatroom, { IChatroom } from "../models/chatroom.model";
-import Model from "../models/model.model";
 import { generateGreeting } from "./gemini.service";
+import models from "../../assets/models/models";
 
 export async function handleCreateRequest(user: IUser, chatroomNum: number) {
-  // Find friends without chatrooms
   let userChatrooms = await Chatroom.find({
     id: { $in: user.chatrooms },
   });
+
   const existingChatroomModelIds = userChatrooms.map(
     (chatroom: IChatroom) => chatroom.modelId
   );
 
-  const availableModels = await Model.aggregate([
-    { $match: { _id: { $nin: existingChatroomModelIds } } },
-    {
-      $match: {
-        $or: [{ gender: user.preferedGender }, { gender: "both" }],
-      },
-    },
-    { $sample: { size: chatroomNum } },
-  ]);
-  if (!availableModels || availableModels.length < chatroomNum) {
+  const availableModelIds = Object.keys(models).filter((modelId) => {
+    const model = models[modelId];
+    return (
+      !existingChatroomModelIds.includes(modelId) &&
+      (user.preferedGender === "both" || model.gender === user.preferedGender)
+    );
+  });
+
+  if (!availableModelIds || availableModelIds.length < chatroomNum) {
     throw new Error("No available friends found");
   }
 
   const chatrooms = await Promise.all(
-    availableModels.map(async (model) => {
+    availableModelIds.map(async (modelId) => {
+      const model = models[modelId];
       const greeting = await generateGreeting(user, model);
 
       const chatroom = await Chatroom.create({

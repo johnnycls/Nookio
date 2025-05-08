@@ -5,13 +5,14 @@ import {
   SUMMARY_TEMPERATURE,
   SUMMARY_MSG,
 } from "../config";
-import { IModel } from "../models/model.model";
 import { IUser } from "../models/user.model";
 import { IChatroom, IMessage } from "../models/chatroom.model";
 import {
   summarizePrompt,
   summarizeSystemInstruction,
 } from "../utils/summarize";
+import Model from "../../assets/models/model";
+
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY || "" });
 
 interface ChatMessage {
@@ -26,30 +27,29 @@ const convertToChatMessage = (message: IMessage): ChatMessage => ({
 
 const generateSystemInstruction = (
   user: IUser,
-  model: IModel,
+  model: Model,
   summaries: string[]
 ): string => {
   return model.systemInstruction({
     username: user.name,
-    userGender: user.gender,
-    userDescription: user.description,
-    userDob: user.dob,
-    userLang: user.lang,
-    summaries: summaries.join("\n"),
+    userGender: user.gender || "",
+    userDescription: user.description || "",
+    userDob: user.dob || new Date(),
+    userLang: user.lang || "",
+    summaries: summaries,
   });
 };
 
-const generateGreetingPrompt = (user: IUser, model: IModel): string => {
+const generateGreetingPrompt = (user: IUser, model: Model): string => {
   return model.greetingPrompt({
     username: user.name,
-    modelName: model.name,
   });
 };
 
 export const generateSummary = async (
   messages: IMessage[],
   user: IUser,
-  model: IModel
+  model: Model
 ): Promise<string> => {
   try {
     const historyChat = messages
@@ -84,7 +84,7 @@ export const generateSummary = async (
 
 export const generateResponse = async (
   user: IUser,
-  model: IModel,
+  model: Model,
   message: string,
   chatroom: IChatroom
 ): Promise<string> => {
@@ -119,7 +119,7 @@ export const generateResponse = async (
 
 export const generateGreeting = async (
   user: IUser,
-  model: IModel
+  model: Model
 ): Promise<string> => {
   try {
     const result = await ai.models.generateContent({
