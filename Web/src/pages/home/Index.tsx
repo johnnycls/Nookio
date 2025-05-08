@@ -6,6 +6,7 @@ import { useThemeColor } from "../../hooks/useThemeColor";
 import Content from "./Content";
 import { useGetProfileQuery } from "../../slices/userSlice";
 import Error from "../../components/Error";
+import { useGetChatroomsQuery } from "../../slices/chatroomSlice";
 
 const Home: React.FC = () => {
   useThemeColor("#FFFFFF");
@@ -19,6 +20,13 @@ const Home: React.FC = () => {
     refetch,
   } = useGetProfileQuery({});
 
+  const {
+    data: chatrooms,
+    isLoading: isChatroomsLoading,
+    isError: isChatroomsError,
+    refetch: refetchChatrooms,
+  } = useGetChatroomsQuery();
+
   useEffect(() => {
     if (
       isSuccess &&
@@ -31,12 +39,18 @@ const Home: React.FC = () => {
     }
   }, [profile, navigate]);
 
-  return isError ? (
-    <Error onReload={refetch} errorText={t("error.error")} />
-  ) : (
+  if (isError) {
+    return <Error onReload={refetch} errorText={t("error.error")} />;
+  }
+
+  if (isChatroomsError) {
+    return <Error onReload={refetchChatrooms} errorText={t("error.error")} />;
+  }
+
+  return (
     <>
-      <LoadingScreen isLoading={isLoading} />
-      <Content />
+      <LoadingScreen isLoading={isLoading || isChatroomsLoading} />
+      <Content chatrooms={chatrooms} />
     </>
   );
 };

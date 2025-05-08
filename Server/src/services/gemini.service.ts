@@ -14,6 +14,7 @@ import {
   summarizeSystemInstruction,
 } from "../utils/summarize";
 import Model from "../../assets/models/model";
+import { langs } from "../../assets/langs";
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY || "" });
 
@@ -37,7 +38,7 @@ const generateSystemInstruction = (
     userGender: user.gender || "",
     userDescription: user.description || "",
     userDob: user.dob || new Date(),
-    userLang: user.lang || "",
+    userLang: user.lang in langs ? langs[user.lang].nativeName : "",
     summaries: summaries,
   });
 };
@@ -68,7 +69,7 @@ export const generateSummary = async (
     });
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       contents: summarizePrompt,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
@@ -96,7 +97,7 @@ export const generateResponse = async (
       .map(convertToChatMessage);
 
     const chat = ai.chats.create({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       history: historyMessage,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
@@ -127,7 +128,7 @@ export const generateGreeting = async (
 ): Promise<string> => {
   try {
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-2.5-flash",
       contents: generateGreetingPrompt(user, model),
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
