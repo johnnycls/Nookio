@@ -14,10 +14,10 @@ const Home: React.FC = () => {
   const { t } = useTranslation();
   const {
     data: profile,
-    isLoading,
-    isError,
-    isSuccess,
-    refetch,
+    isLoading: isProfileLoading,
+    isError: isProfileError,
+    isSuccess: isProfileSuccess,
+    refetch: refetchProfile,
   } = useGetProfileQuery({});
 
   const {
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (
-      isSuccess &&
+      isProfileSuccess &&
       (profile?.name === "" ||
         profile?.description === "" ||
         profile?.gender === "" ||
@@ -39,20 +39,21 @@ const Home: React.FC = () => {
     }
   }, [profile, navigate]);
 
-  if (isError) {
-    return <Error onReload={refetch} errorText={t("error.error")} />;
+  if (isProfileError) {
+    return <Error onReload={refetchProfile} errorText={t("profile.error")} />;
   }
 
   if (isChatroomsError) {
-    return <Error onReload={refetchChatrooms} errorText={t("error.error")} />;
+    return (
+      <Error onReload={refetchChatrooms} errorText={t("chatroom.error")} />
+    );
   }
 
-  return (
-    <>
-      <LoadingScreen isLoading={isLoading || isChatroomsLoading} />
-      <Content chatrooms={chatrooms} />
-    </>
-  );
+  if (isProfileLoading || isChatroomsLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
+  return <Content chatrooms={chatrooms} />;
 };
 
 export default Home;

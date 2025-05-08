@@ -11,16 +11,24 @@ const Profile: React.FC = () => {
   useThemeColor("#FFFFFF");
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { data: profile, isLoading, isError, refetch } = useGetProfileQuery({});
+  const {
+    data: profile,
+    isLoading: isProfileLoading,
+    isError: isProfileError,
+    refetch: refetchProfile,
+  } = useGetProfileQuery({});
 
-  return isError ? (
-    <Error onReload={refetch} errorText={t("error.error")} />
-  ) : (
-    <>
-      <LoadingScreen isLoading={isLoading} />
-      <Content profile={profile} />
-    </>
-  );
+  if (isProfileError) {
+    return (
+      <Error onReload={refetchProfile} errorText={t("fetchProfileError")} />
+    );
+  }
+
+  if (isProfileLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
+  return <Content profile={profile} />;
 };
 
 export default Profile;

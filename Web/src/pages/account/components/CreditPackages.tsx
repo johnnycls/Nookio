@@ -5,7 +5,7 @@ import { usePurchaseCreditsMutation } from "../../../slices/userSlice";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import LoadingScreen from "../../../components/LoadingScreen";
-import PaymentDialog from "../../../components/PaymentDialog";
+import PaymentDialog from "./PaymentDialog";
 import { Toast } from "primereact/toast";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -40,11 +40,26 @@ const CreditPackages: React.FC<{}> = ({}) => {
     if (isError) {
       toast.current?.show({
         severity: "error",
-        summary: t("account.buyCreditsError"),
+        summary: t("purchaseCreditsError"),
         detail: error?.toString(),
       });
     }
   }, [isError, t]);
+
+  const onPaymentError = (error: any) => {
+    toast.current?.show({
+      severity: "error",
+      summary: t("paymentError"),
+      detail: error?.toString(),
+    });
+  };
+
+  const onPaymentSuccess = () => {
+    toast.current?.show({
+      severity: "success",
+      summary: t("account.payment.success"),
+    });
+  };
 
   return (
     <>
@@ -60,7 +75,9 @@ const CreditPackages: React.FC<{}> = ({}) => {
             }}
             onSuccess={() => {
               setPaymentDialogVisible(false);
+              onPaymentSuccess();
             }}
+            onPaymentError={onPaymentError}
           />
         </Elements>
       )}

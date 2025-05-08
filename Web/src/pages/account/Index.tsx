@@ -7,21 +7,21 @@ import Content from "./Content";
 import { useGetProfileQuery } from "../../slices/userSlice";
 import Error from "../../components/Error";
 
-const Account: React.FC = () => {
+const Home: React.FC = () => {
   useThemeColor("#FFFFFF");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const {
     data: profile,
-    isLoading,
-    isError,
-    isSuccess,
-    refetch,
+    isLoading: isProfileLoading,
+    isError: isProfileError,
+    isSuccess: isProfileSuccess,
+    refetch: refetchProfile,
   } = useGetProfileQuery({});
 
   useEffect(() => {
     if (
-      isSuccess &&
+      isProfileSuccess &&
       (profile?.name === "" ||
         profile?.description === "" ||
         profile?.gender === "" ||
@@ -31,14 +31,15 @@ const Account: React.FC = () => {
     }
   }, [profile, navigate]);
 
-  return isError ? (
-    <Error onReload={refetch} errorText={t("error.error")} />
-  ) : (
-    <>
-      <LoadingScreen isLoading={isLoading} />
-      <Content profile={profile} />
-    </>
-  );
+  if (isProfileError) {
+    return <Error onReload={refetchProfile} errorText={t("profile.error")} />;
+  }
+
+  if (isProfileLoading) {
+    return <LoadingScreen isLoading={true} />;
+  }
+
+  return <Content profile={profile} />;
 };
 
-export default Account;
+export default Home;

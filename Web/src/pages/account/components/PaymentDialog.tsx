@@ -3,7 +3,6 @@ import {
   useStripe,
   useElements,
   PaymentElement,
-  Elements,
 } from "@stripe/react-stripe-js";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
@@ -12,12 +11,14 @@ interface PaymentDialogProps {
   visible: boolean;
   onHide: () => void;
   onSuccess: () => void;
+  onPaymentError: (error: any) => void;
 }
 
 const PaymentDialog: React.FC<PaymentDialogProps> = ({
   visible,
   onHide,
   onSuccess,
+  onPaymentError,
 }) => {
   const { t } = useTranslation();
   const stripe = useStripe();
@@ -38,7 +39,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({
     });
 
     if (error) {
-      console.error("Payment failed:", error);
+      onPaymentError(error);
     } else {
       onSuccess();
     }

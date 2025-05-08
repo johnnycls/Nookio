@@ -1,10 +1,12 @@
 import { Button } from "primereact/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { profile, useUpdateProfileMutation } from "../../slices/userSlice";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { MAX_CHATROOMS } from "../../config";
 import { useTranslation } from "react-i18next";
+import { Toast } from "primereact/toast";
+import LoadingScreen from "../../components/LoadingScreen";
 
 const MatchSettings: React.FC<{
   prevCallback: () => void;
@@ -12,7 +14,11 @@ const MatchSettings: React.FC<{
   profile?: profile;
 }> = ({ prevCallback, nextCallback, profile }) => {
   const { t } = useTranslation();
-  const [updateProfile, { isSuccess }] = useUpdateProfileMutation();
+  const toast = useRef<Toast>(null);
+
+  const [updateProfile, { isSuccess, isError, isLoading }] =
+    useUpdateProfileMutation();
+
   const [preferedGender, setPreferedGender] = useState<
     "male" | "female" | "both"
   >(profile?.preferedGender || "both");
@@ -35,9 +41,22 @@ const MatchSettings: React.FC<{
     }
   }, [isSuccess, nextCallback]);
 
+  useEffect(() => {
+    if (isError) {
+      toast.current?.show({
+        severity: "error",
+        summary: t("updateProfileError"),
+        // detail: t("updateProfileError"),
+      });
+    }
+  }, [isError, t]);
+
   return (
     <>
       <div className="flex flex-col">
+        <Toast ref={toast} />
+        <LoadingScreen isLoading={isLoading} />
+
         <label>{t("profile.matchSettings.gender.label")}</label>
         <Dropdown
           value={preferedGender}
@@ -78,7 +97,14 @@ const MatchSettings: React.FC<{
             iconPos="right"
             icon="pi pi-arrow-right"
             onClick={() => {
-              updateProfile({ preferedGender, targetChatrooms });
+              if (
+                preferedGender === profile?.preferedGender &&
+                targetChatrooms === profile?.targetChatrooms
+              ) {
+                nextCallback();
+              } else {
+                updateProfile({ preferedGender, targetChatrooms });
+              }
             }}
           />
         </div>

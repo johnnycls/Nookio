@@ -31,17 +31,23 @@ i18n
             title: "Error",
             message: "An error occurred",
           },
+          loginError: "An error occurred while logging in",
+          fetchProfileError: "An error occurred while fetching profile",
+          fetchChatroomsError: "An error occurred while fetching chatrooms",
+          purchaseCreditsError: "An error occurred while purchasing credits",
+          paymentError: "Payment failed. Please try again.",
+          updateProfileError: "An error occurred while updating your profile",
+
           account: {
             remainingCredit: "Remaining Credits",
             package: "${{price}} - {{credits}} Credits",
-            buyCreditsError: "An error occurred while buying credits",
             payment: {
               title: "Complete Payment",
               submit: "Pay Now",
               success: "Payment successful!",
-              error: "Payment failed. Please try again.",
             },
           },
+
           profile: {
             title: "Profile",
             basicInfo: {
@@ -93,10 +99,6 @@ i18n
               back: "Back",
               next: "Next",
               finish: "Finish",
-            },
-            error: {
-              title: "Error",
-              message: "An error occurred while updating your profile",
             },
           },
         },

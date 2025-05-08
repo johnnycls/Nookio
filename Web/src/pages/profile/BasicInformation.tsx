@@ -8,6 +8,7 @@ import { Calendar } from "primereact/calendar";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
+import i18next from "i18next";
 
 const BasicInformation: React.FC<{
   nextCallback: () => void;
@@ -16,12 +17,18 @@ const BasicInformation: React.FC<{
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
-  const [updateProfile, { isLoading, isError }] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading, isError, isSuccess }] =
+    useUpdateProfileMutation();
+
+  const [lang, setLang] = useState<string>(profile?.lang || "");
   const [name, setName] = useState<string>(profile?.name || "");
   const [gender, setGender] = useState<string>(profile?.gender || "");
   const [dob, setDob] = useState<string>(profile?.dob || "");
 
   useEffect(() => {
+    if (profile?.lang) {
+      setLang(profile.lang);
+    }
     if (profile?.gender) {
       setGender(profile.gender);
     }
@@ -34,11 +41,17 @@ const BasicInformation: React.FC<{
   }, [profile]);
 
   useEffect(() => {
+    if (isSuccess) {
+      nextCallback();
+    }
+  }, [isSuccess, nextCallback]);
+
+  useEffect(() => {
     if (isError) {
       toast.current?.show({
         severity: "error",
-        summary: t("profile.error.title"),
-        detail: t("profile.error.message"),
+        summary: t("updateProfileError"),
+        // detail: t("updateProfileError"),
       });
     }
   }, [isError, t]);
@@ -52,10 +65,15 @@ const BasicInformation: React.FC<{
   return (
     <>
       <div className="flex flex-col gap-4">
+        <Toast ref={toast} />
         <LoadingScreen isLoading={isLoading} />
+
         <Dropdown
-          value={langs.find((lang) => lang.code === profile?.lang)}
-          onChange={(e) => updateProfile({ lang: e.value.code })}
+          value={langs.find((_lang) => _lang.code === lang)}
+          onChange={(e) => {
+            i18next.changeLanguage(e.value.code);
+            setLang(e.value.code);
+          }}
           options={langs}
           optionLabel="nativeName"
           placeholder={t("profile.basicInfo.language.placeholder")}
@@ -88,8 +106,16 @@ const BasicInformation: React.FC<{
           icon="pi pi-arrow-right"
           iconPos="right"
           onClick={() => {
-            updateProfile({ name, gender, dob });
-            nextCallback();
+            if (
+              lang === profile?.lang &&
+              name === profile?.name &&
+              gender === profile?.gender &&
+              dob === profile?.dob
+            ) {
+              nextCallback();
+            } else {
+              updateProfile({ lang, name, gender, dob });
+            }
           }}
         />
       </div>
