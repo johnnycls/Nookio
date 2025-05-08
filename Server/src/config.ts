@@ -30,3 +30,6 @@ export const CREDITS_FOR_RESPONSE = (history_length: number): number => {
       : summaryPairs + Math.floor((messagePairs - summaryPairs) / summaryPairs))
   );
 };
+
+export const FREQUENCY_PENALTY = 0.2;
+export const PRESENCE_PENALTY = 0.2;
