@@ -22,8 +22,7 @@ const port = PORT || 8080;
 
 app.use(
   cors({
-    origin: true,
-    // origin: [WEB_URL || "http://localhost:5173"],
+    origin: [WEB_URL || "http://localhost:5173"],
   })
 );
 
