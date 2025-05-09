@@ -16,7 +16,7 @@ export const MAX_OUTPUT_TOKENS = 750;
 
 export const SUMMARY_TEMPERATURE = 0.3;
 export const SUMMARY_MSG = 20;
-export const LLM_MODEL = "gemini-2.5-flash-preview-04-17";
+export const LLM_MODEL = "gemini-2.0-flash";
 
 export const MAX_CHATROOMS = 4;
 export const MIN_CREDITS_FOR_AUTO_CHAT = 5;

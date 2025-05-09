@@ -1,7 +1,7 @@
 type Model = {
   _id: string;
   name: string;
-  gender: string;
+  gender: "male" | "female";
   dob: Date;
   temperature: number;
   frequencyPenalty: number;
