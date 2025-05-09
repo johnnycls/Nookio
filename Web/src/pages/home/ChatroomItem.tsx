@@ -15,7 +15,7 @@ const ChatroomItem: React.FC<{
       <Avatar
         shape="circle"
         size="xlarge"
-        image={`src/assets/avatars/${chatroom.model.avatar}`}
+        image={`@/assets/avatars/${chatroom.model.avatar}`}
         icon="pi pi-user"
       />
       <div className="flex flex-col gap-1">

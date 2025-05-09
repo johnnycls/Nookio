@@ -13,7 +13,7 @@ const ChatroomAppBar: React.FC<{ chatroom: ChatroomDetail }> = ({
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Avatar
-            image={`src/assets/avatars/${chatroom.model.avatar}`}
+            image={`@/assets/avatars/${chatroom.model.avatar}`}
             icon="pi pi-user"
             shape="circle"
             size="xlarge"

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
+import * as path from "path";
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
   registerType: "autoUpdate",
@@ -53,4 +54,9 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugIn)],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });
