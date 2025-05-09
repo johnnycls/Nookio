@@ -8,7 +8,7 @@ const authSlice = apiSlice.injectEndpoints({
     login: builder.mutation<tokenResponse, { credentials: CredentialResponse }>(
       {
         query: ({ credentials }) => ({
-          url: "user/login",
+          url: "user/login/",
           method: "POST",
           body: { credentials },
           headers: { Authorization: "None" },

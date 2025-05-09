@@ -26,7 +26,7 @@ const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProfile: builder.query<profileResponse, {}>({
       query: () => ({
-        url: "user/profile",
+        url: "user/profile/",
       }),
       transformResponse: (response: profileResponse) => {
         if (response.lang) {
@@ -37,7 +37,7 @@ const userSlice = apiSlice.injectEndpoints({
     }),
     updateProfile: builder.mutation<profileResponse, updateProfileRequest>({
       query: (profileData) => ({
-        url: "user/profile",
+        url: "user/profile/",
         method: "PATCH",
         body: profileData,
       }),
@@ -57,7 +57,7 @@ const userSlice = apiSlice.injectEndpoints({
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({
       query: ({ packageId }) => ({
-        url: "user/purchase",
+        url: "user/purchase/",
         method: "POST",
         body: { packageId },
       }),

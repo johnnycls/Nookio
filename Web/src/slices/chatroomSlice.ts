@@ -20,14 +20,14 @@ export type ChatroomDetail = Chatroom & {
 export const chatroomSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getChatrooms: builder.query<Chatroom[], void>({
-      query: () => "chatroom",
+      query: () => "chatroom/",
     }),
     getChatroomDetail: builder.query<ChatroomDetail, string>({
       query: (chatroomId) => `chatroom/${chatroomId}`,
     }),
     createChatroom: builder.mutation<Chatroom, { name: string }>({
       query: (body) => ({
-        url: "chatroom",
+        url: "chatroom/",
         method: "POST",
         body,
       }),
@@ -51,7 +51,7 @@ export const chatroomSlice = apiSlice.injectEndpoints({
     }),
     deleteChatroom: builder.mutation<void, string>({
       query: (chatroomId) => ({
-        url: `chatroom/${chatroomId}`,
+        url: `chatroom/${chatroomId}/`,
         method: "DELETE",
       }),
       async onQueryStarted(chatroomId, { dispatch, queryFulfilled }) {

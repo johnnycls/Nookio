@@ -15,7 +15,7 @@ const chatSlice = apiSlice.injectEndpoints({
       { chatroomId: string; message: string }
     >({
       query: ({ chatroomId, message }) => ({
-        url: `chat/${chatroomId}`,
+        url: `chat/${chatroomId}/`,
         method: "POST",
         body: { message },
       }),
