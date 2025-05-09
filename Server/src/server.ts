@@ -22,13 +22,18 @@ const port = PORT || 8080;
 
 app.use(
   cors({
-    // origin: [WEB_URL || "http://localhost:5173"],
-    origin: true,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Authorization", "Content-Type"],
+    origin: true, // Allow all origins
+    credentials: true, // Allow credentials
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// app.use(
+//   cors({
+//     origin: [WEB_URL || "http://localhost:5173"],
+//   })
+// );
 
 app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(limiter);
