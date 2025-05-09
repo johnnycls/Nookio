@@ -31,6 +31,7 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
           name: model.name,
           gender: model.gender || "",
           dob: model.dob || null,
+          avatar: model.avatar || "",
         },
         lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
         lastReadPosition: chatroom.lastReadPosition,
@@ -75,10 +76,22 @@ router.get(
         await chatroom.save();
       }
 
+      if (!chatroom.modelId) {
+        return res.status(404).json({ message: "Model not found" });
+      }
+      const model = models[chatroom.modelId];
+
       return res.status(200).json({
         _id: chatroom._id,
         messages: chatroom.messages,
         lastReadPosition: chatroom.lastReadPosition,
+        model: {
+          _id: model._id,
+          name: model.name,
+          gender: model.gender || "",
+          dob: model.dob || null,
+          avatar: model.avatar || "",
+        },
       });
     } catch (error) {
       console.error(JSON.stringify(error));
@@ -88,36 +101,39 @@ router.get(
 );
 
 // Remove chatroom from user's chatrooms
-router.delete(
-  "/:chatroomId",
-  authMiddleware,
-  async (req: Request, res: Response) => {
-    try {
-      const email = res.locals.email as string;
-      const { chatroomId } = req.params;
-      const user = await User.findOne({ email });
+router.delete("/", authMiddleware, async (req: Request, res: Response) => {
+  try {
+    const email = res.locals.email as string;
+    const { chatroomIds } = req.body as { chatroomIds: string[] };
+    const user = await User.findOne({ email });
 
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      // Check if the chatroom is in user's chatrooms
-      if (!user.chatrooms.some((id) => id.toString() === chatroomId)) {
-        return res.status(404).json({ message: "Chatroom not found" });
-      }
-
-      // Remove chatroom from user's chatrooms array
-      user.chatrooms = user.chatrooms.filter(
-        (id) => id.toString() !== chatroomId
-      );
-      await user.save();
-
-      return res.status(200).json({ message: "Chatroom removed successfully" });
-    } catch (error) {
-      console.error(JSON.stringify(error));
-      return res.status(500).json({ message: "Internal server error" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
+
+    // Check if the chatroom is in user's chatrooms
+    if (
+      chatroomIds.some(
+        (id) =>
+          !user.chatrooms
+            .map((chatroomId) => chatroomId.toString())
+            .includes(id)
+      )
+    ) {
+      return res.status(404).json({ message: "Chatroom not found" });
+    }
+
+    // Remove chatroom from user's chatrooms array
+    user.chatrooms = user.chatrooms.filter((id) =>
+      chatroomIds.includes(id.toString())
+    );
+    await user.save();
+
+    return res.status(200).json({ message: "Chatroom removed successfully" });
+  } catch (error) {
+    console.error(JSON.stringify(error));
+    return res.status(500).json({ message: "Internal server error" });
   }
-);
+});
 
 export default router;

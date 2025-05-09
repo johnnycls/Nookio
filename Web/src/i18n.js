@@ -37,6 +37,15 @@ i18n
           purchaseCreditsError: "An error occurred while purchasing credits",
           paymentError: "Payment failed. Please try again.",
           updateProfileError: "An error occurred while updating your profile",
+          deleteChatroomError: "An error occurred while deleting chatrooms",
+          fetchChatroomDetailError:
+            "An error occurred while fetching chatroom detail",
+          sendMsgError: "An error occurred while sending message: {{error}}",
+
+          home: {
+            deleteChatroomConfirmation:
+              "Are you sure you want to delete these chatrooms?",
+          },
 
           account: {
             remainingCredit: "Remaining Credits",

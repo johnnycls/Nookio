@@ -1,20 +1,34 @@
 import { apiSlice } from "./apiSlice";
 
-export type Chatroom = {
-  _id: string;
-  name: string;
-  lastMessage: string;
-  lastReadPosition: number;
-  createdAt: string;
-  updatedAt: string;
+export type Message = {
+  content: string;
+  sender: string;
+  timestamp: string;
 };
 
-export type ChatroomDetail = Chatroom & {
-  messages: {
-    message: string;
-    response: string;
-    timestamp: string;
-  }[];
+export type Chatroom = {
+  _id: string;
+  lastMessage: Message;
+  lastReadPosition: number;
+  model: {
+    _id: string;
+    name: string;
+    gender: string;
+    dob: string;
+    avatar: string;
+  };
+};
+
+export type ChatroomDetail = {
+  _id: string;
+  messages: Message[];
+  model: {
+    _id: string;
+    name: string;
+    gender: string;
+    dob: string;
+    avatar: string;
+  };
 };
 
 export const chatroomSlice = apiSlice.injectEndpoints({
@@ -22,7 +36,7 @@ export const chatroomSlice = apiSlice.injectEndpoints({
     getChatrooms: builder.query<Chatroom[], void>({
       query: () => "chatroom/",
     }),
-    getChatroomDetail: builder.query<ChatroomDetail, string>({
+    getChatroomDetail: builder.query<ChatroomDetail, { chatroomId: string }>({
       query: (chatroomId) => `chatroom/${chatroomId}`,
     }),
     createChatroom: builder.mutation<Chatroom, { name: string }>({
@@ -49,12 +63,13 @@ export const chatroomSlice = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteChatroom: builder.mutation<void, string>({
-      query: (chatroomId) => ({
-        url: `chatroom/${chatroomId}/`,
+    deleteChatroom: builder.mutation<void, string[]>({
+      query: (chatroomIds) => ({
+        url: `chatroom/`,
         method: "DELETE",
+        body: { chatroomIds },
       }),
-      async onQueryStarted(chatroomId, { dispatch, queryFulfilled }) {
+      async onQueryStarted(chatroomIds, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
           // Remove the chatroom from the list cache
@@ -63,23 +78,22 @@ export const chatroomSlice = apiSlice.injectEndpoints({
               "getChatrooms",
               undefined,
               (draft: Chatroom[]) => {
-                const index = draft.findIndex((c) => c._id === chatroomId);
-                if (index !== -1) {
-                  draft.splice(index, 1);
-                }
+                draft = draft.filter((c) => !chatroomIds.includes(c._id));
               }
             )
           );
           // Remove the chatroom detail from the cache
-          dispatch(
-            chatroomSlice.util.updateQueryData(
-              "getChatroomDetail",
-              chatroomId,
-              () => {
-                return undefined;
-              }
-            )
-          );
+          chatroomIds.forEach((chatroomId) => {
+            dispatch(
+              chatroomSlice.util.updateQueryData(
+                "getChatroomDetail",
+                { chatroomId },
+                () => {
+                  return undefined;
+                }
+              )
+            );
+          });
         } catch {
           // Error handling is done by the mutation hook
         }
