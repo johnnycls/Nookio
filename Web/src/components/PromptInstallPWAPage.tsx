@@ -125,10 +125,6 @@ const PromptInstallPWAPage: React.FC = () => {
       ],
     },
   };
-  const publisherLink = {
-    zh: "創作者請按這裏",
-    en: "Click here if you are a creator",
-  };
 
   const currentInstructions = instructions[platform];
   const colors = {
