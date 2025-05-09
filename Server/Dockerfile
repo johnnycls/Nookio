@@ -22,3 +22,5 @@ RUN npm ci --only=production
 EXPOSE 8080
 
 ENV NODE_ENV=production
+
+CMD ["npm", "run", "production"]
