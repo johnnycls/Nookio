@@ -31,5 +31,30 @@ export const CREDITS_FOR_RESPONSE = (history_length: number): number => {
   );
 };
 
-export const FREQUENCY_PENALTY = 0.2;
-export const PRESENCE_PENALTY = 0.2;
+export interface CreditPackage {
+  id: string;
+  credits: number;
+  price: number;
+}
+export const creditPackages: CreditPackage[] = [
+  {
+    id: "0",
+    credits: 3000,
+    price: 2.49,
+  },
+  {
+    id: "1",
+    credits: 8000,
+    price: 4.99,
+  },
+  {
+    id: "2",
+    credits: 20000,
+    price: 9.99,
+  },
+  {
+    id: "3",
+    credits: 50000,
+    price: 19.99,
+  },
+];

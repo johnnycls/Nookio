@@ -54,9 +54,6 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugIn)],
-  css: {
-    postcss: "./postcss.config.js",
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

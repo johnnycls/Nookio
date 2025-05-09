@@ -9,6 +9,7 @@ import PaymentDialog from "./PaymentDialog";
 import { Toast } from "primereact/toast";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Card } from "primereact/card";
 
 const CreditPackages: React.FC<{}> = ({}) => {
   const { t } = useTranslation();
@@ -82,24 +83,28 @@ const CreditPackages: React.FC<{}> = ({}) => {
         </Elements>
       )}
 
-      {CREDIT_PACKAGES.map((pack) => (
-        <Button
-          key={pack.id}
-          onClick={() => {
-            purchaseCredits({ packageId: pack.id });
-          }}
-          pt={{
-            label: {
-              className: "text-2xl",
-            },
-          }}
-          label={t("account.package", {
-            price: pack?.price,
-            credits: pack?.credits,
-          })}
-          className="w-full"
-        />
-      ))}
+      <Card title={t("account.buyCredits")}>
+        <div className="flex flex-col gap-2">
+          {CREDIT_PACKAGES.map((pack) => (
+            <Button
+              key={pack.id}
+              onClick={() => {
+                purchaseCredits({ packageId: pack.id });
+              }}
+              pt={{
+                label: {
+                  className: "text-2xl",
+                },
+              }}
+              label={t("account.package", {
+                price: pack?.price,
+                credits: pack?.credits,
+              })}
+              className="w-full"
+            />
+          ))}
+        </div>
+      </Card>
     </>
   );
 };

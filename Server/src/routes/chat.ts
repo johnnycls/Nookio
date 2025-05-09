@@ -124,7 +124,12 @@ router.post(
       });
     } catch (error) {
       console.error("Error sending message:", JSON.stringify(error));
-      res.status(500).json({ message: "Error sending message" });
+      res
+        .status(500)
+        .json({
+          message: "Error sending message",
+          error: JSON.stringify(error),
+        });
     }
   }
 );

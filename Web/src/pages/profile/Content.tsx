@@ -22,9 +22,19 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
         <h1 className="text-3xl">NookioAI</h1>
       </AppBar>
 
-      <div className="w-full p-6 flex justify-content-center items-center">
-        <Card className="w-full p-4" title={t("profile.title")}>
-          <Stepper ref={stepperRef} linear>
+      <div className="w-full h-full p-5 flex justify-content-center items-center overflow-y-auto">
+        <Card className="w-full" title={t("profile.title")}>
+          <Stepper
+            ref={stepperRef}
+            linear
+            pt={{
+              stepperpanel: {
+                root: {
+                  className: "p-0",
+                },
+              },
+            }}
+          >
             <StepperPanel header={t("profile.basicInfo.title")}>
               <BasicInformation
                 nextCallback={() => {

@@ -6,6 +6,8 @@ export const model013: Model = {
   gender: "male",
   dob: new Date("1993-07-14T12:00:00.000Z"),
   temperature: 0.9,
+  presencePenalty: 0.3,
+  frequencyPenalty: 0.2,
   avatar: "013.jpg",
 
   greetingPrompt: ({ username }) => `

@@ -1,20 +1,14 @@
-@layer tailwind-base, primereact, tailwind-utilities;
+/* @layer tailwind-base, primereact, tailwind-utilities; */
 
-@layer tailwind-base {
-  @tailwind base;
-}
+@import "tailwindcss";
+@import "./assets/theme/theme.css";
 
-@layer tailwind-utilities {
-  @tailwind components;
-  @tailwind utilities;
-}
-
-@layer utilities {
+/* @layer utilities {
   .glow-white {
     text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #fff,
       0 0 82px #fff, 0 0 92px #fff, 0 0 102px #fff, 0 0 151px #fff;
   }
-}
+} */
 
 body {
   margin: 0;

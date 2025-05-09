@@ -45,11 +45,13 @@ i18n
           home: {
             deleteChatroomConfirmation:
               "Are you sure you want to delete these chatrooms?",
+            noChatrooms: "No chatrooms found",
           },
 
           account: {
             remainingCredit: "Remaining Credits",
             package: "${{price}} - {{credits}} Credits",
+            buyCredits: "Buy Credits",
             payment: {
               title: "Complete Payment",
               submit: "Pay Now",
@@ -58,7 +60,7 @@ i18n
           },
 
           profile: {
-            title: "Profile",
+            title: "Profile Setup",
             basicInfo: {
               title: "Basic Information",
               language: {

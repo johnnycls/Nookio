@@ -17,7 +17,7 @@ const BasicInformation: React.FC<{
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
-  const [updateProfile, { isLoading, isError, isSuccess }] =
+  const [updateProfile, { isLoading, isError, isSuccess, error }] =
     useUpdateProfileMutation();
 
   const [lang, setLang] = useState<string>(profile?.lang || "");
@@ -51,10 +51,10 @@ const BasicInformation: React.FC<{
       toast.current?.show({
         severity: "error",
         summary: t("updateProfileError"),
-        // detail: t("updateProfileError"),
+        detail: error?.toString(),
       });
     }
-  }, [isError, t]);
+  }, [isError, t, error]);
 
   const genderOptions = [
     { label: t("profile.basicInfo.gender.options.male"), value: "male" },
@@ -64,41 +64,61 @@ const BasicInformation: React.FC<{
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <Toast ref={toast} />
         <LoadingScreen isLoading={isLoading} />
 
-        <Dropdown
-          value={langs.find((_lang) => _lang.code === lang)}
-          onChange={(e) => {
-            i18next.changeLanguage(e.value.code);
-            setLang(e.value.code);
-          }}
-          options={langs}
-          optionLabel="nativeName"
-          placeholder={t("profile.basicInfo.language.placeholder")}
-        />
+        <div className="flex flex-col">
+          <label htmlFor="language" className="text-sm">
+            {t("profile.basicInfo.language.label")}
+          </label>
+          <Dropdown
+            value={langs.find((_lang) => _lang.code === lang)}
+            onChange={(e) => {
+              i18next.changeLanguage(e.value.code);
+              setLang(e.value.code);
+            }}
+            options={langs}
+            optionLabel="nativeName"
+            placeholder={t("profile.basicInfo.language.placeholder")}
+          />
+        </div>
 
-        <InputText
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={t("profile.basicInfo.name.placeholder")}
-        />
+        <div className="flex flex-col">
+          <label htmlFor="name" className="text-sm">
+            {t("profile.basicInfo.name.label")}
+          </label>
+          <InputText
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={t("profile.basicInfo.name.placeholder")}
+          />
+        </div>
 
-        <Dropdown
-          value={gender}
-          onChange={(e) => setGender(e.value)}
-          options={genderOptions}
-          placeholder={t("profile.basicInfo.gender.placeholder")}
-        />
+        <div className="flex flex-col">
+          <label htmlFor="gender" className="text-sm">
+            {t("profile.basicInfo.gender.label")}
+          </label>
+          <Dropdown
+            value={gender}
+            onChange={(e) => setGender(e.value)}
+            options={genderOptions}
+            placeholder={t("profile.basicInfo.gender.placeholder")}
+          />
+        </div>
 
-        <Calendar
-          value={new Date(dob)}
-          onChange={(e) =>
-            setDob(e.value?.toISOString() || new Date().toISOString())
-          }
-          placeholder={t("profile.basicInfo.dob.placeholder")}
-        />
+        <div className="flex flex-col">
+          <label htmlFor="dob" className="text-sm">
+            {t("profile.basicInfo.dob.label")}
+          </label>
+          <Calendar
+            value={new Date(dob)}
+            onChange={(e) =>
+              setDob(e.value?.toISOString() || new Date().toISOString())
+            }
+            placeholder={t("profile.basicInfo.dob.placeholder")}
+          />
+        </div>
 
         <Button
           disabled={!name || !gender || !dob || isLoading}

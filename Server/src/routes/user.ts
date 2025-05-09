@@ -63,7 +63,9 @@ router.post("/login", async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.log(JSON.stringify(error));
-    res.status(500).json("error");
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: JSON.stringify(error) });
   }
 });
 
@@ -173,7 +175,10 @@ router.patch(
       res.status(200).json(profile);
     } catch (error) {
       console.error(JSON.stringify(error));
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({
+        message: "Internal server error",
+        error: JSON.stringify(error),
+      });
     }
   }
 );
@@ -201,7 +206,12 @@ router.post(
         res.status(400).json({ message: "Invalid package ID" });
         return;
       }
-      res.status(500).json({ message: "Internal server error" });
+      res
+        .status(500)
+        .json({
+          message: "Internal server error",
+          error: JSON.stringify(error),
+        });
     }
   }
 );

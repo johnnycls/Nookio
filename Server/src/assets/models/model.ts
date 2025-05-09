@@ -4,6 +4,8 @@ type Model = {
   gender: string;
   dob: Date;
   temperature: number;
+  frequencyPenalty: number;
+  presencePenalty: number;
   avatar: string;
   greetingPrompt: ({ username }: { username: string }) => string;
   systemInstruction: ({

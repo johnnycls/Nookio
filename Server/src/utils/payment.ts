@@ -1,36 +1,7 @@
 import Stripe from "stripe";
-import { STRIPE_PRIVATE_KEY } from "../config";
+import { STRIPE_PRIVATE_KEY, creditPackages } from "../config";
 
 const stripe = new Stripe(STRIPE_PRIVATE_KEY || "");
-
-export interface CreditPackage {
-  id: string;
-  credits: number;
-  price: number;
-}
-
-export const creditPackages: CreditPackage[] = [
-  {
-    id: "0",
-    credits: 3000,
-    price: 2.49,
-  },
-  {
-    id: "1",
-    credits: 8000,
-    price: 4.99,
-  },
-  {
-    id: "2",
-    credits: 20000,
-    price: 9.99,
-  },
-  {
-    id: "3",
-    credits: 50000,
-    price: 19.99,
-  },
-];
 
 export async function createPaymentSession(packageId: string, email: string) {
   const creditPackage = creditPackages.find((pkg) => pkg.id === packageId);

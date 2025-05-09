@@ -4,8 +4,6 @@ import {
   MAX_OUTPUT_TOKENS,
   SUMMARY_TEMPERATURE,
   SUMMARY_MSG,
-  FREQUENCY_PENALTY,
-  PRESENCE_PENALTY,
 } from "../config";
 import { IUser } from "../models/user.model";
 import { IChatroom, IMessage } from "../models/chatroom.model";
@@ -107,8 +105,8 @@ export const generateResponse = async (
           model,
           chatroom.summaries
         ),
-        frequencyPenalty: FREQUENCY_PENALTY,
-        presencePenalty: PRESENCE_PENALTY,
+        frequencyPenalty: model.frequencyPenalty,
+        presencePenalty: model.presencePenalty,
       },
     });
 
@@ -134,8 +132,8 @@ export const generateGreeting = async (
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
         systemInstruction: generateSystemInstruction(user, model, []),
-        frequencyPenalty: FREQUENCY_PENALTY,
-        presencePenalty: PRESENCE_PENALTY,
+        frequencyPenalty: model.frequencyPenalty,
+        presencePenalty: model.presencePenalty,
       },
     });
 

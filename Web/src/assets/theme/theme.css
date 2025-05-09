@@ -7045,7 +7045,7 @@
   }
   .p-stepper .p-stepper-panels {
     background: #ffffff;
-    padding: 0.875rem 1.125rem 1.125rem 1.125rem;
+    padding: 0.75rem;
     color: #334155;
   }
   .p-stepper .p-stepper-separator {
@@ -10727,7 +10727,7 @@
   }
 
   .p-toast {
-    max-width: 90vw;
+    max-width: 80vw;
     white-space: pre-line;
     word-break: break-word;
   }

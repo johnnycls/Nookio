@@ -13,7 +13,7 @@ const Description: React.FC<{
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
-  const [updateProfile, { isLoading, isError, isSuccess }] =
+  const [updateProfile, { isLoading, isError, isSuccess, error }] =
     useUpdateProfileMutation();
 
   const [description, setDescription] = useState<string>(
@@ -31,10 +31,10 @@ const Description: React.FC<{
       toast.current?.show({
         severity: "error",
         summary: t("updateProfileError"),
-        // detail: t("updateProfileError"),
+        detail: error?.toString(),
       });
     }
-  }, [isError, t]);
+  }, [isError, t, error]);
 
   return (
     <>
@@ -45,7 +45,7 @@ const Description: React.FC<{
         <InputTextarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          rows={4}
+          rows={5}
           autoResize
           placeholder={t("profile.description.placeholder")}
         />

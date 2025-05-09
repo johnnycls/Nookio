@@ -4,7 +4,7 @@ import "./index.css";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import App from "./app/App";
-import "./assets/theme/theme.css";
+// import "./assets/theme/theme.css";
 import "primeicons/primeicons.css";
 import "./i18n";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";

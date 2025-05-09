@@ -21,8 +21,10 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
-  const [deleteChatrooms, { isLoading: isDeleting, isError: isDeletingError }] =
-    useDeleteChatroomMutation();
+  const [
+    deleteChatrooms,
+    { isLoading: isDeleting, isError: isDeletingError, error: deleteError },
+  ] = useDeleteChatroomMutation();
 
   const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
   const [selectedChatroomIds, setSelectedChatroomIds] = useState<string[]>([]);
@@ -34,8 +36,8 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
   if (isDeletingError) {
     toast.current?.show({
       severity: "error",
-      summary: t("error"),
-      detail: t("deleteChatroomError"),
+      summary: t("deleteChatroomError"),
+      detail: deleteError?.toString(),
     });
   }
 
@@ -67,36 +69,42 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
           {isSelectMode && selectedChatroomIds.length === 0 && (
             <Button icon="pi pi-check" onClick={() => setIsSelectMode(false)} />
           )}
-          {!isSelectMode && (
+          {!isSelectMode && chatrooms && chatrooms.length > 0 && (
             <Button icon="pi pi-pencil" onClick={() => setIsSelectMode(true)} />
           )}
         </div>
       </AppBar>
 
       <div className="w-full h-full overflow-y-auto">
-        {chatrooms?.map((chatroom) => (
-          <ChatroomItem
-            key={chatroom._id}
-            chatroom={chatroom}
-            isSelected={selectedChatroomIds.includes(chatroom._id)}
-            onClick={() => {
-              if (isSelectMode) {
-                if (selectedChatroomIds.includes(chatroom._id)) {
-                  setSelectedChatroomIds(
-                    selectedChatroomIds.filter((id) => id !== chatroom._id)
-                  );
+        {chatrooms && chatrooms.length > 0 ? (
+          chatrooms?.map((chatroom) => (
+            <ChatroomItem
+              key={chatroom._id}
+              chatroom={chatroom}
+              isSelected={selectedChatroomIds.includes(chatroom._id)}
+              onClick={() => {
+                if (isSelectMode) {
+                  if (selectedChatroomIds.includes(chatroom._id)) {
+                    setSelectedChatroomIds(
+                      selectedChatroomIds.filter((id) => id !== chatroom._id)
+                    );
+                  } else {
+                    setSelectedChatroomIds([
+                      ...selectedChatroomIds,
+                      chatroom._id,
+                    ]);
+                  }
                 } else {
-                  setSelectedChatroomIds([
-                    ...selectedChatroomIds,
-                    chatroom._id,
-                  ]);
+                  navigate(`/chat/${chatroom._id}`);
                 }
-              } else {
-                navigate(`/chat/${chatroom._id}`);
-              }
-            }}
-          />
-        ))}
+              }}
+            />
+          ))
+        ) : (
+          <div className="h-full w-full p-2 text-xl">
+            {t("home.noChatrooms")}
+          </div>
+        )}
       </div>
 
       <BottomTab activeIndex={0} />

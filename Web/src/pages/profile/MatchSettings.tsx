@@ -16,7 +16,7 @@ const MatchSettings: React.FC<{
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
-  const [updateProfile, { isSuccess, isError, isLoading }] =
+  const [updateProfile, { isSuccess, isError, isLoading, error }] =
     useUpdateProfileMutation();
 
   const [preferedGender, setPreferedGender] = useState<
@@ -46,10 +46,10 @@ const MatchSettings: React.FC<{
       toast.current?.show({
         severity: "error",
         summary: t("updateProfileError"),
-        // detail: t("updateProfileError"),
+        detail: error?.toString(),
       });
     }
-  }, [isError, t]);
+  }, [isError, t, error]);
 
   return (
     <>
@@ -76,6 +76,13 @@ const MatchSettings: React.FC<{
           showButtons
           buttonLayout="horizontal"
           className="mb-4"
+          pt={{
+            input: {
+              root: {
+                className: "w-full",
+              },
+            },
+          }}
         />
 
         <div className="flex justify-between">

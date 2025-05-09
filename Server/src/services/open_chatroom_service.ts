@@ -20,12 +20,14 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
     );
   });
 
-  if (!availableModelIds || availableModelIds.length < chatroomNum) {
+  if (availableModelIds.length < chatroomNum) {
     throw new Error("No available friends found");
   }
 
+  const selectedModelIds = availableModelIds.slice(0, chatroomNum);
+
   const chatrooms = await Promise.all(
-    availableModelIds.map(async (modelId) => {
+    selectedModelIds.map(async (modelId) => {
       const model = models[modelId];
       const greeting = await generateGreeting(user, model);
 
