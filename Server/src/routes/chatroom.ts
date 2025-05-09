@@ -4,7 +4,7 @@ import type { Request, Response } from "express";
 import Chatroom from "../models/chatroom.model";
 import User from "../models/user.model";
 import authMiddleware from "../middlewares/auth";
-import models from "../../assets/models/models";
+import models from "../assets/models/models";
 
 const router: Router = express.Router();
 

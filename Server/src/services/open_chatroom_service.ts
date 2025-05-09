@@ -1,7 +1,7 @@
 import User, { IUser } from "../models/user.model";
 import Chatroom, { IChatroom } from "../models/chatroom.model";
 import { generateGreeting } from "./gemini.service";
-import models from "../../assets/models/models";
+import models from "../assets/models/models";
 
 export async function handleCreateRequest(user: IUser, chatroomNum: number) {
   let userChatrooms = await Chatroom.find({

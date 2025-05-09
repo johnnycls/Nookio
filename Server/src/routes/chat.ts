@@ -5,7 +5,7 @@ import Chatroom from "../models/chatroom.model";
 import { CREDITS_FOR_RESPONSE, MAX_INPUT_TOKENS, SUMMARY_MSG } from "../config";
 import { calculateTokens } from "../utils/token";
 import { generateResponse, generateSummary } from "../services/gemini.service";
-import models from "../../assets/models/models";
+import models from "../assets/models/models";
 
 const router = express.Router();
 

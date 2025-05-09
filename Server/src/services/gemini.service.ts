@@ -13,8 +13,8 @@ import {
   summarizePrompt,
   summarizeSystemInstruction,
 } from "../utils/summarize";
-import Model from "../../assets/models/model";
-import { langs } from "../../assets/langs";
+import Model from "../assets/models/model";
+import { langs } from "../assets/langs";
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY || "" });
 
