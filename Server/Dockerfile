@@ -23,4 +23,4 @@ EXPOSE 8080
 
 ENV NODE_ENV=production
 
-CMD ["node", "dist/server.js"]
+RUN npm run production
