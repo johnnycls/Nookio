@@ -13,18 +13,23 @@ const App: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <PromptInstallIfNotStandalone>
-      <PrimeReactProvider>
+    <PrimeReactProvider>
+      <PromptInstallIfNotStandalone>
         {isError ? (
-          <Error errorText={t("loginError")} />
+          <Error
+            errorText={t("loginError")}
+            onReload={() => {
+              window.location.reload();
+            }}
+          />
         ) : (
           <>
             <LoadingScreen isLoading={isLoading} />
             {isSuccess && <RouterProvider router={router} />}
           </>
         )}
-      </PrimeReactProvider>
-    </PromptInstallIfNotStandalone>
+      </PromptInstallIfNotStandalone>
+    </PrimeReactProvider>
   );
 };
 

@@ -23,15 +23,16 @@ const port = PORT || 8080;
 app.use(
   cors({
     origin: [WEB_URL || "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(limiter);
+app.use(express.json({ limit: "100kb" }));
 
 app.use("/stripe", stripeRouter);
-
-app.use(express.json({ limit: "100kb" }));
 
 app.use("/user", userRouter);
 app.use("/chat", chatRoutes);
@@ -50,6 +51,6 @@ try {
     console.log(`${port}`);
   });
 } catch (error) {
-  console.error("Error starting server:", error);
+  console.error("Error starting server:", JSON.stringify(error));
   process.exit(1);
 }

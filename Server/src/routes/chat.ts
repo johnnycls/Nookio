@@ -110,7 +110,7 @@ router.post("/:chatroomId", authMiddleware, async (req, res) => {
       remainingCredits: user.credit,
     });
   } catch (error) {
-    console.error("Error sending message:", error);
+    console.error("Error sending message:", JSON.stringify(error));
     res.status(500).json({ message: "Error sending message" });
   }
 });

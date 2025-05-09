@@ -91,7 +91,7 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
 
     return res.status(200).json(profile);
   } catch (error) {
-    console.error(error);
+    console.error(JSON.stringify(error));
     return res.status(500).json({ message: "Internal server error" });
   }
 });
@@ -168,7 +168,7 @@ router.patch(
 
       return res.status(200).json(profile);
     } catch (error) {
-      console.error(error);
+      console.error(JSON.stringify(error));
       return res.status(500).json({ message: "Internal server error" });
     }
   }
@@ -191,7 +191,7 @@ router.post(
       const session = await createPaymentSession(packageId, user.email);
       return res.status(200).json({ clientSecret: session.clientSecret });
     } catch (error) {
-      console.error(error);
+      console.error(JSON.stringify(error));
       if (error instanceof Error && error.message === "Invalid package ID") {
         return res.status(400).json({ message: "Invalid package ID" });
       }

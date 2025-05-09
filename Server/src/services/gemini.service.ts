@@ -80,7 +80,7 @@ export const generateSummary = async (
 
     return result.text || "";
   } catch (error) {
-    console.error("Error summarizing conversation:", error);
+    console.error("Error summarizing conversation:", JSON.stringify(error));
     return "";
   }
 };
@@ -117,7 +117,7 @@ export const generateResponse = async (
     });
     return result.text || "";
   } catch (error) {
-    console.error("Error generating response:", error);
+    console.error("Error generating response:", JSON.stringify(error));
     throw new Error("Failed to generate response");
   }
 };
@@ -141,7 +141,7 @@ export const generateGreeting = async (
 
     return result.text || "";
   } catch (error) {
-    console.error("Error generating response:", error);
+    console.error("Error generating response:", JSON.stringify(error));
     throw new Error("Failed to generate response");
   }
 };

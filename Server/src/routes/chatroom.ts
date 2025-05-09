@@ -39,7 +39,7 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
 
     return res.status(200).json(chatList);
   } catch (error) {
-    console.error(error);
+    console.error(JSON.stringify(error));
     return res.status(500).json({ message: "Internal server error" });
   }
 });
@@ -81,7 +81,7 @@ router.get(
         lastReadPosition: chatroom.lastReadPosition,
       });
     } catch (error) {
-      console.error(error);
+      console.error(JSON.stringify(error));
       return res.status(500).json({ message: "Internal server error" });
     }
   }
@@ -114,7 +114,7 @@ router.delete(
 
       return res.status(200).json({ message: "Chatroom removed successfully" });
     } catch (error) {
-      console.error(error);
+      console.error(JSON.stringify(error));
       return res.status(500).json({ message: "Internal server error" });
     }
   }
