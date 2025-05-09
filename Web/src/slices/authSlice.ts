@@ -12,7 +12,6 @@ const authSlice = apiSlice.injectEndpoints({
           method: "POST",
           body: { credentials },
           headers: { Authorization: "None" },
-          credentials: "include", // TODO: Remove this
         }),
         transformResponse: (res: { token: string }) => {
           localStorage.setItem("token", res.token);
