@@ -25,7 +25,7 @@ const Home: React.FC = () => {
     isLoading: isChatroomsLoading,
     isError: isChatroomsError,
     refetch: refetchChatrooms,
-  } = useGetChatroomsQuery();
+  } = useGetChatroomsQuery({});
 
   useEffect(() => {
     if (

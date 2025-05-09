@@ -25,7 +25,7 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
 
     const chatList = chatrooms.map((chatroom) => {
       const model = models[chatroom.modelId];
-      ({
+      return {
         _id: chatroom._id,
         model: {
           _id: model._id,
@@ -36,7 +36,7 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
         },
         lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
         lastReadPosition: chatroom.lastReadPosition,
-      });
+      };
     });
 
     res.status(200).json(chatList);
@@ -102,12 +102,10 @@ router.get(
       });
     } catch (error) {
       console.error(JSON.stringify(error));
-      res
-        .status(500)
-        .json({
-          message: "Internal server error",
-          error: JSON.stringify(error),
-        });
+      res.status(500).json({
+        message: "Internal server error",
+        error: JSON.stringify(error),
+      });
     }
   }
 );

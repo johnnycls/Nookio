@@ -34,7 +34,7 @@ export type ChatroomDetail = {
 
 export const chatroomSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getChatrooms: builder.query<Chatroom[], void>({
+    getChatrooms: builder.query<Chatroom[], {}>({
       query: () => "chatroom/",
     }),
     getChatroomDetail: builder.query<ChatroomDetail, { chatroomId: string }>({
@@ -53,7 +53,7 @@ export const chatroomSlice = apiSlice.injectEndpoints({
           dispatch(
             chatroomSlice.util.updateQueryData(
               "getChatrooms",
-              undefined,
+              {},
               (draft: Chatroom[]) => {
                 draft = draft.filter((c) => !chatroomIds.includes(c._id));
               }
