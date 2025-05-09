@@ -22,7 +22,11 @@ const port = PORT || 8080;
 
 app.use(
   cors({
-    origin: [WEB_URL || "http://localhost:5173"],
+    origin: true,
+    // origin: [WEB_URL || "http://localhost:5173"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Authorization", "Content-Type"],
   })
 );
 

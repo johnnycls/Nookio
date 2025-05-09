@@ -24,7 +24,7 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
 
       <div className="w-full p-6 flex justify-content-center items-center">
         <Card className="w-full p-4" title={t("profile.title")}>
-          <Stepper ref={stepperRef}>
+          <Stepper ref={stepperRef} linear>
             <StepperPanel header={t("profile.basicInfo.title")}>
               <BasicInformation
                 nextCallback={() => {
