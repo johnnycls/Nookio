@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import bodyParser from "body-parser";
 import { STRIPE_PRIVATE_KEY, STRIPE_ENDPOINT_SECRET } from "../config";
 import User from "../models/user.model";
+import type { Request, Response } from "express";
 
 const router = express.Router();
 const stripe = new Stripe(STRIPE_PRIVATE_KEY || "");
@@ -10,7 +11,7 @@ const stripe = new Stripe(STRIPE_PRIVATE_KEY || "");
 router.post(
   "/",
   bodyParser.raw({ type: "application/json" }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
       const payload = req.body;
       const sig = req.headers["stripe-signature"];
@@ -18,9 +19,8 @@ router.post(
       let event;
 
       if (!sig || !STRIPE_ENDPOINT_SECRET) {
-        return res
-          .status(400)
-          .send(`Webhook Error: No sig or no endpoint secret`);
+        res.status(400).send(`Webhook Error: No sig or no endpoint secret`);
+        return;
       }
       event = stripe.webhooks.constructEvent(
         payload,
@@ -46,7 +46,7 @@ router.post(
         res.status(200).end();
       }
     } catch (err) {
-      return res.status(400).send(`Webhook Error: ${err}`);
+      res.status(400).send(`Webhook Error: ${err}`);
     }
   }
 );

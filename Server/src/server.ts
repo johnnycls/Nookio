@@ -36,7 +36,7 @@ app.use("/user", userRouter);
 app.use("/chat", chatRoutes);
 app.use("/chatroom", chatroomRoutes);
 
-app.use("*", (req: Request, res: Response, next: NextFunction) => {
+app.use("*path", (req: Request, res: Response, next: NextFunction) => {
   const error = {
     status: 404,
     message: "Api endpoint does not found",

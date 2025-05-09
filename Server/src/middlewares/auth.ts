@@ -6,27 +6,31 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization;
 
   if (!token) {
-    return res.status(401).json({ msg: "No token, authorization denied" });
+    res.status(401).json({ msg: "No token, authorization denied" });
+    return;
   }
   if (!JWT_SECRET) {
-    return res.status(500).json({ msg: "No JWT Secret" });
+    res.status(500).json({ msg: "No JWT Secret" });
+    return;
   }
 
   // Verify token
   try {
     jwt.verify(token, JWT_SECRET, (error, decoded) => {
       if (error) {
-        return res.status(401).json({ msg: "Token is not valid" });
+        res.status(401).json({ msg: "Token is not valid" });
+        return;
       } else {
         if (typeof decoded === "string" || !decoded?.email) {
-          return res.status(401).json({ msg: "Token is not valid" });
+          res.status(401).json({ msg: "Token is not valid" });
+          return;
         }
         res.locals.email = decoded.email;
         next();
       }
     });
   } catch (err) {
-    return res.status(500).json({ msg: "Server Error" });
+    res.status(500).json({ msg: "Server Error" });
   }
 }
 

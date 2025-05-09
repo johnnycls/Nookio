@@ -39,9 +39,10 @@ router.post("/login", async (req: Request, res: Response) => {
       const verificationResponse = await verifyGoogleToken(credential);
 
       if (verificationResponse.error) {
-        return res.status(400).json({
+        res.status(400).json({
           message: verificationResponse.error,
         });
+        return;
       }
 
       const email = verificationResponse?.payload?.email;
@@ -55,14 +56,14 @@ router.post("/login", async (req: Request, res: Response) => {
         const token = jwt.sign({ email }, JWT_SECRET, {
           expiresIn: "30d",
         });
-        return res.status(200).json({ token });
+        res.status(200).json({ token });
       } else {
-        return res.status(500).json("No JWT Secret");
+        res.status(500).json("No JWT Secret");
       }
     }
   } catch (error) {
     console.log(JSON.stringify(error));
-    return res.status(500).json("error");
+    res.status(500).json("error");
   }
 });
 
@@ -73,7 +74,8 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found" });
+      return;
     }
 
     const profile = {
@@ -89,10 +91,10 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       targetChatrooms: user.targetChatrooms || 0,
     };
 
-    return res.status(200).json(profile);
+    res.status(200).json(profile);
   } catch (error) {
     console.error(JSON.stringify(error));
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
@@ -115,7 +117,8 @@ router.patch(
 
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        res.status(404).json({ message: "User not found" });
+        return;
       }
 
       // Update basic profile fields
@@ -137,11 +140,12 @@ router.patch(
         // Check if user has enough credits
         const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
         if (user.credit < requiredCredits) {
-          return res.status(400).json({
+          res.status(400).json({
             message: "Not enough credits",
             required: requiredCredits,
             available: user.credit,
           });
+          return;
         }
 
         if (additionalChatrooms > 0) {
@@ -166,10 +170,10 @@ router.patch(
         targetChatrooms: user.targetChatrooms || 0,
       };
 
-      return res.status(200).json(profile);
+      res.status(200).json(profile);
     } catch (error) {
       console.error(JSON.stringify(error));
-      return res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error" });
     }
   }
 );
@@ -185,17 +189,19 @@ router.post(
       const user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        res.status(404).json({ message: "User not found" });
+        return;
       }
 
       const session = await createPaymentSession(packageId, user.email);
-      return res.status(200).json({ clientSecret: session.clientSecret });
+      res.status(200).json({ clientSecret: session.clientSecret });
     } catch (error) {
       console.error(JSON.stringify(error));
       if (error instanceof Error && error.message === "Invalid package ID") {
-        return res.status(400).json({ message: "Invalid package ID" });
+        res.status(400).json({ message: "Invalid package ID" });
+        return;
       }
-      return res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error" });
     }
   }
 );

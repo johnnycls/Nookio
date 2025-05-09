@@ -15,7 +15,8 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found" });
+      return;
     }
 
     const chatrooms = await Chatroom.find({
@@ -38,36 +39,39 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
       });
     });
 
-    return res.status(200).json(chatList);
+    res.status(200).json(chatList);
   } catch (error) {
     console.error(JSON.stringify(error));
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
 // Get chat details for a specific chatroom
 router.get(
-  "/:chatroomId",
+  "/:chatroomid",
   authMiddleware,
   async (req: Request, res: Response) => {
     try {
       const email = res.locals.email as string;
-      const { chatroomId } = req.params;
+      const { chatroomid } = req.params;
       const user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        res.status(404).json({ message: "User not found" });
+        return;
       }
 
       // Check if the chatroom is in user's chatrooms
-      if (!user.chatrooms.some((id) => id.toString() === chatroomId)) {
-        return res.status(404).json({ message: "Chatroom not found" });
+      if (!user.chatrooms.some((id) => id.toString() === chatroomid)) {
+        res.status(404).json({ message: "Chatroom not found" });
+        return;
       }
 
-      const chatroom = await Chatroom.findById(chatroomId);
+      const chatroom = await Chatroom.findById(chatroomid);
 
       if (!chatroom) {
-        return res.status(404).json({ message: "Chatroom not found" });
+        res.status(404).json({ message: "Chatroom not found" });
+        return;
       }
 
       // Update lastReadPosition to the latest message
@@ -77,11 +81,12 @@ router.get(
       }
 
       if (!chatroom.modelId) {
-        return res.status(404).json({ message: "Model not found" });
+        res.status(404).json({ message: "Model not found" });
+        return;
       }
       const model = models[chatroom.modelId];
 
-      return res.status(200).json({
+      res.status(200).json({
         _id: chatroom._id,
         messages: chatroom.messages,
         lastReadPosition: chatroom.lastReadPosition,
@@ -95,7 +100,7 @@ router.get(
       });
     } catch (error) {
       console.error(JSON.stringify(error));
-      return res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error" });
     }
   }
 );
@@ -108,7 +113,8 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found" });
+      return;
     }
 
     // Check if the chatroom is in user's chatrooms
@@ -120,7 +126,8 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
             .includes(id)
       )
     ) {
-      return res.status(404).json({ message: "Chatroom not found" });
+      res.status(404).json({ message: "Chatroom not found" });
+      return;
     }
 
     // Remove chatroom from user's chatrooms array
@@ -129,10 +136,10 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     );
     await user.save();
 
-    return res.status(200).json({ message: "Chatroom removed successfully" });
+    res.status(200).json({ message: "Chatroom removed successfully" });
   } catch (error) {
     console.error(JSON.stringify(error));
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
