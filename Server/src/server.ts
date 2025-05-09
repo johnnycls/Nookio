@@ -20,10 +20,11 @@ InitiateMongoServer();
 const app: Express = express();
 const port = PORT || 8080;
 
+// TODO: Remove this
 app.use(
   cors({
-    origin: true, // Allow all origins
-    credentials: true, // Allow credentials
+    origin: true,
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

@@ -22,6 +22,7 @@ export type Chatroom = {
 export type ChatroomDetail = {
   _id: string;
   messages: Message[];
+  lastReadPosition: number;
   model: {
     _id: string;
     name: string;
@@ -38,30 +39,6 @@ export const chatroomSlice = apiSlice.injectEndpoints({
     }),
     getChatroomDetail: builder.query<ChatroomDetail, { chatroomId: string }>({
       query: (chatroomId) => `chatroom/${chatroomId}`,
-    }),
-    createChatroom: builder.mutation<Chatroom, { name: string }>({
-      query: (body) => ({
-        url: "chatroom/",
-        method: "POST",
-        body,
-      }),
-      async onQueryStarted({ name }, { dispatch, queryFulfilled }) {
-        try {
-          const { data: newChatroom } = await queryFulfilled;
-          // Update the chatrooms list cache with the new chatroom
-          dispatch(
-            chatroomSlice.util.updateQueryData(
-              "getChatrooms",
-              undefined,
-              (draft: Chatroom[]) => {
-                draft.push(newChatroom);
-              }
-            )
-          );
-        } catch {
-          // Error handling is done by the mutation hook
-        }
-      },
     }),
     deleteChatroom: builder.mutation<void, string[]>({
       query: (chatroomIds) => ({
@@ -106,6 +83,5 @@ export const chatroomSlice = apiSlice.injectEndpoints({
 export const {
   useGetChatroomsQuery,
   useGetChatroomDetailQuery,
-  useCreateChatroomMutation,
   useDeleteChatroomMutation,
 } = chatroomSlice;

@@ -29,20 +29,19 @@ const chatSlice = apiSlice.injectEndpoints({
           dispatch(
             chatroomSlice.util.updateQueryData(
               "getChatroomDetail",
-              chatroomId,
+              { chatroomId },
               (draft: ChatroomDetail | undefined) => {
                 if (draft) {
                   draft.messages.push({
-                    message: message,
-                    response: "user",
+                    content: message,
+                    sender: "user",
                     timestamp: new Date().toISOString(),
                   });
                   draft.messages.push({
-                    message: newMessage.message,
-                    response: newMessage.response,
+                    content: newMessage.message,
+                    sender: "model",
                     timestamp: new Date().toISOString(),
                   });
-                  draft.lastReadPosition = newMessage.lastReadPosition;
                 }
               }
             )
@@ -57,7 +56,11 @@ const chatSlice = apiSlice.injectEndpoints({
                   (c: Chatroom) => c._id === chatroomId
                 );
                 if (chatroom) {
-                  chatroom.lastMessage = newMessage.response;
+                  chatroom.lastMessage = {
+                    content: newMessage.message,
+                    sender: "model",
+                    timestamp: new Date().toISOString(),
+                  };
                   chatroom.lastReadPosition = newMessage.lastReadPosition;
                 }
               }

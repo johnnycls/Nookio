@@ -54,6 +54,7 @@ const userSlice = apiSlice.injectEndpoints({
           }
         } catch {}
       },
+      invalidatesTags: ["Chatroom"],
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({
       query: ({ packageId }) => ({
