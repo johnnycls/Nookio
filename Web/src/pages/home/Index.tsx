@@ -37,7 +37,7 @@ const Home: React.FC = () => {
     ) {
       navigate("/profile");
     }
-  }, [profile, navigate]);
+  }, [profile, navigate, isProfileSuccess]);
 
   if (isProfileError) {
     return <Error onReload={refetchProfile} errorText={t("profile.error")} />;

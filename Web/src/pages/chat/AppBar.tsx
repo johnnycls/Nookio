@@ -10,16 +10,13 @@ const ChatroomAppBar: React.FC<{ chatroom: ChatroomDetail }> = ({
 
   return (
     <AppBar onBack={() => navigate("/")}>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Avatar
-            image={`@/assets/avatars/${chatroom.model.avatar}`}
-            icon="pi pi-user"
-            shape="circle"
-            size="xlarge"
-          />
-          <h1 className="text-3xl">{chatroom.model.name}</h1>;
-        </div>
+      <div className="flex items-center gap-2 items-center">
+        <Avatar
+          image={`../src/assets/avatars/${chatroom.model.avatar}`}
+          icon="pi pi-user"
+          shape="circle"
+        />
+        <h1 className="text-2xl">{chatroom.model.name}</h1>
       </div>
     </AppBar>
   );

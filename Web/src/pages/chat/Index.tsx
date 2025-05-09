@@ -6,7 +6,8 @@ import { useThemeColor } from "../../hooks/useThemeColor";
 import Content from "./Content";
 import { useGetProfileQuery } from "../../slices/userSlice";
 import Error from "../../components/Error";
-import { useGetChatroomDetailQuery } from "../../slices/chatroomSlice";
+import { useLazyGetChatroomDetailQuery } from "../../slices/chatroomSlice";
+
 const Home: React.FC = () => {
   useThemeColor("#FFFFFF");
   const navigate = useNavigate();
@@ -14,12 +15,10 @@ const Home: React.FC = () => {
   const { chatroomId } = useParams();
 
   const { data: profile, isLoading, isError, refetch } = useGetProfileQuery({});
-  const {
-    data: chatroom,
-    isLoading: isChatroomLoading,
-    isError: isChatroomError,
-    refetch: refetchChatroom,
-  } = useGetChatroomDetailQuery({ chatroomId: chatroomId ?? "" });
+  const [
+    fetchChatroomDetail,
+    { data: chatroom, isLoading: isChatroomLoading, isError: isChatroomError },
+  ] = useLazyGetChatroomDetailQuery();
 
   useEffect(() => {
     if (
@@ -34,9 +33,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (chatroomId) {
-      refetchChatroom();
+      fetchChatroomDetail({ chatroomId });
     }
-  }, [chatroomId, refetchChatroom]);
+  }, [chatroomId, fetchChatroomDetail]);
 
   if (isChatroomLoading || isLoading) {
     return <LoadingScreen isLoading={true} />;
@@ -45,7 +44,11 @@ const Home: React.FC = () => {
   if (isChatroomError) {
     return (
       <Error
-        onReload={refetchChatroom}
+        onReload={() => {
+          if (chatroomId) {
+            fetchChatroomDetail({ chatroomId });
+          }
+        }}
         errorText={t("fetchChatroomDetailError")}
       />
     );

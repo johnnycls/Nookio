@@ -342,7 +342,7 @@
   color: #8b5cf6;
 }
 
-@layer primevue {
+@layer primereact {
   .p-component,
   .p-component * {
     box-sizing: border-box;
@@ -6668,8 +6668,8 @@
     background-color: #ffffff;
   }
   .p-divider.p-divider-horizontal {
-    margin: 1rem 0;
-    padding: 0 1rem;
+    margin: 0 0;
+    padding: 0 0;
   }
   .p-divider.p-divider-horizontal:before {
     border-top: 1px solid #e2e8f0;
@@ -12235,7 +12235,7 @@
     font-size: 1rem;
   }
 }
-@layer primevue {
+@layer primereact {
   .p-accordion .p-accordion-header .p-accordion-header-link {
     border-radius: 6px !important;
     flex-direction: row-reverse;

@@ -38,7 +38,7 @@ export const chatroomSlice = apiSlice.injectEndpoints({
       query: () => "chatroom/",
     }),
     getChatroomDetail: builder.query<ChatroomDetail, { chatroomId: string }>({
-      query: (chatroomId) => `chatroom/${chatroomId}`,
+      query: ({ chatroomId }) => `chatroom/${chatroomId}`,
     }),
     deleteChatroom: builder.mutation<void, string[]>({
       query: (chatroomIds) => ({
@@ -55,7 +55,10 @@ export const chatroomSlice = apiSlice.injectEndpoints({
               "getChatrooms",
               {},
               (draft: Chatroom[]) => {
-                draft = draft.filter((c) => !chatroomIds.includes(c._id));
+                Object.assign(
+                  draft,
+                  draft.filter((c) => !chatroomIds.includes(c._id))
+                );
               }
             )
           );
@@ -82,6 +85,6 @@ export const chatroomSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetChatroomsQuery,
-  useGetChatroomDetailQuery,
+  useLazyGetChatroomDetailQuery,
   useDeleteChatroomMutation,
 } = chatroomSlice;

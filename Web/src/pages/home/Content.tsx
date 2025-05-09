@@ -49,22 +49,33 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
       <AppBar>
         <div className="flex justify-between items-center">
           <h1 className="text-3xl">NookioAI</h1>
+
           {isSelectMode && selectedChatroomIds.length > 0 && (
-            <Button
-              icon="pi pi-trash"
-              onClick={() => {
-                confirmDialog({
-                  message: t("home.deleteChatroomConfirmation"),
-                  accept: () => {
-                    deleteChatrooms(selectedChatroomIds);
-                  },
-                  reject: () => {
-                    setSelectedChatroomIds([]);
-                    setIsSelectMode(false);
-                  },
-                });
-              }}
-            />
+            <div className="flex gap-1">
+              <Button
+                icon="pi pi-times"
+                onClick={() => {
+                  setIsSelectMode(false);
+                  setSelectedChatroomIds([]);
+                }}
+              />
+
+              <Button
+                icon="pi pi-trash"
+                onClick={() => {
+                  confirmDialog({
+                    message: t("home.deleteChatroomConfirmation"),
+                    accept: () => {
+                      deleteChatrooms(selectedChatroomIds);
+                    },
+                    reject: () => {
+                      setSelectedChatroomIds([]);
+                      setIsSelectMode(false);
+                    },
+                  });
+                }}
+              />
+            </div>
           )}
           {isSelectMode && selectedChatroomIds.length === 0 && (
             <Button icon="pi pi-check" onClick={() => setIsSelectMode(false)} />
