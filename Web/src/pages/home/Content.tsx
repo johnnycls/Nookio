@@ -37,7 +37,7 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
     toast.current?.show({
       severity: "error",
       summary: t("deleteChatroomError"),
-      detail: deleteError?.toString(),
+      detail: JSON.stringify(deleteError),
     });
   }
 

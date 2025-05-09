@@ -4,6 +4,7 @@ import {
   MAX_OUTPUT_TOKENS,
   SUMMARY_TEMPERATURE,
   SUMMARY_MSG,
+  LLM_MODEL,
 } from "../config";
 import { IUser } from "../models/user.model";
 import { IChatroom, IMessage } from "../models/chatroom.model";
@@ -67,7 +68,7 @@ export const generateSummary = async (
     });
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: LLM_MODEL,
       contents: summarizePrompt,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
@@ -95,7 +96,7 @@ export const generateResponse = async (
       .map(convertToChatMessage);
 
     const chat = ai.chats.create({
-      model: "gemini-2.5-flash",
+      model: LLM_MODEL,
       history: historyMessage,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
@@ -126,7 +127,7 @@ export const generateGreeting = async (
 ): Promise<string> => {
   try {
     const result = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: LLM_MODEL,
       contents: generateGreetingPrompt(user, model),
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,

@@ -42,7 +42,7 @@ const CreditPackages: React.FC<{}> = ({}) => {
       toast.current?.show({
         severity: "error",
         summary: t("purchaseCreditsError"),
-        detail: error?.toString(),
+        detail: JSON.stringify(error),
       });
     }
   }, [isError, t]);
@@ -51,7 +51,7 @@ const CreditPackages: React.FC<{}> = ({}) => {
     toast.current?.show({
       severity: "error",
       summary: t("paymentError"),
-      detail: error?.toString(),
+      detail: JSON.stringify(error),
     });
   };
 

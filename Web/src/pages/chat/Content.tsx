@@ -22,7 +22,7 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
     if (isSendingError) {
       toast.current?.show({
         severity: "error",
-        summary: t("sendMsgError", { error: error?.toString() }),
+        summary: t("sendMsgError", { error: JSON.stringify(error) }),
       });
     }
   }, [isSendingError]);

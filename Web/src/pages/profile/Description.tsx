@@ -31,7 +31,7 @@ const Description: React.FC<{
       toast.current?.show({
         severity: "error",
         summary: t("updateProfileError"),
-        detail: error?.toString(),
+        detail: JSON.stringify(error),
       });
     }
   }, [isError, t, error]);
