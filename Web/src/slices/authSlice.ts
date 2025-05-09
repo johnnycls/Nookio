@@ -11,7 +11,7 @@ const authSlice = apiSlice.injectEndpoints({
           url: "user/login",
           method: "POST",
           body: { credentials },
-          headers: { Authorization: `Bearer ${credentials.credential}` },
+          headers: { Authorization: "None" },
         }),
         transformResponse: (res: { token: string }) => {
           localStorage.setItem("token", res.token);
