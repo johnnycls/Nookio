@@ -43,8 +43,8 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
       <Toast ref={toast} />
       <ChatroomAppBar chatroom={chatroom} />
 
-      <div className="w-full flex-1 px-3 pt-3 min-h-0">
-        <div className="flex flex-col h-full gap-2 overflow-y-auto">
+      <div className="w-full flex-1 px-3 pt-3 min-h-0 overflow-y-auto">
+        <div className="flex flex-col h-full gap-2">
           {chatroom.messages.map((message) => (
             <div
               className={`w-full flex ${
@@ -59,7 +59,7 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
         </div>
       </div>
 
-      <div className="w-full flex gap-2 p-2">
+      <div className="w-full flex gap-2 p-2 pb-4">
         <InputTextarea
           className="flex-1 "
           value={message}

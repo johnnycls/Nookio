@@ -28,17 +28,17 @@ router.post(
         STRIPE_ENDPOINT_SECRET
       );
 
-      if (event.type === "checkout.session.completed") {
+      if (event.type === "payment_intent.succeeded") {
         const session = await stripe.checkout.sessions.retrieve(
           event.data.object.id
         );
 
-        const { metadata, customer_email } = session;
+        const { metadata } = session;
 
-        if (metadata?.credits && customer_email) {
+        if (metadata?.credits && metadata?.customer_email) {
           const credits = parseInt(metadata.credits);
           await User.findOneAndUpdate(
-            { email: customer_email },
+            { email: metadata.customer_email },
             { $inc: { credit: credits } }
           );
         }

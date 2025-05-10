@@ -4,6 +4,7 @@ import AppBar from "../../components/AppBar";
 import BottomTab from "../../components/BottomTab";
 import CreditPackages from "./components/CreditPackages";
 import RemainingCredits from "./components/RemainingCredits";
+import Explanation from "./components/Explanation";
 
 const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
   return (
@@ -12,9 +13,10 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
         <h1 className="text-3xl">NookioAI</h1>
       </AppBar>
 
-      <div className="w-full h-full p-6 flex flex-col gap-4">
+      <div className="w-full h-full p-6 flex flex-col gap-4 overflow-y-auto">
         <RemainingCredits profile={profile} />
         <CreditPackages />
+        <Explanation />
       </div>
 
       <BottomTab activeIndex={2} />
