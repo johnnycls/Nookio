@@ -50,7 +50,7 @@ i18n
 
           account: {
             remainingCredit: "Remaining Credits",
-            package: "${{price}} - {{credits}} Credits",
+            package: "USD${{price}} - {{credits}} Credits",
             buyCredits: "Buy Credits",
             payment: {
               title: "Complete Payment",
@@ -146,7 +146,7 @@ i18n
           },
           account: {
             remainingCredit: "剩餘點數",
-            package: "${{price}} - {{credits}} 點數",
+            package: "USD${{price}} - {{credits}} 點數",
             buyCredits: "購買點數",
             payment: {
               title: "完成付款",
@@ -240,7 +240,7 @@ i18n
           },
           account: {
             remainingCredit: "剩余积分",
-            package: "${{price}} - {{credits}} 积分",
+            package: "USD${{price}} - {{credits}} 积分",
             buyCredits: "购买积分",
             payment: {
               title: "完成支付",
@@ -336,7 +336,7 @@ i18n
           },
           account: {
             remainingCredit: "Créditos restantes",
-            package: "${{price}} - {{credits}} Créditos",
+            package: "USD${{price}} - {{credits}} Créditos",
             buyCredits: "Comprar Créditos",
             payment: {
               title: "Completar Pago",
@@ -439,7 +439,7 @@ i18n
           },
           account: {
             remainingCredit: "Crédits Restants",
-            package: "${{price}} - {{credits}} Crédits",
+            package: "USD${{price}} - {{credits}} Crédits",
             buyCredits: "Acheter des Crédits",
             payment: {
               title: "Finaliser le Paiement",
@@ -536,7 +536,7 @@ i18n
           },
           account: {
             remainingCredit: "残りのクレジット",
-            package: "${{price}} - {{credits}} クレジット",
+            package: "USD${{price}} - {{credits}} クレジット",
             buyCredits: "クレジットを購入",
             payment: {
               title: "支払いを完了",
@@ -632,7 +632,7 @@ i18n
           },
           account: {
             remainingCredit: "남은 크레딧",
-            package: "${{price}} - {{credits}} 크레딧",
+            package: "USD${{price}} - {{credits}} 크레딧",
             buyCredits: "크레딧 구매",
             payment: {
               title: "결제 완료",
@@ -729,7 +729,7 @@ i18n
           },
           account: {
             remainingCredit: "Оставшиеся кредиты",
-            package: "${{price}} - {{credits}} кредитов",
+            package: "USD${{price}} - {{credits}} кредитов",
             buyCredits: "Купить кредиты",
             payment: {
               title: "Завершить платеж",

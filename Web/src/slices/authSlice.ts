@@ -17,6 +17,7 @@ const authSlice = apiSlice.injectEndpoints({
           localStorage.setItem("token", res.token);
           return res;
         },
+        invalidatesTags: ["User"],
       }
     ),
   }),

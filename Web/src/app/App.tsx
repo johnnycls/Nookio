@@ -2,26 +2,19 @@ import React from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { PrimeReactProvider } from "primereact/api";
-import useLogin from "../hooks/useLogin";
 import PromptInstallIfNotStandalone from "../components/PromptInstallIfNotStandalone";
 import LoadingScreen from "../components/LoadingScreen";
-import Error from "../components/Error";
-import { useTranslation } from "react-i18next";
+import { useGetProfileQuery } from "../slices/userSlice";
+import Login from "./Login";
 
 const App: React.FC = () => {
-  const { isLoading, isError, isSuccess } = useLogin();
-  const { t } = useTranslation();
+  const { isError, isLoading, isSuccess } = useGetProfileQuery({});
 
   return (
     <PrimeReactProvider>
       <PromptInstallIfNotStandalone>
         {isError ? (
-          <Error
-            errorText={t("loginError")}
-            onReload={() => {
-              window.location.reload();
-            }}
-          />
+          <Login />
         ) : (
           <>
             <LoadingScreen isLoading={isLoading} />
