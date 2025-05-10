@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
 import i18next from "i18next";
+import { NAME_LENGTH_LIMIT } from "../../config";
 
 const BasicInformation: React.FC<{
   nextCallback: () => void;
@@ -92,6 +93,7 @@ const BasicInformation: React.FC<{
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t("profile.basicInfo.name.placeholder")}
+            maxLength={NAME_LENGTH_LIMIT}
           />
         </div>
 

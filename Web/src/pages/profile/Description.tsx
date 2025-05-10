@@ -5,6 +5,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
+import { DESCRIPTION_LENGTH_LIMIT } from "../../config";
 const Description: React.FC<{
   prevCallback: () => void;
   nextCallback: () => void;
@@ -48,6 +49,7 @@ const Description: React.FC<{
           rows={5}
           autoResize
           placeholder={t("profile.description.placeholder")}
+          maxLength={DESCRIPTION_LENGTH_LIMIT}
         />
 
         <div className="flex justify-between">

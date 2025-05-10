@@ -59,3 +59,7 @@ export const creditPackages: CreditPackage[] = [
     price: 19.99,
   },
 ];
+
+export const NAME_LENGTH_LIMIT = 20;
+export const DESCRIPTION_LENGTH_LIMIT = 300;
+export const MESSAGE_LENGTH_LIMIT = 300;

@@ -7,10 +7,12 @@ import { useSendMessageMutation } from "../../slices/chatSlice";
 import { useTranslation } from "react-i18next";
 import { Card } from "primereact/card";
 import { InputTextarea } from "primereact/inputtextarea";
+import { MESSAGE_LENGTH_LIMIT } from "../../config";
 
 const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [
     sendMessage,
@@ -18,6 +20,14 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
   ] = useSendMessageMutation();
 
   const [message, setMessage] = useState<string>("");
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatroom.messages]);
 
   useEffect(() => {
     if (isSendingError) {
@@ -45,6 +55,7 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
               <Card className="max-w-[70%]">{message.content}</Card>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
       </div>
 
@@ -55,6 +66,7 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
           onChange={(e) => setMessage(e.target.value)}
           autoResize
           rows={1}
+          maxLength={MESSAGE_LENGTH_LIMIT}
         />
 
         {isSending ? (

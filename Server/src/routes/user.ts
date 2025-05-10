@@ -9,6 +9,8 @@ import {
   JWT_SECRET,
   MIN_CREDITS_FOR_AUTO_CHAT,
   MAX_CHATROOMS,
+  DESCRIPTION_LENGTH_LIMIT,
+  NAME_LENGTH_LIMIT,
 } from "../config";
 import authMiddleware from "../middlewares/auth";
 import { createPaymentSession } from "../utils/payment";
@@ -126,8 +128,13 @@ router.patch(
       }
 
       // Update basic profile fields
-      if (name !== undefined) user.name = name;
-      if (description !== undefined) user.description = description;
+      if (name !== undefined && name.length <= NAME_LENGTH_LIMIT)
+        user.name = name;
+      if (
+        description !== undefined &&
+        description.length <= DESCRIPTION_LENGTH_LIMIT
+      )
+        user.description = description;
       if (gender !== undefined) user.gender = gender;
       if (dob !== undefined) user.dob = dob;
       if (lang !== undefined) user.lang = lang;
