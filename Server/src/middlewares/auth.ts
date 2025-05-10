@@ -30,6 +30,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
       }
     });
   } catch (err) {
+    console.error("Error verifying token:", JSON.stringify(err));
     res.status(500).json({ msg: "Server Error", error: JSON.stringify(err) });
   }
 }

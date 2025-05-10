@@ -6,7 +6,7 @@ import models from "../assets/models/models";
 export async function handleCreateRequest(user: IUser, chatroomNum: number) {
   try {
     let userChatrooms = await Chatroom.find({
-      id: { $in: user.chatrooms },
+      _id: { $in: user.chatrooms },
     });
 
     const existingChatroomModelIds = userChatrooms.map(
@@ -59,6 +59,7 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
       },
     });
   } catch (error) {
+    console.error("Error creating chatrooms:", JSON.stringify(error));
     throw new Error("Error creating chatrooms:" + JSON.stringify(error));
   }
 }

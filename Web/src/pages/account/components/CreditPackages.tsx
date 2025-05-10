@@ -1,20 +1,16 @@
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
-import { CREDIT_PACKAGES, STRIPE_PUBLISHABLE_KEY } from "../../../config";
+import { CREDIT_PACKAGES } from "../../../config";
 import { usePurchaseCreditsMutation } from "../../../slices/userSlice";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import LoadingScreen from "../../../components/LoadingScreen";
-import PaymentDialog from "./PaymentDialog";
 import { Toast } from "primereact/toast";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { Card } from "primereact/card";
+import StripeElement from "./StripeElement";
 
 const CreditPackages: React.FC<{}> = ({}) => {
   const { t } = useTranslation();
-
-  const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
   const [purchaseCredits, { isLoading, isError, isSuccess, error, data }] =
     usePurchaseCreditsMutation();
@@ -23,13 +19,6 @@ const CreditPackages: React.FC<{}> = ({}) => {
     useState<boolean>(false);
 
   const toast = useRef<Toast>(null);
-
-  const options = {
-    clientSecret: data?.clientSecret,
-    appearance: {
-      theme: "stripe" as const,
-    },
-  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -68,19 +57,13 @@ const CreditPackages: React.FC<{}> = ({}) => {
       <Toast ref={toast} />
 
       {data?.clientSecret && (
-        <Elements stripe={stripePromise} options={options}>
-          <PaymentDialog
-            visible={paymentDialogVisible}
-            onHide={() => {
-              setPaymentDialogVisible(false);
-            }}
-            onSuccess={() => {
-              setPaymentDialogVisible(false);
-              onPaymentSuccess();
-            }}
-            onPaymentError={onPaymentError}
-          />
-        </Elements>
+        <StripeElement
+          clientSecret={data.clientSecret}
+          paymentDialogVisible={paymentDialogVisible}
+          setPaymentDialogVisible={setPaymentDialogVisible}
+          onPaymentSuccess={onPaymentSuccess}
+          onPaymentError={onPaymentError}
+        />
       )}
 
       <Card title={t("account.buyCredits")}>
