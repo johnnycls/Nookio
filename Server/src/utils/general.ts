@@ -1,4 +1,4 @@
-function getRandomSubarray<T>(arr: Array<T>, size: number): Array<T> {
+export function getRandomSubarray<T>(arr: Array<T>, size: number): Array<T> {
   if (size < 0 || size > arr.length) {
     throw new Error(
       `Invalid size: ${size}. Must be between 0 and ${arr.length}`
@@ -14,5 +14,6 @@ function getRandomSubarray<T>(arr: Array<T>, size: number): Array<T> {
     [shuffled[index], shuffled[i]] = [shuffled[i], shuffled[index]];
   }
 
-  return shuffled.slice(min);
+  const result = shuffled.slice(min);
+  return result;
 }

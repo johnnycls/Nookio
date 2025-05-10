@@ -2,22 +2,17 @@ import User, { IUser } from "../models/user.model";
 import Chatroom, { IChatroom } from "../models/chatroom.model";
 import { generateGreeting } from "./gemini.service";
 import models from "../assets/models/models";
+import { getRandomSubarray } from "../utils/general";
 
 export async function handleCreateRequest(user: IUser, chatroomNum: number) {
   try {
-    console.log(user);
-    console.log(chatroomNum);
     const userChatrooms = await Chatroom.find({
       _id: { $in: user.chatrooms },
     });
 
-    console.log(userChatrooms);
-
     const existingChatroomModelIds = userChatrooms.map(
       (chatroom: IChatroom) => chatroom.modelId
     );
-
-    console.log(existingChatroomModelIds);
 
     const availableModelIds = Object.keys(models).filter((modelId) => {
       const model = models[modelId];
@@ -27,21 +22,16 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
       );
     });
 
-    console.log(availableModelIds);
-
     if (availableModelIds.length < chatroomNum) {
       throw new Error("No available friends found");
     }
 
     const selectedModelIds = getRandomSubarray(availableModelIds, chatroomNum);
 
-    console.log(selectedModelIds);
-
     const chatrooms = await Promise.all(
       selectedModelIds.map(async (modelId) => {
         const model = models[modelId];
         const greeting = await generateGreeting(user, model);
-        console.log(greeting);
 
         const chatroom = await Chatroom.create({
           userId: user._id,
