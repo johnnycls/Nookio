@@ -29,11 +29,11 @@ router.post(
       );
 
       if (event.type === "payment_intent.succeeded") {
-        const session = await stripe.checkout.sessions.retrieve(
-          event.data.object.id
-        );
+        // const session = await stripe.checkout.sessions.retrieve(
+        //   event.data.object.id
+        // );
 
-        const { metadata } = session;
+        const { metadata } = event.data.object;
 
         if (metadata?.credits && metadata?.customer_email) {
           const credits = parseInt(metadata.credits);
