@@ -35,9 +35,10 @@ app.use(
 
 app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(limiter);
-app.use(express.json({ limit: "100kb" }));
 
 app.use("/stripe", stripeRouter);
+
+app.use(express.json({ limit: "100kb" }));
 
 app.use("/user", userRouter);
 app.use("/chat", chatRoutes);
