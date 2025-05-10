@@ -153,6 +153,7 @@ export const generateGreeting = async (
   model: Model
 ): Promise<string> => {
   try {
+    console.log(model.name);
     const result = await ai.models.generateContent({
       model: LLM_MODEL,
       contents: generateGreetingPrompt(user, model),

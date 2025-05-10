@@ -27,6 +27,8 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
 
     const selectedModelIds = getRandomSubarray(availableModelIds, chatroomNum);
 
+    console.log(selectedModelIds);
+
     const chatrooms = await Promise.all(
       selectedModelIds.map(async (modelId) => {
         const model = models[modelId];
