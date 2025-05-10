@@ -75,6 +75,7 @@ export const generateSummary = async (
         temperature: SUMMARY_TEMPERATURE,
         systemInstruction,
         thinkingConfig: {
+          includeThoughts: false,
           thinkingBudget: 0,
         },
       },
@@ -119,6 +120,7 @@ export const generateResponse = async (
         frequencyPenalty: model.frequencyPenalty,
         presencePenalty: model.presencePenalty,
         thinkingConfig: {
+          includeThoughts: false,
           thinkingBudget: 0,
         },
       },
@@ -146,6 +148,7 @@ export const generateGreeting = async (
         frequencyPenalty: model.frequencyPenalty,
         presencePenalty: model.presencePenalty,
         thinkingConfig: {
+          includeThoughts: false,
           thinkingBudget: 0,
         },
       },
