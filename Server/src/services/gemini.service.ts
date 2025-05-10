@@ -91,13 +91,44 @@ export const generateResponse = async (
   chatroom: IChatroom
 ): Promise<string> => {
   try {
-    const historyMessage = chatroom.messages
-      .slice(-SUMMARY_MSG)
+    // const historyMessage = chatroom.messages
+    //   .slice(-SUMMARY_MSG)
+    //   .map(convertToChatMessage);
+
+    // const chat = ai.chats.create({
+    //   model: LLM_MODEL,
+    //   history: historyMessage,
+    //   config: {
+    //     maxOutputTokens: MAX_OUTPUT_TOKENS,
+    //     temperature: model.temperature,
+    //     systemInstruction: generateSystemInstruction(
+    //       user,
+    //       model,
+    //       chatroom.summaries
+    //     ),
+    //     frequencyPenalty: model.frequencyPenalty,
+    //     presencePenalty: model.presencePenalty,
+    //   },
+    // });
+
+    // const result = await chat.sendMessage({
+    //   message: message,
+    // });
+
+    const messages = [
+      ...chatroom.messages,
+      {
+        sender: "user" as const,
+        content: message,
+        timestamp: new Date(),
+      },
+    ]
+      .slice(-SUMMARY_MSG - 1)
       .map(convertToChatMessage);
 
-    const chat = ai.chats.create({
+    const result = await ai.models.generateContent({
       model: LLM_MODEL,
-      history: historyMessage,
+      contents: messages,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
@@ -109,10 +140,6 @@ export const generateResponse = async (
         frequencyPenalty: model.frequencyPenalty,
         presencePenalty: model.presencePenalty,
       },
-    });
-
-    const result = await chat.sendMessage({
-      message: message,
     });
     return result.text || "";
   } catch (error) {

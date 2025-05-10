@@ -123,21 +123,15 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     }
 
     // Check if the chatroom is in user's chatrooms
-    if (
-      chatroomIds.some(
-        (id) =>
-          !user.chatrooms
-            .map((chatroomId) => chatroomId.toString())
-            .includes(id)
-      )
-    ) {
+    const userChatroomIds = user.chatrooms.map((id) => id.toString());
+    if (chatroomIds.some((id) => !userChatroomIds.includes(id))) {
       res.status(404).json({ message: "Chatroom not found" });
       return;
     }
 
     // Remove chatroom from user's chatrooms array
-    user.chatrooms = user.chatrooms.filter((id) =>
-      chatroomIds.includes(id.toString())
+    user.chatrooms = user.chatrooms.filter(
+      (id) => !chatroomIds.includes(id.toString())
     );
     await user.save();
 

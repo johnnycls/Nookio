@@ -36,9 +36,13 @@ export const chatroomSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getChatrooms: builder.query<Chatroom[], {}>({
       query: () => "chatroom/",
+      providesTags: ["Chatroom"],
     }),
     getChatroomDetail: builder.query<ChatroomDetail, { chatroomId: string }>({
       query: ({ chatroomId }) => `chatroom/${chatroomId}`,
+      providesTags: (result, error, { chatroomId }) => [
+        { type: "Chat", id: chatroomId },
+      ],
     }),
     deleteChatroom: builder.mutation<void, string[]>({
       query: (chatroomIds) => ({
@@ -46,38 +50,13 @@ export const chatroomSlice = apiSlice.injectEndpoints({
         method: "DELETE",
         body: { chatroomIds },
       }),
-      async onQueryStarted(chatroomIds, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          // Remove the chatroom from the list cache
-          dispatch(
-            chatroomSlice.util.updateQueryData(
-              "getChatrooms",
-              {},
-              (draft: Chatroom[]) => {
-                Object.assign(
-                  draft,
-                  draft.filter((c) => !chatroomIds.includes(c._id))
-                );
-              }
-            )
-          );
-          // Remove the chatroom detail from the cache
-          chatroomIds.forEach((chatroomId) => {
-            dispatch(
-              chatroomSlice.util.updateQueryData(
-                "getChatroomDetail",
-                { chatroomId },
-                () => {
-                  return undefined;
-                }
-              )
-            );
-          });
-        } catch {
-          // Error handling is done by the mutation hook
-        }
-      },
+      invalidatesTags: (result, error, chatroomIds) => [
+        "Chatroom",
+        ...chatroomIds.map((chatroomId) => ({
+          type: "Chat" as const,
+          id: chatroomId,
+        })),
+      ],
     }),
   }),
   overrideExisting: false,

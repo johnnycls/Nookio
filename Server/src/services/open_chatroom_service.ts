@@ -24,7 +24,7 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
     throw new Error("No available friends found");
   }
 
-  const selectedModelIds = availableModelIds.slice(0, chatroomNum);
+  const selectedModelIds = getRandomSubarray(availableModelIds, chatroomNum);
 
   const chatrooms = await Promise.all(
     selectedModelIds.map(async (modelId) => {

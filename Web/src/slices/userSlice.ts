@@ -34,6 +34,7 @@ const userSlice = apiSlice.injectEndpoints({
         }
         return response;
       },
+      providesTags: ["User"],
     }),
     updateProfile: builder.mutation<profileResponse, updateProfileRequest>({
       query: (profileData) => ({
@@ -41,20 +42,17 @@ const userSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: profileData,
       }),
-      async onQueryStarted(profileData, { dispatch, queryFulfilled }) {
+      async onQueryStarted(profileData, {}) {
         try {
-          const { data: updatedProfile } = await queryFulfilled;
-          dispatch(
-            userSlice.util.updateQueryData("getProfile", {}, (draft) => {
-              Object.assign(draft, updatedProfile);
-            })
-          );
           if (profileData.lang) {
             i18next.changeLanguage(profileData.lang);
           }
         } catch {}
       },
-      invalidatesTags: ["Chatroom"],
+      invalidatesTags: (result, error, profileData) =>
+        profileData?.targetChatrooms && profileData.targetChatrooms > 0
+          ? ["User", "Chatroom"]
+          : ["User"],
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({
       query: ({ packageId }) => ({

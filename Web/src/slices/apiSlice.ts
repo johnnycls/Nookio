@@ -13,7 +13,7 @@ export const apiSlice = createApi({
       }
     },
   }),
-  tagTypes: ["Chatroom", "ChatroomDetail", "Chat", "User"],
+  tagTypes: ["Chatroom", "Chat", "User"],
   reducerPath: "api",
   endpoints: (builder) => ({}),
 });
