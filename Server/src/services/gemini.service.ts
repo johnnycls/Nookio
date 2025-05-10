@@ -74,10 +74,10 @@ export const generateSummary = async (
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: SUMMARY_TEMPERATURE,
         systemInstruction,
-        thinkingConfig: {
-          includeThoughts: false,
-          thinkingBudget: 0,
-        },
+        // thinkingConfig: {
+        //   includeThoughts: false,
+        //   thinkingBudget: 0,
+        // },
       },
     });
 
@@ -119,10 +119,10 @@ export const generateResponse = async (
         ),
         frequencyPenalty: model.frequencyPenalty,
         presencePenalty: model.presencePenalty,
-        thinkingConfig: {
-          includeThoughts: false,
-          thinkingBudget: 0,
-        },
+        // thinkingConfig: {
+        //   includeThoughts: false,
+        //   thinkingBudget: 0,
+        // },
       },
     });
     return result.text || "";
@@ -147,10 +147,10 @@ export const generateGreeting = async (
         systemInstruction: generateSystemInstruction(user, model, []),
         frequencyPenalty: model.frequencyPenalty,
         presencePenalty: model.presencePenalty,
-        thinkingConfig: {
-          includeThoughts: false,
-          thinkingBudget: 0,
-        },
+        // thinkingConfig: {
+        //   includeThoughts: false,
+        //   thinkingBudget: 0,
+        // },
       },
     });
 
