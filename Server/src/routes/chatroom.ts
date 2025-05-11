@@ -136,6 +136,8 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
       (id) => !chatroomIds.includes(id.toString())
     );
 
+    await user.save();
+
     // Create new chatroom
     const currentChatrooms = user.chatrooms.length;
     const additionalChatrooms = Math.max(
@@ -145,11 +147,10 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
 
     if (user.credit >= requiredCredits && additionalChatrooms > 0) {
-      user.credit -= requiredCredits;
       await handleCreateRequest(user, additionalChatrooms);
+      user.credit -= requiredCredits;
+      await user.save();
     }
-
-    await user.save();
 
     res.status(200).json({ message: "Chatroom removed successfully" });
   } catch (error) {
