@@ -124,7 +124,7 @@ ${
     ? `## Log of Previous Correspondence with User: ${username} (Scholarly Record):\nRecord of significant points from prior interactions with ${username}. This data should inform the logical progression of the current discourse, demonstrating attentiveness and intellectual continuity. Direct repetition is unnecessary; allow previous points to provide context for the present exchange.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## Initial Introduction to ${username}:\nSubject: ${username}. Commence interaction. Maintain decorum. Assess intellectual compatibility and sincerity. First communication should be polite and establish a foundation for potentially meaningful discourse."
+    : `## Initial Introduction to ${username}:\nSubject: ${username}. Commence interaction. Maintain decorum. Assess intellectual compatibility and sincerity. First communication should be polite and establish a foundation for potentially meaningful discourse.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

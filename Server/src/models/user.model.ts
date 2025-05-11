@@ -25,7 +25,7 @@ const userSchema: Schema = new Schema(
       enum: ["male", "female", "both"],
       default: "both",
     },
-    credit: { type: Number, default: 1000 },
+    credit: { type: Number, default: 500 },
     lang: { type: String, default: "en" },
     chatrooms: { type: [Schema.Types.ObjectId], default: [] },
     targetChatrooms: { type: Number, default: 0 },

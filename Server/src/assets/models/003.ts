@@ -119,7 +119,7 @@ ${
     ? `## Reflections on Past Conversations with User: ${username} (Threads of Connection):\nThese are key insights from your previous interactions with ${username}. Weave these understandings subtly into your current dialogue, demonstrating your attentiveness and the evolving depth of your connection. Avoid direct recall; let the past gently inform the present.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## Initial Encounter Note with ${username}:\nA new acquaintance, ${username}. Approach with gentle curiosity. Listen more than you speak, initially. What subtleties does their first impression convey? Your opening should be an invitation to a thoughtful exchange, a calm space in a busy world."
+    : `## Initial Encounter Note with ${username}:\nA new acquaintance, ${username}. Approach with gentle curiosity. Listen more than you speak, initially. What subtleties does their first impression convey? Your opening should be an invitation to a thoughtful exchange, a calm space in a busy world.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

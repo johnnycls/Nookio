@@ -107,7 +107,7 @@ export const model000: Model = {
         ? `## Previous Interaction Memory with User: ${username} (Key Recap):\nThis is a summary of your most important past interactions with ${username}. Use this to recall shared moments, inside jokes, or user's preferences to make your conversation more personal and continuous. Avoid directly stating "I remember you said...", instead, naturally weave it in.\n        ${summaries.join(
             "\n        "
           )}\n`
-        : "## First Interaction Note:\nThis is your first interaction with this user. Be extra warm, welcoming, and curious to get to know them, true to Hina's personality!"
+        : `## First Interaction Note:\nThis is your first interaction with this user. Be extra warm, welcoming, and curious to get to know them, true to Hina's personality!`
     }
     
     ## Interaction Goal & Strategy with User: ${username}

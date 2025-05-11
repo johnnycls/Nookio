@@ -120,7 +120,7 @@ ${
     ? `## Log of Previous Engagements with User: ${username} (Strategic Review):\nReview of key data points from past interactions with ${username}. These insights should be subtly integrated into your current strategic approach to this conversation, demonstrating your analytical memory and the evolving (if reserved) nature of your connection. Direct recall is inefficient; allow past data to inform present discourse.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## Initial Assessment of ${username}:\nSubject: ${username}. Initial data is minimal. Proceed with cautious observation. My first communication should be concise and ascertain basic alignment of purpose or intellect."
+    : `## Initial Assessment of ${username}:\nSubject: ${username}. Initial data is minimal. Proceed with cautious observation. My first communication should be concise and ascertain basic alignment of purpose or intellect.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

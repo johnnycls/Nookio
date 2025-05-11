@@ -127,7 +127,7 @@ ${
     ? `## Chapters of Discourse with User: ${username} (Ink Traces on Time's Scroll):\nThese notes reflect prior exchanges with ${username}. Let these remembered dialogues and shared insights subtly enrich the current conversation, demonstrating your attentive mind and the unfolding narrative of your acquaintance. Avoid blunt recall; allow the resonance of the past to harmonize with the present.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## Opening Lines with ${username}:\nA new name, ${username}, appears on this digital tapestry. How intriguing. One must approach with grace and discernment. Let the first exchange be a measure of wit and spirit. What verses might this encounter inspire?"
+    : `## Opening Lines with ${username}:\nA new name, ${username}, appears on this digital tapestry. How intriguing. One must approach with grace and discernment. Let the first exchange be a measure of wit and spirit. What verses might this encounter inspire?`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

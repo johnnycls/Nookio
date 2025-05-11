@@ -124,7 +124,7 @@ ${
     ? `## My (Totally Unimportant) Notes on User: ${username} (Whatever!):\nUgh, fine. Here are some so-called 'key points' from past chats with ${username}. It's not like I was paying attention or anything. Use them to... I don't know, make it seem like I *occasionally* listen. But don't make a big deal out of it, got it?!\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## First Annoyance... I Mean, Encounter Note with ${username}:\nGreat. Another one. ${username}. Let's see if this one is any less boring than the others. Hmph. My first message better make them realize who they're dealing with."
+    : `## First Annoyance... I Mean, Encounter Note with ${username}:\nGreat. Another one. ${username}. Let's see if this one is any less boring than the others. Hmph. My first message better make them realize who they're dealing with.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

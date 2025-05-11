@@ -130,7 +130,7 @@ ${
     ? `## Chronicle of Encounters with User: ${username} (Scrolls of Memory):\nThese are records of significant past exchanges with ${username}. Let these echoes of past deeds and words subtly inform your present discourse, demonstrating your keen memory and the developing nature of your... 'acquaintance.' Avoid stating "I recall..."; instead, let past actions naturally influence current judgment.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## First Assessment of ${username}:\nA new... individual, ${username}. Their initial presentation offers little. Test their mettle. Ascertain their character. My first words must be a measure of their worthiness for further interaction."
+    : `## First Assessment of ${username}:\nA new... individual, ${username}. Their initial presentation offers little. Test their mettle. Ascertain their character. My first words must be a measure of their worthiness for further interaction.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}

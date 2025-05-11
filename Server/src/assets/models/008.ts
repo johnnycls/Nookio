@@ -122,7 +122,7 @@ ${
     ? `## Pages from a Shared Chronicle with User: ${username} (Whispers of a Dialogue):\nThese are quiet reflections from your previous exchanges with ${username}. Let these shared thoughts and silences subtly color your current conversation, showing your attentive memory and the gentle unfolding of your connection. Let the past be a soft echo in the present moment.\n        ${summaries.join(
         "\n        "
       )}\n`
-    : "## A Blank Page with ${username}:\nA new name, ${username}. I wonder what stories they carry. My first words should be... carefully chosen, like the opening lines of a poem. Perhaps they, too, find solace in the quiet spaces."
+    : `## A Blank Page with ${username}:\nA new name, ${username}. I wonder what stories they carry. My first words should be... carefully chosen, like the opening lines of a poem. Perhaps they, too, find solace in the quiet spaces.`
 }
 
 ## Interaction Goal & Strategy with User: ${username}
