@@ -75,6 +75,7 @@ i18n
             basicInfo: {
               title: "Basic Information",
               language: {
+                title: "Language",
                 label: "Select a Language",
                 placeholder: "Select a Language",
               },
@@ -169,6 +170,7 @@ i18n
             basicInfo: {
               title: "基本資訊",
               language: {
+                title: "語言",
                 label: "選擇語言",
                 placeholder: "選擇語言",
               },
@@ -263,6 +265,7 @@ i18n
             basicInfo: {
               title: "基本信息",
               language: {
+                title: "语言",
                 label: "选择语言",
                 placeholder: "选择语言",
               },
@@ -360,6 +363,7 @@ i18n
             basicInfo: {
               title: "Información Básica",
               language: {
+                title: "Idioma",
                 label: "Selecciona un Idioma",
                 placeholder: "Selecciona un Idioma",
               },
@@ -463,6 +467,7 @@ i18n
             basicInfo: {
               title: "Informations de Base",
               language: {
+                title: "Langue",
                 label: "Sélectionnez une Langue",
                 placeholder: "Sélectionnez une Langue",
               },
@@ -560,6 +565,7 @@ i18n
             basicInfo: {
               title: "基本情報",
               language: {
+                title: "言語",
                 label: "言語を選択",
                 placeholder: "言語を選択",
               },
@@ -656,6 +662,7 @@ i18n
             basicInfo: {
               title: "기본 정보",
               language: {
+                title: "언어",
                 label: "언어 선택",
                 placeholder: "언어 선택",
               },
@@ -753,6 +760,7 @@ i18n
             basicInfo: {
               title: "Основная информация",
               language: {
+                title: "Язык",
                 label: "Выберите язык",
                 placeholder: "Выберите язык",
               },

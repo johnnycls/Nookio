@@ -12,24 +12,21 @@ import i18next from "i18next";
 import { NAME_LENGTH_LIMIT } from "../../config";
 
 const BasicInformation: React.FC<{
+  prevCallback: () => void;
   nextCallback: () => void;
   profile?: profile;
-}> = ({ nextCallback, profile }) => {
+}> = ({ prevCallback, nextCallback, profile }) => {
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
   const [updateProfile, { isLoading, isError, isSuccess, error }] =
     useUpdateProfileMutation();
 
-  const [lang, setLang] = useState<string>(profile?.lang || "");
   const [name, setName] = useState<string>(profile?.name || "");
   const [gender, setGender] = useState<string>(profile?.gender || "");
   const [dob, setDob] = useState<string>(profile?.dob || "");
 
   useEffect(() => {
-    if (profile?.lang) {
-      setLang(profile.lang);
-    }
     if (profile?.gender) {
       setGender(profile.gender);
     }
@@ -70,22 +67,6 @@ const BasicInformation: React.FC<{
         <LoadingScreen isLoading={isLoading} />
 
         <div className="flex flex-col">
-          <label htmlFor="language" className="text-sm">
-            {t("profile.basicInfo.language.label")}
-          </label>
-          <Dropdown
-            value={langs.find((_lang) => _lang.code === lang)}
-            onChange={(e) => {
-              i18next.changeLanguage(e.value.code);
-              setLang(e.value.code);
-            }}
-            options={langs}
-            optionLabel="nativeName"
-            placeholder={t("profile.basicInfo.language.placeholder")}
-          />
-        </div>
-
-        <div className="flex flex-col">
           <label htmlFor="name" className="text-sm">
             {t("profile.basicInfo.name.label")}
           </label>
@@ -122,24 +103,33 @@ const BasicInformation: React.FC<{
           />
         </div>
 
-        <Button
-          disabled={!name || !gender || !dob || isLoading}
-          label={t("profile.navigation.next")}
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          onClick={() => {
-            if (
-              lang === profile?.lang &&
-              name === profile?.name &&
-              gender === profile?.gender &&
-              dob === profile?.dob
-            ) {
-              nextCallback();
-            } else {
-              updateProfile({ lang, name, gender, dob });
-            }
-          }}
-        />
+        <div className="flex justify-between">
+          <Button
+            label={t("profile.navigation.back")}
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            onClick={() => {
+              prevCallback();
+            }}
+          />
+          <Button
+            disabled={!name || !gender || !dob || isLoading}
+            label={t("profile.navigation.next")}
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            onClick={() => {
+              if (
+                name === profile?.name &&
+                gender === profile?.gender &&
+                dob === profile?.dob
+              ) {
+                nextCallback();
+              } else {
+                updateProfile({ name, gender, dob });
+              }
+            }}
+          />
+        </div>
       </div>
     </>
   );

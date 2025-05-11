@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AppBar from "../../components/AppBar";
 import BottomTab from "../../components/BottomTab";
+import Language from "./Language";
 
 const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
   const stepperRef = useRef<Stepper>(null);
@@ -35,8 +36,19 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
               },
             }}
           >
+            <StepperPanel header={t("profile.basicInfo.language.title")}>
+              <Language
+                nextCallback={() => {
+                  stepperRef.current?.nextCallback();
+                }}
+                profile={profile}
+              />
+            </StepperPanel>
             <StepperPanel header={t("profile.basicInfo.title")}>
               <BasicInformation
+                prevCallback={() => {
+                  stepperRef.current?.prevCallback();
+                }}
                 nextCallback={() => {
                   stepperRef.current?.nextCallback();
                 }}
