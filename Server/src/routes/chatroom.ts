@@ -5,6 +5,8 @@ import Chatroom from "../models/chatroom.model";
 import User from "../models/user.model";
 import authMiddleware from "../middlewares/auth";
 import models from "../assets/models/models";
+import { MIN_CREDITS_FOR_AUTO_CHAT } from "../config";
+import { handleCreateRequest } from "../services/open_chatroom_service";
 
 const router: Router = express.Router();
 
@@ -133,6 +135,20 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     user.chatrooms = user.chatrooms.filter(
       (id) => !chatroomIds.includes(id.toString())
     );
+
+    // Create new chatroom
+    const currentChatrooms = user.chatrooms.length;
+    const additionalChatrooms = Math.max(
+      0,
+      user.targetChatrooms - currentChatrooms
+    );
+    const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
+
+    if (user.credit >= requiredCredits && additionalChatrooms > 0) {
+      user.credit -= requiredCredits;
+      await handleCreateRequest(user, additionalChatrooms);
+    }
+
     await user.save();
 
     res.status(200).json({ message: "Chatroom removed successfully" });
