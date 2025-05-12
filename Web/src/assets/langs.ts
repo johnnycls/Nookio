@@ -254,4 +254,9 @@ export const langs: { code: string; name: string; nativeName: string }[] = [
     name: "Traditional Chinese",
     nativeName: "繁體中文",
   },
+  {
+    code: "zh-HK",
+    name: "Cantonese",
+    nativeName: "廣東話",
+  },
 ];

@@ -221,6 +221,101 @@ i18n
           },
         },
       },
+      "zh-HK": {
+        translation: {
+          error: {
+            title: "Bug咗",
+            message: "Bug L咗",
+          },
+          loginError: "登入嘅時候Bug L咗",
+          fetchProfileError: "fetch profile嘅時候Bug L咗",
+          fetchChatroomsError: "fetch chatrooms嘅時候Bug L咗",
+          purchaseCreditsError: "買點數嘅時候Bug L咗",
+          paymentError: "俾錢嘅時候Bug L咗",
+          updateProfileError: "更新profile嘅時候Bug L咗",
+          deleteChatroomError: "剷chatroom嘅時候Bug L咗",
+          fetchChatroomDetailError: "攞chatroom詳情嘅時候Bug L咗",
+          sendMsgError: "send msg嘅時候Bug L咗：{{error}}",
+          home: {
+            deleteChatroomConfirmation: "您真係要剷依啲chatrooms？",
+            noChatrooms: "搵唔到chatrooms",
+          },
+          account: {
+            remainingCredit: "剩返幾多點數",
+            package: "USD${{price}} - {{credits}} 點數",
+            buyCredits: "買點數",
+            payment: {
+              title: "俾錢",
+              submit: "即刻俾錢",
+              success: "俾錢成功！",
+            },
+            explanation: {
+              title: "點收費",
+              explanation1: "起始費用：AI每次send嘢俾你都要用5點數。",
+              explanation2:
+                "初期對話（前10回合）：在前10次來回交流中，每回合額外用1點數。",
+              explanation3:
+                "較長對話（10回合後）：一旦對話超過 10 回合，每10回合將額外消耗1點數。",
+              turn: "回合",
+              credit: "點數",
+            },
+          },
+          profile: {
+            title: "set個人資料",
+            basicInfo: {
+              title: "基本資料",
+              language: {
+                title: "語言",
+                label: "揀語言",
+                placeholder: "揀語言",
+              },
+              name: {
+                label: "名",
+                placeholder: "名",
+              },
+              gender: {
+                label: "性別",
+                placeholder: "性別",
+                options: {
+                  male: "男性",
+                  female: "女性",
+                  other: "其他",
+                },
+              },
+              dob: {
+                label: "出生日期",
+                placeholder: "出生日期",
+              },
+            },
+            description: {
+              title: "形容自己",
+              placeholder:
+                "請形容一下你自己。例如MBTI、興趣、職業、鍾意嘅嘢、唔鍾意嘅嘢等。",
+            },
+            matchSettings: {
+              title: "配對設定",
+              gender: {
+                label: "配對性別",
+                placeholder: "配對性別",
+                options: {
+                  male: "男性",
+                  female: "女性",
+                  both: "都好",
+                },
+              },
+              targetChatrooms: {
+                label: "配對人數",
+                placeholder: "配對人數",
+              },
+            },
+            navigation: {
+              back: "返回",
+              next: "下一步",
+              finish: "完成",
+            },
+          },
+        },
+      },
       "zh-CN": {
         translation: {
           error: {
