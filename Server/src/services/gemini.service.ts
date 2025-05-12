@@ -75,7 +75,6 @@ export const generateSummary = async (
         temperature: SUMMARY_TEMPERATURE,
         systemInstruction,
         thinkingConfig: {
-          //   includeThoughts: false,
           thinkingBudget: 0,
         },
       },
@@ -117,10 +116,9 @@ export const generateResponse = async (
           model,
           chatroom.summaries
         ),
-        // frequencyPenalty: model.frequencyPenalty,
-        // presencePenalty: model.presencePenalty,
+        frequencyPenalty: model.frequencyPenalty,
+        presencePenalty: model.presencePenalty,
         thinkingConfig: {
-          //   includeThoughts: false,
           thinkingBudget: 0,
         },
       },
@@ -145,10 +143,9 @@ export const generateGreeting = async (
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
         systemInstruction: generateSystemInstruction(user, model, []),
-        // frequencyPenalty: model.frequencyPenalty,
-        // presencePenalty: model.presencePenalty,
+        frequencyPenalty: model.frequencyPenalty,
+        presencePenalty: model.presencePenalty,
         thinkingConfig: {
-          // includeThoughts: false,
           thinkingBudget: 0,
         },
       },
