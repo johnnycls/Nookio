@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { profile } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,12 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
 
   const [
     deleteChatrooms,
-    { isLoading: isDeleting, isError: isDeletingError, error: deleteError },
+    {
+      isLoading: isDeleting,
+      isError: isDeletingError,
+      error: deleteError,
+      isSuccess: isDeletingSuccess,
+    },
   ] = useDeleteChatroomMutation();
 
   const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
@@ -33,13 +38,22 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
     return <LoadingScreen isLoading={true} />;
   }
 
-  if (isDeletingError) {
-    toast.current?.show({
-      severity: "error",
-      summary: t("deleteChatroomError"),
-      detail: JSON.stringify(deleteError),
-    });
-  }
+  useEffect(() => {
+    if (isDeletingSuccess) {
+      setSelectedChatroomIds([]);
+      setIsSelectMode(false);
+    }
+  }, [isDeletingSuccess]);
+
+  useEffect(() => {
+    if (isDeletingError) {
+      toast.current?.show({
+        severity: "error",
+        summary: t("deleteChatroomError"),
+        detail: JSON.stringify(deleteError),
+      });
+    }
+  }, [isDeletingError]);
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
