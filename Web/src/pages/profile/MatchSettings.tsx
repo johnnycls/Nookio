@@ -68,6 +68,7 @@ const MatchSettings: React.FC<{
 
         <label>{t("profile.matchSettings.targetChatrooms.label")}</label>
         <InputNumber
+          required
           value={targetChatrooms}
           onChange={(e) => setTargetChatrooms(e.value || 0)}
           placeholder={t("profile.matchSettings.targetChatrooms.placeholder")}
@@ -79,6 +80,7 @@ const MatchSettings: React.FC<{
           pt={{
             input: {
               root: {
+                disabled: true,
                 className: "w-full",
               },
             },

@@ -71,6 +71,7 @@ const BasicInformation: React.FC<{
             {t("profile.basicInfo.name.label")}
           </label>
           <InputText
+            required
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t("profile.basicInfo.name.placeholder")}
@@ -83,6 +84,7 @@ const BasicInformation: React.FC<{
             {t("profile.basicInfo.gender.label")}
           </label>
           <Dropdown
+            required
             value={gender}
             onChange={(e) => setGender(e.value)}
             options={genderOptions}
@@ -95,6 +97,7 @@ const BasicInformation: React.FC<{
             {t("profile.basicInfo.dob.label")}
           </label>
           <Calendar
+            required
             value={new Date(dob)}
             onChange={(e) =>
               setDob(e.value?.toISOString() || new Date().toISOString())
