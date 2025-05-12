@@ -111,7 +111,7 @@ export const generateResponse = async (
       contents: messages,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
-        // temperature: model.temperature,
+        temperature: model.temperature,
         systemInstruction: generateSystemInstruction(
           user,
           model,
@@ -143,7 +143,7 @@ export const generateGreeting = async (
       contents: generateGreetingPrompt(user, model),
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
-        // temperature: model.temperature,
+        temperature: model.temperature,
         systemInstruction: generateSystemInstruction(user, model, []),
         // frequencyPenalty: model.frequencyPenalty,
         // presencePenalty: model.presencePenalty,
