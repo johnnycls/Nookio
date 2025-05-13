@@ -22,6 +22,7 @@ const chatSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, { chatroomId }) => [
         { type: "Chat", id: chatroomId },
         "Chatroom",
+        "User",
       ],
     }),
   }),

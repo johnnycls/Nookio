@@ -6,6 +6,7 @@ export type profile = {
   email: string;
   name: string;
   description: string;
+  opening: string;
   preferedGender: "male" | "female" | "both";
   gender: string;
   dob: string;

@@ -291,6 +291,7 @@ i18n
               title: "形容自己",
               placeholder:
                 "請形容一下你自己。例如MBTI、興趣、職業、鍾意嘅嘢、唔鍾意嘅嘢等。",
+              opening: "（選填）開場白，如果唔寫就會由AI開始對話",
             },
             matchSettings: {
               title: "配對設定",

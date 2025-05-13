@@ -4,6 +4,7 @@ export interface IUser extends Document {
   email: string;
   name: string;
   description?: string;
+  opening: string;
   gender?: string;
   dob?: Date;
   preferedGender?: "male" | "female" | "both";
@@ -18,6 +19,7 @@ const userSchema: Schema = new Schema(
     email: { type: String, required: true, unique: true, index: true },
     name: { type: String, default: "" },
     description: { type: String, default: "" },
+    opening: { type: String, default: "" },
     gender: { type: String, default: "" },
     dob: { type: Date, default: null },
     preferedGender: {

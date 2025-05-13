@@ -116,20 +116,22 @@ router.post(
       user.credit -= requiredCredits;
       await user.save();
 
+      // res.status(200).json({
+      //   message: message,
+      //   response: response,
+      //   lastReadPosition: chatroom.lastReadPosition,
+      //   remainingCredits: user.credit,
+      // });
+
       res.status(200).json({
-        message: message,
-        response: response,
-        lastReadPosition: chatroom.lastReadPosition,
-        remainingCredits: user.credit,
+        message: "Message sent successfully",
       });
     } catch (error) {
       console.error("Error sending message:", JSON.stringify(error));
-      res
-        .status(500)
-        .json({
-          message: "Error sending message",
-          error: JSON.stringify(error),
-        });
+      res.status(500).json({
+        message: "Error sending message",
+        error: JSON.stringify(error),
+      });
     }
   }
 );

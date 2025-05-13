@@ -1,6 +1,6 @@
 import User, { IUser } from "../models/user.model";
 import Chatroom, { IChatroom } from "../models/chatroom.model";
-import { generateGreeting } from "./gemini.service";
+import { generateGreeting, generateResponse } from "./gemini.service";
 import models from "../assets/models/models";
 import { getRandomSubarray } from "../utils/general";
 
@@ -31,23 +31,54 @@ export async function handleCreateRequest(user: IUser, chatroomNum: number) {
     const chatrooms = await Promise.all(
       selectedModelIds.map(async (modelId) => {
         const model = models[modelId];
-        const greeting = await generateGreeting(user, model);
 
-        const chatroom = await Chatroom.create({
-          userId: user._id,
-          modelId: model._id,
-          messages: [
-            {
-              content: greeting,
-              sender: "model",
-              timestamp: new Date(),
-            },
-          ],
-        });
+        if (user.opening === "") {
+          const greeting = await generateGreeting(user, model);
 
-        await chatroom.save();
+          const chatroom = await Chatroom.create({
+            userId: user._id,
+            modelId: model._id,
+            messages: [
+              {
+                content: greeting,
+                sender: "model",
+                timestamp: new Date(),
+              },
+            ],
+          });
 
-        return chatroom;
+          await chatroom.save();
+          return chatroom;
+        } else {
+          const chatroom = await Chatroom.create({
+            userId: user._id,
+            modelId: model._id,
+            messages: [],
+          });
+
+          const response = await generateResponse(
+            user,
+            model,
+            user.opening,
+            chatroom
+          );
+
+          chatroom.messages.push({
+            content: user.opening,
+            sender: "user",
+            timestamp: new Date(),
+          });
+
+          chatroom.messages.push({
+            content: response,
+            sender: "model",
+            timestamp: new Date(),
+          });
+          chatroom.lastReadPosition = chatroom.messages.length - 1;
+
+          await chatroom.save();
+          return chatroom;
+        }
       })
     );
 

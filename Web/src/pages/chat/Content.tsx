@@ -52,7 +52,21 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
               }`}
               key={message.timestamp}
             >
-              <Card className="max-w-[70%]">{message.content}</Card>
+              <Card
+                className="max-w-[70%]"
+                pt={{
+                  body: {
+                    className: "!p-2 !gap-0",
+                  },
+                }}
+                footer={
+                  <div className={`text-xs text-gray-500 text-right`}>
+                    {new Date(message.timestamp).toLocaleTimeString()}
+                  </div>
+                }
+              >
+                {message.content}
+              </Card>
             </div>
           ))}
           <div ref={messagesEndRef} />

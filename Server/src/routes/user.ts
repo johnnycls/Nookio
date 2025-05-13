@@ -11,6 +11,7 @@ import {
   MAX_CHATROOMS,
   DESCRIPTION_LENGTH_LIMIT,
   NAME_LENGTH_LIMIT,
+  MESSAGE_LENGTH_LIMIT,
 } from "../config";
 import authMiddleware from "../middlewares/auth";
 import { createPaymentSession } from "../utils/payment";
@@ -87,6 +88,7 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       email: user.email,
       name: user.name || "",
       description: user.description || "",
+      opening: user.opening || "",
       gender: user.gender || "",
       dob: user.dob || new Date(),
       preferedGender: user.preferedGender || "both",
@@ -114,6 +116,7 @@ router.patch(
       const {
         name,
         description,
+        opening,
         gender,
         dob,
         lang,
@@ -135,6 +138,8 @@ router.patch(
         description.length <= DESCRIPTION_LENGTH_LIMIT
       )
         user.description = description;
+      if (opening !== undefined && opening.length <= MESSAGE_LENGTH_LIMIT)
+        user.opening = opening;
       if (gender !== undefined) user.gender = gender;
       if (dob !== undefined) user.dob = dob;
       if (lang !== undefined) user.lang = lang;
@@ -169,19 +174,21 @@ router.patch(
 
       await user.save();
 
-      const profile = {
-        _id: user._id,
-        email: user.email,
-        name: user.name || "",
-        description: user.description || "",
-        gender: user.gender || "",
-        dob: user.dob || new Date(),
-        credit: user.credit || 0,
-        lang: user.lang || "en",
-        targetChatrooms: user.targetChatrooms || 0,
-      };
+      // const profile = {
+      //   _id: user._id,
+      //   email: user.email,
+      //   name: user.name || "",
+      //   description: user.description || "",
+      //   opening: user.opening || "",
+      //   gender: user.gender || "",
+      //   dob: user.dob || new Date(),
+      //   credit: user.credit || 0,
+      //   lang: user.lang || "en",
+      //   targetChatrooms: user.targetChatrooms || 0,
+      // };
 
-      res.status(200).json(profile);
+      // res.status(200).json(profile);
+      res.status(200).json({ message: "Profile updated" });
     } catch (error) {
       console.error(JSON.stringify(error));
       res.status(500).json({
