@@ -70,7 +70,7 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
         />
 
         {isSending ? (
-          <Button icon="pi pi-spinner" />
+          <Button disabled icon="pi pi-spin pi-spinner" />
         ) : (
           <Button
             rounded

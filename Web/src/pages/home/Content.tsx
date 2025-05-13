@@ -21,6 +21,9 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
   const { t } = useTranslation();
   const toast = useRef<Toast>(null);
 
+  const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
+  const [selectedChatroomIds, setSelectedChatroomIds] = useState<string[]>([]);
+
   const [
     deleteChatrooms,
     {
@@ -30,13 +33,6 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
       isSuccess: isDeletingSuccess,
     },
   ] = useDeleteChatroomMutation();
-
-  const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
-  const [selectedChatroomIds, setSelectedChatroomIds] = useState<string[]>([]);
-
-  if (isDeleting) {
-    return <LoadingScreen isLoading={true} />;
-  }
 
   useEffect(() => {
     if (isDeletingSuccess) {
@@ -54,6 +50,10 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
       });
     }
   }, [isDeletingError]);
+
+  if (isDeleting) {
+    return <LoadingScreen isLoading={true} />;
+  }
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
