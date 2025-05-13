@@ -101,6 +101,8 @@ i18n
               title: "Description",
               placeholder:
                 "Please describe yourself. MBTI, hobbies, interests, occupation, nationality, things you like, things you dislike, etc.",
+              opening:
+                "（Optional）Opening message, if not written, the AI will start the conversation",
             },
             matchSettings: {
               title: "Match Settings",
@@ -196,6 +198,7 @@ i18n
               title: "描述",
               placeholder:
                 "請描述您自己。例如 MBTI、嗜好、興趣、職業、國籍、喜歡的事物、不喜歡的事物等。",
+              opening: "（選填）開場白，如果未寫，AI 將開始對話",
             },
             matchSettings: {
               title: "配對設定",
@@ -387,6 +390,7 @@ i18n
               title: "描述",
               placeholder:
                 "请描述您自己。例如 MBTI、爱好、兴趣、职业、国籍、喜欢的事物、不喜欢的事物等。",
+              opening: "（选填）开场白，如果未写，AI 将开始对话",
             },
             matchSettings: {
               title: "匹配设置",
@@ -485,6 +489,8 @@ i18n
               title: "Descripción",
               placeholder:
                 "Por favor, descríbete. MBTI, pasatiempos, intereses, ocupación, nacionalidad, cosas que te gustan, cosas que no te gustan, etc.",
+              opening:
+                "（Opcional）Mensaje de apertura, si no se escribe, la IA comenzará la conversación",
             },
             matchSettings: {
               title: "Configuración de Coincidencia",
@@ -589,6 +595,8 @@ i18n
               title: "Description",
               placeholder:
                 "Veuillez vous décrire. MBTI, loisirs, centres d'intérêt, profession, nationalité, ce que vous aimez, ce que vous n'aimez pas, etc.",
+              opening:
+                "（Opcional）Message de présentation, si non écrit, l'IA commencera la conversation",
             },
             matchSettings: {
               title: "Paramètres de Correspondance",
@@ -687,6 +695,8 @@ i18n
               title: "自己紹介",
               placeholder:
                 "自己紹介を記入してください。MBTI、趣味、興味、職業、国籍、好きなこと、嫌いなことなど。",
+              opening:
+                "（Opcional）自己紹介を記入してください。MBTI、趣味、興味、職業、国籍、好きなこと、嫌いなことなど。",
             },
             matchSettings: {
               title: "マッチング設定",
@@ -784,6 +794,8 @@ i18n
               title: "소개",
               placeholder:
                 "자신을 설명해주세요. MBTI, 취미, 관심사, 직업, 국적, 좋아하는 것, 싫어하는 것 등.",
+              opening:
+                "（Opcional）자신을 설명해주세요. MBTI, 취미, 관심사, 직업, 국적, 좋아하는 것, 싫어하는 것 등.",
             },
             matchSettings: {
               title: "매칭 설정",
@@ -882,6 +894,8 @@ i18n
               title: "Описание",
               placeholder:
                 "Пожалуйста, опишите себя. MBTI, хобби, интересы, профессия, национальность, что вам нравится, что не нравится и т.д.",
+              opening:
+                "（Opcional）Пожалуйста, опишите себя. MBTI, хобби, интересы, профессия, национальность, что вам нравится, что не нравится и т.д.",
             },
             matchSettings: {
               title: "Настройки подбора",
