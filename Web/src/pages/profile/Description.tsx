@@ -53,14 +53,14 @@ const Description: React.FC<{
           maxLength={DESCRIPTION_LENGTH_LIMIT}
         />
 
-        <InputTextarea
+        {/* <InputTextarea
           value={opening}
           onChange={(e) => setOpening(e.target.value)}
           rows={5}
           autoResize
           placeholder={t("profile.description.opening")}
           maxLength={MESSAGE_LENGTH_LIMIT}
-        />
+        /> */}
 
         <div className="flex justify-between">
           <Button
