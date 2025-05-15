@@ -13,6 +13,7 @@ import model010 from "./010";
 import model011 from "./011";
 import model012 from "./012";
 import model013 from "./013";
+import model014 from "./014";
 export const models: { [key: string]: Model } = {
   "000": model000,
   "001": model001,
@@ -28,6 +29,7 @@ export const models: { [key: string]: Model } = {
   "011": model011,
   "012": model012,
   "013": model013,
+  "014": model014,
 };
 
 export default models;
