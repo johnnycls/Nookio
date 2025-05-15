@@ -13,7 +13,7 @@ import { Button } from "primereact/button";
 import LoadingScreen from "../../components/LoadingScreen";
 import { Toast } from "primereact/toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
+
 const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
   profile,
   chatrooms,
@@ -60,7 +60,6 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
     <div className="w-full h-full flex flex-col justify-between">
       <Toast ref={toast} />
       <ConfirmDialog />
-      <PromptInstallIfNotStandalone />
 
       <AppBar>
         <div className="flex justify-between items-center">
