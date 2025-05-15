@@ -5,6 +5,9 @@ import { useTranslation } from "react-i18next";
 import { Chatroom } from "../../slices/chatroomSlice";
 import AppBar from "../../components/AppBar";
 import NewChatroomDialog from "./NewChatroomDialog";
+import { MAX_CHATROOMS } from "../../config";
+import { profile } from "../../slices/userSlice";
+
 interface HomeAppBarProps {
   isSelectMode: boolean;
   selectedChatroomIds: string[];
@@ -33,7 +36,11 @@ const HomeAppBar: React.FC<HomeAppBarProps> = ({
 
         <div className="flex gap-1">
           {!isSelectMode && (
-            <Button icon="pi pi-plus" onClick={() => setIsOpen(true)} />
+            <Button
+              icon="pi pi-plus"
+              disabled={!chatrooms || chatrooms.length >= MAX_CHATROOMS}
+              onClick={() => setIsOpen(true)}
+            />
           )}
 
           {isSelectMode && selectedChatroomIds.length > 0 && (

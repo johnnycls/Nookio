@@ -1,8 +1,9 @@
-type Model = {
+export type Model = {
   _id: string;
   name: string;
   gender: "male" | "female";
-  language: string;
+  languages: string[];
+  avatar: string;
 };
 
 export const MODELS: Model[] = [
@@ -10,6 +11,7 @@ export const MODELS: Model[] = [
     _id: "014",
     name: "米亞 (Mya)",
     gender: "female",
-    language: "zh-HK",
+    languages: ["zh-HK"],
+    avatar: "/avatars/014.jpg",
   },
 ];

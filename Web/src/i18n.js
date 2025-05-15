@@ -80,6 +80,10 @@ i18n
             newChatroom: {
               title: "Create Chatroom",
               create: "Create",
+              allLangs: "All Languages",
+              male: "Male",
+              female: "Female",
+              both: "Both",
             },
             deleteChatroomConfirmation:
               "Are you sure you want to delete these chatrooms?",
@@ -219,6 +223,10 @@ i18n
             newChatroom: {
               title: "創建聊天室",
               create: "建立",
+              allLangs: "所有語言",
+              male: "男性",
+              female: "女性",
+              both: "皆可",
             },
             deleteChatroomConfirmation: "您確定要刪除這些聊天室嗎？",
             noChatrooms: "找不到聊天室",
@@ -352,6 +360,10 @@ i18n
             newChatroom: {
               title: "創建聊天室",
               create: "建立",
+              allLangs: "所有語言",
+              male: "男",
+              female: "女",
+              both: "都得",
             },
             deleteChatroomConfirmation: "您真係要剷依啲chatrooms？",
             noChatrooms: "搵唔到chatrooms",
@@ -485,6 +497,10 @@ i18n
             newChatroom: {
               title: "创建聊天室",
               create: "创建",
+              allLangs: "所有语言",
+              male: "男",
+              female: "女",
+              both: "都行",
             },
             deleteChatroomConfirmation: "您确定要删除这些聊天室吗？",
             noChatrooms: "未找到聊天室",
