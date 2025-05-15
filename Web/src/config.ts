@@ -6,7 +6,7 @@ export const STRIPE_PUBLISHABLE_KEY = import.meta.env
 
 export const MAX_INPUT_TOKENS = 750;
 export const SUMMARY_MSG = 20;
-export const MAX_CHATROOMS = 4;
+export const MAX_CHATROOMS = 1;
 export const MIN_CREDITS_FOR_AUTO_CHAT = 5;
 
 export const CREDITS_FOR_RESPONSE = (history_length: number): number => {

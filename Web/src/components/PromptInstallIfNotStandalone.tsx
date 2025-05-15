@@ -1,20 +1,19 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import PromptInstallPWAPage from "./PromptInstallPWAPage";
 import useIsStandalone from "../hooks/useIsStandalone";
 
-const PromptInstallIfNotStandalone: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+const PromptInstallIfNotStandalone: React.FC<{}> = ({}) => {
   const isStandalone = useIsStandalone();
 
-  return isStandalone === "unknown" ? (
-    <></>
-  ) : isStandalone ? (
-    children
-  ) : (
-    // children // TODO: Remove this
-    <PromptInstallPWAPage />
-  );
+  if (isStandalone === "unknown") {
+    return <></>;
+  }
+
+  if (isStandalone) {
+    return <></>;
+  }
+
+  return <PromptInstallPWAPage />;
 };
 
 export default PromptInstallIfNotStandalone;

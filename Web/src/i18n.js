@@ -27,6 +27,40 @@ i18n
     resources: {
       en: {
         translation: {
+          install: {
+            windows: {
+              title: "Install Nookio on Windows",
+              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              2: "Click on the install button at the right of the address bar",
+              3: 'Click "Install" in the pop-up window',
+            },
+            mac: {
+              title: "Install Nookio on Mac",
+              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              2: "Click on the '...' menu in the top-right corner",
+              3: "Select 'Install Nookio...' from the menu",
+              4: 'Click "Install" in the pop-up window',
+            },
+            ios: {
+              title: "Install Nookio on iOS",
+              1: "It's recommended to open this page with Google Chrome",
+              2: "Tap the Share button",
+              3: "Scroll down and tap 'Add to Home Screen'",
+              4: 'Tap "Add" in the top-right corner',
+            },
+            android: {
+              title: "Install Nookio on Android",
+              1: "It's recommended to open this page with Google Chrome",
+              2: "Tap the '...' menu (if install button is not popped up)",
+              3: 'Tap "Install" in the pop-up window',
+            },
+            unknown: {
+              title: "Install Nookio",
+              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              2: "Look for an 'Install' or 'Add to Home Screen' option in your browser's menu",
+              3: 'Tap "Install" or "Add" in the pop-up',
+            },
+          },
           error: {
             title: "Error",
             message: "An error occurred",
@@ -130,6 +164,40 @@ i18n
       },
       "zh-TW": {
         translation: {
+          install: {
+            windows: {
+              title: "在 Windows 上安裝 Nookio",
+              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              2: "點擊地址欄右邊的安裝按鈕",
+              3: "在彈出視窗中點擊「安裝」",
+            },
+            mac: {
+              title: "在 Mac 上安裝 Nookio",
+              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              2: "點擊右上角的「...」選單",
+              3: "從選單中選擇「安裝 Nookio...」",
+              4: "在彈出視窗中點擊「安裝」",
+            },
+            ios: {
+              title: "在 iOS 上安裝 Nookio",
+              1: "建議使用 Google Chrome 開啟此頁面",
+              2: "點擊分享按鈕",
+              3: "向下滾動並點擊「加入主畫面」",
+              4: "點擊右上角的「加入」",
+            },
+            android: {
+              title: "在 Android 上安裝 Nookio",
+              1: "建議使用 Google Chrome 開啟此頁面",
+              2: "點擊「...」選單（如果安裝按鈕未自動彈出）",
+              3: "在彈出視窗中點擊「安裝」",
+            },
+            unknown: {
+              title: "安裝 Nookio",
+              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              2: "在瀏覽器選單中尋找「安裝」或「加入主畫面」選項",
+              3: "在彈出視窗中點擊「安裝」或「加入」",
+            },
+          },
           error: {
             title: "錯誤",
             message: "發生錯誤",
@@ -226,6 +294,39 @@ i18n
       },
       "zh-HK": {
         translation: {
+          install: {
+            windows: {
+              title: "喺Windows Download Nookio",
+              1: "建議用Google Chrome開（用手機體驗會好啲）",
+              2: "撳Address Bar右邊嘅安裝制",
+              3: "喺個Popup到撳「安裝」",
+            },
+            mac: {
+              title: "喺Mac Download Nookio",
+              1: "建議用Google Chrome開（用手機體驗會好啲）",
+              2: "撳右上角嘅「...」選單",
+              3: "揀「安裝 Nookio...」",
+            },
+            ios: {
+              title: "喺iOS Download Nookio",
+              1: "建議用Google Chrome開",
+              2: "撳Share制",
+              3: "向下碌同撳「加入主畫面」",
+              4: "撳右上角嘅「加入」",
+            },
+            android: {
+              title: "喺Android Download Nookio",
+              1: "建議用Google Chrome開",
+              2: "撳「...」Menu（如果安裝制唔彈出）",
+              3: "喺個Popup到撳「安裝」",
+            },
+            unknown: {
+              title: "Download Nookio",
+              1: "建議用Google Chrome開（用手機體驗會好啲）",
+              2: "喺Browser Menu度搵「安裝」或「加入主畫面」",
+              3: "喺個Popup到撳「安裝」或「加入」",
+            },
+          },
           error: {
             title: "Bug咗",
             message: "Bug L咗",
@@ -322,6 +423,39 @@ i18n
       },
       "zh-CN": {
         translation: {
+          install: {
+            windows: {
+              title: "在 Windows 上安装 Nookio",
+              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              2: "点击地址栏右侧的安装按钮",
+              3: "在弹出窗口中点击“安装”",
+            },
+            mac: {
+              title: "在 Mac 上安装 Nookio",
+              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              2: "点击右上角的“...”菜单",
+              3: "选择“安装 Nookio...”",
+            },
+            ios: {
+              title: "在 iOS 上安装 Nookio",
+              1: "建议使用 Google Chrome 打开此页面",
+              2: "点击分享按钮",
+              3: "向下滚动并点击“添加到主屏幕”",
+              4: "点击右上角的“添加”",
+            },
+            android: {
+              title: "在 Android 上安装 Nookio",
+              1: "建议使用 Google Chrome 打开此页面",
+              2: "点击“...”菜单（如果安装按钮未自动弹出）",
+              3: "在弹出窗口中点击“安装”",
+            },
+            unknown: {
+              title: "安装 Nookio",
+              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              2: "在浏览器菜单中寻找“安装”或“添加到主屏幕”选项",
+              3: "在弹出窗口中点击“安装”或“添加”",
+            },
+          },
           error: {
             title: "错误",
             message: "发生了一个错误",
@@ -412,511 +546,6 @@ i18n
               back: "返回",
               next: "下一步",
               finish: "完成",
-            },
-          },
-        },
-      },
-      es: {
-        translation: {
-          error: {
-            title: "Error",
-            message: "Ocurrió un error",
-          },
-          loginError: "Ocurrió un error al iniciar sesión",
-          fetchProfileError: "Ocurrió un error al obtener el perfil",
-          fetchChatroomsError: "Ocurrió un error al obtener las salas de chat",
-          purchaseCreditsError: "Ocurrió un error al comprar créditos",
-          paymentError: "Pago fallido. Por favor, inténtalo de nuevo.",
-          updateProfileError: "Ocurrió un error al actualizar tu perfil",
-          deleteChatroomError: "Ocurrió un error al eliminar las salas de chat",
-          fetchChatroomDetailError:
-            "Ocurrió un error al obtener los detalles de la sala de chat",
-          sendMsgError: "Ocurrió un error al enviar el mensaje: {{error}}",
-          home: {
-            deleteChatroomConfirmation:
-              "¿Estás seguro de que quieres eliminar estas salas de chat?",
-            noChatrooms: "No se encontraron salas de chat",
-          },
-          account: {
-            remainingCredit: "Créditos restantes",
-            package: "USD${{price}} - {{credits}} Créditos",
-            buyCredits: "Comprar Créditos",
-            payment: {
-              title: "Completar Pago",
-              submit: "Pagar Ahora",
-              success: "¡Pago exitoso!",
-            },
-            explanation: {
-              title: "Modo de Pago",
-              explanation1:
-                "Tarifa Inicial: Cada vez que la IA envía un mensaje o responde, cuesta 5 créditos.",
-              explanation2:
-                "Conversación Temprana (Primeros 10 turnos): Por cada uno de los primeros 10 intercambios (turnos), es 1 crédito extra por turno.",
-              explanation3:
-                "Conversación Larga (Después de 10 turnos): Una vez que has tenido más de 10 turnos, es 1 crédito extra por cada 10 turnos adicionales.",
-              turn: "Turno",
-              credit: "Crédito",
-            },
-          },
-          profile: {
-            title: "Configuración del Perfil",
-            basicInfo: {
-              title: "Información Básica",
-              language: {
-                title: "Idioma",
-                label: "Selecciona un Idioma",
-                placeholder: "Selecciona un Idioma",
-              },
-              name: {
-                label: "Nombre",
-                placeholder: "Nombre",
-              },
-              gender: {
-                label: "Género",
-                placeholder: "Género",
-                options: {
-                  male: "Masculino",
-                  female: "Femenino",
-                  other: "Otro",
-                },
-              },
-              dob: {
-                label: "Fecha de Nacimiento",
-                placeholder: "Fecha de Nacimiento",
-              },
-            },
-            description: {
-              title: "Descripción",
-              placeholder:
-                "Por favor, descríbete. MBTI, pasatiempos, intereses, ocupación, nacionalidad, cosas que te gustan, cosas que no te gustan, etc.",
-              opening:
-                "（Opcional）Mensaje de apertura, si no se escribe, la IA comenzará la conversación",
-            },
-            matchSettings: {
-              title: "Configuración de Coincidencia",
-              gender: {
-                label: "Género de Coincidencia",
-                placeholder: "Género de Coincidencia",
-                options: {
-                  male: "Masculino",
-                  female: "Femenino",
-                  both: "Ambos",
-                },
-              },
-              targetChatrooms: {
-                label: "Número de Personas para Coincidir",
-                placeholder: "Número de Personas para Coincidir",
-              },
-            },
-            navigation: {
-              back: "Atrás",
-              next: "Siguiente",
-              finish: "Finalizar",
-            },
-          },
-        },
-      },
-      fr: {
-        translation: {
-          error: {
-            title: "Erreur",
-            message: "Une erreur est survenue",
-          },
-          loginError: "Une erreur est survenue lors de la connexion",
-          fetchProfileError:
-            "Une erreur est survenue lors de la récupération du profil",
-          fetchChatroomsError:
-            "Une erreur est survenue lors de la récupération des salons de discussion",
-          purchaseCreditsError:
-            "Une erreur est survenue lors de l'achat de crédits",
-          paymentError: "Paiement échoué. Veuillez réessayer.",
-          updateProfileError:
-            "Une erreur est survenue lors de la mise à jour de votre profil",
-          deleteChatroomError:
-            "Une erreur est survenue lors de la suppression des salons de discussion",
-          fetchChatroomDetailError:
-            "Une erreur est survenue lors de la récupération des détails du salon de discussion",
-          sendMsgError:
-            "Une erreur est survenue lors de l'envoi du message : {{error}}",
-          home: {
-            deleteChatroomConfirmation:
-              "Êtes-vous sûr de vouloir supprimer ces salons de discussion ?",
-            noChatrooms: "Aucun salon de discussion trouvé",
-          },
-          account: {
-            remainingCredit: "Crédits Restants",
-            package: "USD${{price}} - {{credits}} Crédits",
-            buyCredits: "Acheter des Crédits",
-            payment: {
-              title: "Finaliser le Paiement",
-              submit: "Payer Maintenant",
-              success: "Paiement réussi !",
-            },
-            explanation: {
-              title: "Mode de Paiement",
-              explanation1:
-                "Frais de Démarrage : Chaque fois que l'IA envoie un message ou répond, cela coûte 5 crédits.",
-              explanation2:
-                "Début de Conversation (10 premiers tours) : Pour chacun des 10 premiers échanges (tours), c'est 1 crédit supplémentaire par tour.",
-              explanation3:
-                "Conversation Plus Longue (Après 10 tours) : Une fois que vous avez eu plus de 10 tours, c'est 1 crédit supplémentaire pour chaque 10 tours additionnels.",
-              turn: "Tour",
-              credit: "Crédit",
-            },
-          },
-          profile: {
-            title: "Configuration du Profil",
-            basicInfo: {
-              title: "Informations de Base",
-              language: {
-                title: "Langue",
-                label: "Sélectionnez une Langue",
-                placeholder: "Sélectionnez une Langue",
-              },
-              name: {
-                label: "Nom",
-                placeholder: "Nom",
-              },
-              gender: {
-                label: "Genre",
-                placeholder: "Genre",
-                options: {
-                  male: "Homme",
-                  female: "Femme",
-                  other: "Autre",
-                },
-              },
-              dob: {
-                label: "Date de Naissance",
-                placeholder: "Date de Naissance",
-              },
-            },
-            description: {
-              title: "Description",
-              placeholder:
-                "Veuillez vous décrire. MBTI, loisirs, centres d'intérêt, profession, nationalité, ce que vous aimez, ce que vous n'aimez pas, etc.",
-              opening:
-                "（Opcional）Message de présentation, si non écrit, l'IA commencera la conversation",
-            },
-            matchSettings: {
-              title: "Paramètres de Correspondance",
-              gender: {
-                label: "Genre de Correspondance",
-                placeholder: "Genre de Correspondance",
-                options: {
-                  male: "Homme",
-                  female: "Femme",
-                  both: "Les deux",
-                },
-              },
-              targetChatrooms: {
-                label: "Nombre de Personnes à Mettre en Correspondance",
-                placeholder: "Nombre de Personnes à Mettre en Correspondance",
-              },
-            },
-            navigation: {
-              back: "Retour",
-              next: "Suivant",
-              finish: "Terminer",
-            },
-          },
-        },
-      },
-      ja: {
-        translation: {
-          error: {
-            title: "エラー",
-            message: "エラーが発生しました",
-          },
-          loginError: "ログイン中にエラーが発生しました",
-          fetchProfileError: "プロフィールの取得中にエラーが発生しました",
-          fetchChatroomsError: "チャットルームの取得中にエラーが発生しました",
-          purchaseCreditsError: "クレジットの購入中にエラーが発生しました",
-          paymentError: "支払いに失敗しました。もう一度お試しください。",
-          updateProfileError: "プロフィールの更新中にエラーが発生しました",
-          deleteChatroomError: "チャットルームの削除中にエラーが発生しました",
-          fetchChatroomDetailError:
-            "チャットルーム詳細の取得中にエラーが発生しました",
-          sendMsgError: "メッセージ送信中にエラーが発生しました：{{error}}",
-          home: {
-            deleteChatroomConfirmation:
-              "これらのチャットルームを削除してもよろしいですか？",
-            noChatrooms: "チャットルームが見つかりません",
-          },
-          account: {
-            remainingCredit: "残りのクレジット",
-            package: "USD${{price}} - {{credits}} クレジット",
-            buyCredits: "クレジットを購入",
-            payment: {
-              title: "支払いを完了",
-              submit: "今すぐ支払う",
-              success: "支払いが成功しました！",
-            },
-            explanation: {
-              title: "支払いモード",
-              explanation1:
-                "開始料金：AIがメッセージを送信または返信するたびに、5クレジットかかります。",
-              explanation2:
-                "初期の会話（最初の10ターン）：最初の10回のやり取り（ターン）それぞれについて、1ターンあたり追加で1クレジットかかります。",
-              explanation3:
-                "長時間の会話（10ターン後）：10ターンを超えると、追加の10ターンごとに1クレジットかかります。",
-              turn: "ターン",
-              credit: "クレジット",
-            },
-          },
-          profile: {
-            title: "プロフィール設定",
-            basicInfo: {
-              title: "基本情報",
-              language: {
-                title: "言語",
-                label: "言語を選択",
-                placeholder: "言語を選択",
-              },
-              name: {
-                label: "名前",
-                placeholder: "名前",
-              },
-              gender: {
-                label: "性別",
-                placeholder: "性別",
-                options: {
-                  male: "男性",
-                  female: "女性",
-                  other: "その他",
-                },
-              },
-              dob: {
-                label: "生年月日",
-                placeholder: "生年月日",
-              },
-            },
-            description: {
-              title: "自己紹介",
-              placeholder:
-                "自己紹介を記入してください。MBTI、趣味、興味、職業、国籍、好きなこと、嫌いなことなど。",
-              opening:
-                "（Opcional）自己紹介を記入してください。MBTI、趣味、興味、職業、国籍、好きなこと、嫌いなことなど。",
-            },
-            matchSettings: {
-              title: "マッチング設定",
-              gender: {
-                label: "マッチングする性別",
-                placeholder: "マッチングする性別",
-                options: {
-                  male: "男性",
-                  female: "女性",
-                  both: "両方",
-                },
-              },
-              targetChatrooms: {
-                label: "マッチングする人数",
-                placeholder: "マッチングする人数",
-              },
-            },
-            navigation: {
-              back: "戻る",
-              next: "次へ",
-              finish: "完了",
-            },
-          },
-        },
-      },
-      ko: {
-        translation: {
-          error: {
-            title: "오류",
-            message: "오류가 발생했습니다",
-          },
-          loginError: "로그인 중 오류가 발생했습니다",
-          fetchProfileError: "프로필을 가져오는 중 오류가 발생했습니다",
-          fetchChatroomsError: "채팅방을 가져오는 중 오류가 발생했습니다",
-          purchaseCreditsError: "크레딧 구매 중 오류가 발생했습니다",
-          paymentError: "결제에 실패했습니다. 다시 시도해주세요.",
-          updateProfileError: "프로필 업데이트 중 오류가 발생했습니다",
-          deleteChatroomError: "채팅방 삭제 중 오류가 발생했습니다",
-          fetchChatroomDetailError:
-            "채팅방 세부 정보를 가져오는 중 오류가 발생했습니다",
-          sendMsgError: "메시지 전송 중 오류 발생: {{error}}",
-          home: {
-            deleteChatroomConfirmation: "이 채팅방들을 삭제하시겠습니까?",
-            noChatrooms: "채팅방을 찾을 수 없습니다",
-          },
-          account: {
-            remainingCredit: "남은 크레딧",
-            package: "USD${{price}} - {{credits}} 크레딧",
-            buyCredits: "크레딧 구매",
-            payment: {
-              title: "결제 완료",
-              submit: "지금 결제",
-              success: "결제 성공!",
-            },
-            explanation: {
-              title: "결제 방식",
-              explanation1:
-                "시작 비용: AI가 메시지를 보내거나 답장할 때마다 5 크레딧이 소모됩니다.",
-              explanation2:
-                "초기 대화 (처음 10턴): 처음 10번의 대화(턴) 각각에 대해 턴당 추가 1 크레딧이 소모됩니다.",
-              explanation3:
-                "긴 대화 (10턴 이후): 10턴을 초과하면 추가 10턴마다 1 크레딧이 소모됩니다.",
-              turn: "턴",
-              credit: "크레딧",
-            },
-          },
-          profile: {
-            title: "프로필 설정",
-            basicInfo: {
-              title: "기본 정보",
-              language: {
-                title: "언어",
-                label: "언어 선택",
-                placeholder: "언어 선택",
-              },
-              name: {
-                label: "이름",
-                placeholder: "이름",
-              },
-              gender: {
-                label: "성별",
-                placeholder: "성별",
-                options: {
-                  male: "남성",
-                  female: "여성",
-                  other: "기타",
-                },
-              },
-              dob: {
-                label: "생년월일",
-                placeholder: "생년월일",
-              },
-            },
-            description: {
-              title: "소개",
-              placeholder:
-                "자신을 설명해주세요. MBTI, 취미, 관심사, 직업, 국적, 좋아하는 것, 싫어하는 것 등.",
-              opening:
-                "（Opcional）자신을 설명해주세요. MBTI, 취미, 관심사, 직업, 국적, 좋아하는 것, 싫어하는 것 등.",
-            },
-            matchSettings: {
-              title: "매칭 설정",
-              gender: {
-                label: "매칭 성별",
-                placeholder: "매칭 성별",
-                options: {
-                  male: "남성",
-                  female: "여성",
-                  both: "모두",
-                },
-              },
-              targetChatrooms: {
-                label: "매칭할 사람 수",
-                placeholder: "매칭할 사람 수",
-              },
-            },
-            navigation: {
-              back: "뒤로",
-              next: "다음",
-              finish: "완료",
-            },
-          },
-        },
-      },
-      ru: {
-        translation: {
-          error: {
-            title: "Ошибка",
-            message: "Произошла ошибка",
-          },
-          loginError: "Произошла ошибка при входе в систему",
-          fetchProfileError: "Произошла ошибка при загрузке профиля",
-          fetchChatroomsError: "Произошла ошибка при загрузке чатов",
-          purchaseCreditsError: "Произошла ошибка при покупке кредитов",
-          paymentError: "Платеж не удался. Пожалуйста, попробуйте еще раз.",
-          updateProfileError: "Произошла ошибка при обновлении вашего профиля",
-          deleteChatroomError: "Произошла ошибка при удалении чатов",
-          fetchChatroomDetailError:
-            "Произошла ошибка при загрузке деталей чата",
-          sendMsgError: "Произошла ошибка при отправке сообщения: {{error}}",
-          home: {
-            deleteChatroomConfirmation:
-              "Вы уверены, что хотите удалить эти чаты?",
-            noChatrooms: "Чаты не найдены",
-          },
-          account: {
-            remainingCredit: "Оставшиеся кредиты",
-            package: "USD${{price}} - {{credits}} кредитов",
-            buyCredits: "Купить кредиты",
-            payment: {
-              title: "Завершить платеж",
-              submit: "Оплатить сейчас",
-              success: "Платеж успешно выполнен!",
-            },
-            explanation: {
-              title: "Режим оплаты",
-              explanation1:
-                "Начальная плата: Каждый раз, когда ИИ отправляет сообщение или отвечает, это стоит 5 кредитов.",
-              explanation2:
-                "Начало разговора (первые 10 ходов): За каждый из первых 10 обменов сообщениями (ходов) взимается дополнительно 1 кредит за ход.",
-              explanation3:
-                "Длительный разговор (после 10 ходов): После более чем 10 ходов взимается дополнительно 1 кредит за каждые 10 дополнительных ходов.",
-              turn: "Ход",
-              credit: "Кредит",
-            },
-          },
-          profile: {
-            title: "Настройка профиля",
-            basicInfo: {
-              title: "Основная информация",
-              language: {
-                title: "Язык",
-                label: "Выберите язык",
-                placeholder: "Выберите язык",
-              },
-              name: {
-                label: "Имя",
-                placeholder: "Имя",
-              },
-              gender: {
-                label: "Пол",
-                placeholder: "Пол",
-                options: {
-                  male: "Мужской",
-                  female: "Женский",
-                  other: "Другой",
-                },
-              },
-              dob: {
-                label: "Дата рождения",
-                placeholder: "Дата рождения",
-              },
-            },
-            description: {
-              title: "Описание",
-              placeholder:
-                "Пожалуйста, опишите себя. MBTI, хобби, интересы, профессия, национальность, что вам нравится, что не нравится и т.д.",
-              opening:
-                "（Opcional）Пожалуйста, опишите себя. MBTI, хобби, интересы, профессия, национальность, что вам нравится, что не нравится и т.д.",
-            },
-            matchSettings: {
-              title: "Настройки подбора",
-              gender: {
-                label: "Пол для подбора",
-                placeholder: "Пол для подбора",
-                options: {
-                  male: "Мужской",
-                  female: "Женский",
-                  both: "Оба",
-                },
-              },
-              targetChatrooms: {
-                label: "Количество людей для подбора",
-                placeholder: "Количество людей для подбора",
-              },
-            },
-            navigation: {
-              back: "Назад",
-              next: "Далее",
-              finish: "Готово",
             },
           },
         },

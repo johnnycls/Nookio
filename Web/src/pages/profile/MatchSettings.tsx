@@ -2,7 +2,6 @@ import { Button } from "primereact/button";
 import React, { useEffect, useRef, useState } from "react";
 import { profile, useUpdateProfileMutation } from "../../slices/userSlice";
 import { Dropdown } from "primereact/dropdown";
-import { InputNumber } from "primereact/inputnumber";
 import { MAX_CHATROOMS } from "../../config";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
@@ -67,24 +66,15 @@ const MatchSettings: React.FC<{
         />
 
         <label>{t("profile.matchSettings.targetChatrooms.label")}</label>
-        <InputNumber
-          required
+        <Dropdown
           value={targetChatrooms}
-          onChange={(e) => setTargetChatrooms(e.value || 0)}
+          onChange={(e) => setTargetChatrooms(e.value)}
           placeholder={t("profile.matchSettings.targetChatrooms.placeholder")}
-          min={0}
-          max={MAX_CHATROOMS}
-          showButtons
-          buttonLayout="horizontal"
+          options={Array.from({ length: MAX_CHATROOMS + 1 }, (_, index) => ({
+            label: index.toString(),
+            value: index,
+          }))}
           className="mb-4"
-          pt={{
-            input: {
-              root: {
-                disabled: true,
-                className: "w-full",
-              },
-            },
-          }}
         />
 
         <div className="flex justify-between">
