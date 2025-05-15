@@ -9,7 +9,6 @@ export type Message = {
 export type Chatroom = {
   _id: string;
   lastMessage: Message;
-  lastReadPosition: number;
   model: {
     _id: string;
     name: string;
@@ -22,7 +21,6 @@ export type Chatroom = {
 export type ChatroomDetail = {
   _id: string;
   messages: Message[];
-  lastReadPosition: number;
   model: {
     _id: string;
     name: string;
@@ -43,6 +41,14 @@ export const chatroomSlice = apiSlice.injectEndpoints({
       providesTags: (result, error, { chatroomId }) => [
         { type: "Chat", id: chatroomId },
       ],
+    }),
+    createChatroom: builder.mutation<void, { modelId: string }>({
+      query: ({ modelId }) => ({
+        url: `chatroom/`,
+        method: "POST",
+        body: { modelId },
+      }),
+      invalidatesTags: ["Chatroom"],
     }),
     deleteChatroom: builder.mutation<void, string[]>({
       query: (chatroomIds) => ({
@@ -65,5 +71,6 @@ export const chatroomSlice = apiSlice.injectEndpoints({
 export const {
   useGetChatroomsQuery,
   useLazyGetChatroomDetailQuery,
+  useCreateChatroomMutation,
   useDeleteChatroomMutation,
 } = chatroomSlice;

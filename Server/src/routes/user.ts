@@ -7,15 +7,11 @@ import jwt from "jsonwebtoken";
 import {
   GOOGLE_CLIENT_ID,
   JWT_SECRET,
-  MIN_CREDITS_FOR_AUTO_CHAT,
-  MAX_CHATROOMS,
   DESCRIPTION_LENGTH_LIMIT,
   NAME_LENGTH_LIMIT,
-  MESSAGE_LENGTH_LIMIT,
 } from "../config";
 import authMiddleware from "../middlewares/auth";
 import { createPaymentSession } from "../utils/payment";
-import { handleCreateRequest } from "../services/open_chatroom_service";
 
 const router: Router = express.Router();
 
@@ -88,13 +84,10 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       email: user.email,
       name: user.name || "",
       description: user.description || "",
-      opening: user.opening || "",
       gender: user.gender || "",
       dob: user.dob || new Date(),
-      preferedGender: user.preferedGender || "both",
       credit: user.credit || 0,
       lang: user.lang || "en",
-      targetChatrooms: user.targetChatrooms || 0,
     };
 
     res.status(200).json(profile);
@@ -113,16 +106,7 @@ router.patch(
   async (req: Request, res: Response) => {
     try {
       const email = res.locals.email as string;
-      const {
-        name,
-        description,
-        opening,
-        gender,
-        dob,
-        lang,
-        targetChatrooms,
-        preferedGender,
-      } = req.body;
+      const { name, description, opening, gender, dob, lang } = req.body;
 
       const user = await User.findOne({ email });
       if (!user) {
@@ -138,56 +122,12 @@ router.patch(
         description.length <= DESCRIPTION_LENGTH_LIMIT
       )
         user.description = description;
-      if (opening !== undefined && opening.length <= MESSAGE_LENGTH_LIMIT)
-        user.opening = opening;
       if (gender !== undefined) user.gender = gender;
       if (dob !== undefined) user.dob = dob;
       if (lang !== undefined) user.lang = lang;
-      if (preferedGender !== undefined) user.preferedGender = preferedGender;
-
-      // Handle targetChatrooms update
-      if (targetChatrooms !== undefined) {
-        const currentChatrooms = user.chatrooms.length;
-        const newTarget = Math.min(targetChatrooms, MAX_CHATROOMS);
-
-        // Calculate how many new chatrooms to create
-        const additionalChatrooms = Math.max(0, newTarget - currentChatrooms);
-
-        // Check if user has enough credits
-        const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
-        if (user.credit < requiredCredits) {
-          res.status(400).json({
-            message: "Not enough credits",
-            required: requiredCredits,
-            available: user.credit,
-          });
-          return;
-        }
-
-        if (additionalChatrooms > 0) {
-          user.credit -= requiredCredits;
-          await handleCreateRequest(user, additionalChatrooms);
-        }
-
-        user.targetChatrooms = newTarget;
-      }
 
       await user.save();
 
-      // const profile = {
-      //   _id: user._id,
-      //   email: user.email,
-      //   name: user.name || "",
-      //   description: user.description || "",
-      //   opening: user.opening || "",
-      //   gender: user.gender || "",
-      //   dob: user.dob || new Date(),
-      //   credit: user.credit || 0,
-      //   lang: user.lang || "en",
-      //   targetChatrooms: user.targetChatrooms || 0,
-      // };
-
-      // res.status(200).json(profile);
       res.status(200).json({ message: "Profile updated" });
     } catch (error) {
       console.error(JSON.stringify(error));

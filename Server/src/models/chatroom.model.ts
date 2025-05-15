@@ -10,7 +10,6 @@ export interface IChatroom extends Document {
   userId: Schema.Types.ObjectId;
   modelId: string;
   messages: IMessage[];
-  lastReadPosition: number;
   summaries: string[];
   lastSummaryPosition: number;
 }
@@ -26,7 +25,6 @@ const chatroomSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     modelId: { type: String, required: true },
     messages: [messageSchema],
-    lastReadPosition: { type: Number, default: 0 },
     summaries: { type: [String], default: [] },
     lastSummaryPosition: { type: Number, default: 0 },
   },

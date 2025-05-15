@@ -77,6 +77,10 @@ i18n
           sendMsgError: "An error occurred while sending message: {{error}}",
 
           home: {
+            newChatroom: {
+              title: "Create Chatroom",
+              create: "Create",
+            },
             deleteChatroomConfirmation:
               "Are you sure you want to delete these chatrooms?",
             noChatrooms: "No chatrooms found",
@@ -212,6 +216,10 @@ i18n
           fetchChatroomDetailError: "擷取聊天室詳細資訊時發生錯誤",
           sendMsgError: "傳送訊息時發生錯誤：{{error}}",
           home: {
+            newChatroom: {
+              title: "創建聊天室",
+              create: "建立",
+            },
             deleteChatroomConfirmation: "您確定要刪除這些聊天室嗎？",
             noChatrooms: "找不到聊天室",
           },
@@ -311,7 +319,7 @@ i18n
               title: "喺iOS Download Nookio",
               1: "建議用Google Chrome開",
               2: "撳Share制",
-              3: "向下碌同撳「加入主畫面」",
+              3: "向下碌然後撳「加入主畫面」",
               4: "撳右上角嘅「加入」",
             },
             android: {
@@ -341,6 +349,10 @@ i18n
           fetchChatroomDetailError: "攞chatroom詳情嘅時候Bug L咗",
           sendMsgError: "send msg嘅時候Bug L咗：{{error}}",
           home: {
+            newChatroom: {
+              title: "創建聊天室",
+              create: "建立",
+            },
             deleteChatroomConfirmation: "您真係要剷依啲chatrooms？",
             noChatrooms: "搵唔到chatrooms",
           },
@@ -470,6 +482,10 @@ i18n
           fetchChatroomDetailError: "获取聊天室详情时发生错误",
           sendMsgError: "发送消息时发生错误：{{error}}",
           home: {
+            newChatroom: {
+              title: "创建聊天室",
+              create: "创建",
+            },
             deleteChatroomConfirmation: "您确定要删除这些聊天室吗？",
             noChatrooms: "未找到聊天室",
           },

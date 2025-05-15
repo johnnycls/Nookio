@@ -4,7 +4,6 @@ import { StepperPanel } from "primereact/stepperpanel";
 import BasicInformation from "./BasicInformation";
 import { Card } from "primereact/card";
 import { profile } from "../../slices/userSlice";
-import MatchSettings from "./MatchSettings";
 import Description from "./Description";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -57,17 +56,6 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
             </StepperPanel>
             <StepperPanel header={t("profile.description.title")}>
               <Description
-                prevCallback={() => {
-                  stepperRef.current?.prevCallback();
-                }}
-                nextCallback={() => {
-                  stepperRef.current?.nextCallback();
-                }}
-                profile={profile}
-              />
-            </StepperPanel>
-            <StepperPanel header={t("profile.matchSettings.title")}>
-              <MatchSettings
                 prevCallback={() => {
                   stepperRef.current?.prevCallback();
                 }}

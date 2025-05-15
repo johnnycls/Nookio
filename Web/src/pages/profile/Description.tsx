@@ -5,7 +5,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
-import { DESCRIPTION_LENGTH_LIMIT, MESSAGE_LENGTH_LIMIT } from "../../config";
+import { DESCRIPTION_LENGTH_LIMIT } from "../../config";
 const Description: React.FC<{
   prevCallback: () => void;
   nextCallback: () => void;
@@ -20,7 +20,6 @@ const Description: React.FC<{
   const [description, setDescription] = useState<string>(
     profile?.description || ""
   );
-  const [opening, setOpening] = useState<string>(profile?.opening || "");
 
   useEffect(() => {
     if (isSuccess) {
@@ -53,15 +52,6 @@ const Description: React.FC<{
           maxLength={DESCRIPTION_LENGTH_LIMIT}
         />
 
-        {/* <InputTextarea
-          value={opening}
-          onChange={(e) => setOpening(e.target.value)}
-          rows={5}
-          autoResize
-          placeholder={t("profile.description.opening")}
-          maxLength={MESSAGE_LENGTH_LIMIT}
-        /> */}
-
         <div className="flex justify-between">
           <Button
             label={t("profile.navigation.back")}
@@ -73,17 +63,14 @@ const Description: React.FC<{
           />
           <Button
             disabled={!description}
-            label={t("profile.navigation.next")}
+            label={t("profile.navigation.finish")}
             iconPos="right"
             icon="pi pi-arrow-right"
             onClick={() => {
-              if (
-                description === profile?.description &&
-                opening === profile?.opening
-              ) {
+              if (description === profile?.description) {
                 nextCallback();
               } else {
-                updateProfile({ description, opening });
+                updateProfile({ description });
               }
             }}
           />

@@ -12,7 +12,7 @@ const ChatroomItem: React.FC<{
   return (
     <div
       className="w-full"
-      style={{ backgroundColor: isSelected ? "lightgray" : "white" }}
+      style={{ backgroundColor: isSelected ? "#e3d8fd" : "white" }}
     >
       <div
         className="w-full flex gap-2 items-center justify-between p-4"

@@ -1,93 +1,41 @@
 import User, { IUser } from "../models/user.model";
-import Chatroom, { IChatroom } from "../models/chatroom.model";
-import { generateGreeting, generateResponse } from "./gemini.service";
+import Chatroom from "../models/chatroom.model";
+import { generateGreeting } from "./gemini.service";
 import models from "../assets/models/models";
-import { getRandomSubarray } from "../utils/general";
+import { MAX_CHATROOMS } from "../config";
 
-export async function handleCreateRequest(user: IUser, chatroomNum: number) {
+export async function handleCreateRequest(user: IUser, modelId: string) {
   try {
-    const userChatrooms = await Chatroom.find({
-      _id: { $in: user.chatrooms },
-    });
-
-    const existingChatroomModelIds = userChatrooms.map(
-      (chatroom: IChatroom) => chatroom.modelId
-    );
-
-    const availableModelIds = Object.keys(models).filter((modelId) => {
-      const model = models[modelId];
-      return (
-        !existingChatroomModelIds.includes(modelId) &&
-        (user.preferedGender === "both" || model.gender === user.preferedGender)
-      );
-    });
-
-    if (availableModelIds.length < chatroomNum) {
-      throw new Error("No available friends found");
+    if (!models.hasOwnProperty(modelId)) {
+      throw new Error("Invalid model ID");
     }
 
-    const selectedModelIds = getRandomSubarray(availableModelIds, chatroomNum);
+    if (user.chatrooms.length >= MAX_CHATROOMS) {
+      throw new Error("Max chatrooms reached");
+    }
 
-    const chatrooms = await Promise.all(
-      selectedModelIds.map(async (modelId) => {
-        const model = models[modelId];
+    const model = models[modelId];
 
-        if (user.opening === "") {
-          const greeting = await generateGreeting(user, model);
+    const greeting = await generateGreeting(user, model);
 
-          const chatroom = await Chatroom.create({
-            userId: user._id,
-            modelId: model._id,
-            messages: [
-              {
-                content: greeting,
-                sender: "model",
-                timestamp: new Date(),
-              },
-            ],
-          });
+    const chatroom = await Chatroom.create({
+      userId: user._id,
+      modelId: model._id,
+      messages: [
+        {
+          content: greeting,
+          sender: "model",
+          timestamp: new Date(),
+        },
+      ],
+    });
 
-          await chatroom.save();
-          return chatroom;
-        } else {
-          const chatroom = await Chatroom.create({
-            userId: user._id,
-            modelId: model._id,
-            messages: [],
-          });
-
-          const response = await generateResponse(
-            user,
-            model,
-            user.opening,
-            chatroom
-          );
-
-          chatroom.messages.push({
-            content: user.opening,
-            sender: "user",
-            timestamp: new Date(),
-          });
-
-          chatroom.messages.push({
-            content: response,
-            sender: "model",
-            timestamp: new Date(),
-          });
-          chatroom.lastReadPosition = chatroom.messages.length - 1;
-
-          await chatroom.save();
-          return chatroom;
-        }
-      })
-    );
+    await chatroom.save();
 
     // Add chatroom to user's list
     await User.findByIdAndUpdate(user._id, {
       $push: {
-        chatrooms: {
-          $each: chatrooms.map((chatroom) => chatroom._id),
-        },
+        chatrooms: chatroom._id,
       },
     });
   } catch (error) {

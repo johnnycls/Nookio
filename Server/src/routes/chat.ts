@@ -110,18 +110,10 @@ router.post(
         sender: "model",
         timestamp: new Date(),
       });
-      chatroom.lastReadPosition = chatroom.messages.length - 1;
       await chatroom.save();
 
       user.credit -= requiredCredits;
       await user.save();
-
-      // res.status(200).json({
-      //   message: message,
-      //   response: response,
-      //   lastReadPosition: chatroom.lastReadPosition,
-      //   remainingCredits: user.credit,
-      // });
 
       res.status(200).json({
         message: "Message sent successfully",

@@ -6,13 +6,10 @@ export type profile = {
   email: string;
   name: string;
   description: string;
-  opening: string;
-  preferedGender: "male" | "female" | "both";
   gender: string;
   dob: string;
   credit: number;
   lang: string;
-  targetChatrooms: number;
 };
 
 type profileResponse = profile;
@@ -50,10 +47,7 @@ const userSlice = apiSlice.injectEndpoints({
           }
         } catch {}
       },
-      invalidatesTags: (result, error, profileData) =>
-        profileData?.targetChatrooms && profileData.targetChatrooms > 0
-          ? ["User", "Chatroom"]
-          : ["User"],
+      invalidatesTags: (result, error, profileData) => ["User"],
     }),
     purchaseCredits: builder.mutation<purchaseResponse, { packageId: string }>({
       query: ({ packageId }) => ({

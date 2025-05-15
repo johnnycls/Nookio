@@ -33,5 +33,4 @@ const AppBar: React.FC<{ children?: React.ReactNode; onBack?: () => void }> = ({
     </div>
   );
 };
-
 export default AppBar;

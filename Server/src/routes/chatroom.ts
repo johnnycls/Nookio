@@ -37,7 +37,6 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
           avatar: model.avatar || "",
         },
         lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
-        lastReadPosition: chatroom.lastReadPosition,
       };
     });
 
@@ -78,12 +77,6 @@ router.get(
         return;
       }
 
-      // Update lastReadPosition to the latest message
-      if (chatroom.lastReadPosition < chatroom.messages.length - 1) {
-        chatroom.lastReadPosition = chatroom.messages.length - 1;
-        await chatroom.save();
-      }
-
       if (!chatroom.modelId) {
         res.status(404).json({ message: "Model not found" });
         return;
@@ -93,7 +86,6 @@ router.get(
       res.status(200).json({
         _id: chatroom._id,
         messages: chatroom.messages,
-        lastReadPosition: chatroom.lastReadPosition,
         model: {
           _id: model._id,
           name: model.name,
@@ -138,19 +130,25 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
 
     await user.save();
 
-    // Create new chatroom
-    const currentChatrooms = user.chatrooms.length;
-    const additionalChatrooms = Math.max(
-      0,
-      user.targetChatrooms - currentChatrooms
-    );
-    const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
+    // Delete chatrooms with less than 5 messages
+    await Chatroom.deleteMany({
+      _id: { $in: chatroomIds },
+      $expr: { $lt: [{ $size: "$messages" }, 5] },
+    });
 
-    if (user.credit >= requiredCredits && additionalChatrooms > 0) {
-      await handleCreateRequest(user, additionalChatrooms);
-      user.credit -= requiredCredits;
-      await user.save();
-    }
+    // // Create new chatroom
+    // const currentChatrooms = user.chatrooms.length;
+    // const additionalChatrooms = Math.max(
+    //   0,
+    //   user.targetChatrooms - currentChatrooms
+    // );
+    // const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
+
+    // if (user.credit >= requiredCredits && additionalChatrooms > 0) {
+    //   await handleCreateRequest(user, additionalChatrooms);
+    //   user.credit -= requiredCredits;
+    //   await user.save();
+    // }
 
     res.status(200).json({ message: "Chatroom removed successfully" });
   } catch (error) {
@@ -158,6 +156,37 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
     res
       .status(500)
       .json({ message: "Internal server error", error: JSON.stringify(error) });
+  }
+});
+
+// Create new chatroom
+router.post("/", authMiddleware, async (req: Request, res: Response) => {
+  try {
+    const { modelId } = req.body as { modelId: string };
+    const user = await User.findOne({ email: res.locals.email });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+    if (user.credit < MIN_CREDITS_FOR_AUTO_CHAT) {
+      res.status(400).json({ message: "Insufficient credits" });
+      return;
+    }
+
+    await handleCreateRequest(user, modelId);
+    user.credit -= MIN_CREDITS_FOR_AUTO_CHAT;
+    await user.save();
+
+    res.status(200).json({
+      message: "Chatroom created successfully",
+    });
+  } catch (error) {
+    console.error("Error sending message:", JSON.stringify(error));
+    res.status(500).json({
+      message: "Error sending message",
+      error: JSON.stringify(error),
+    });
   }
 });
 

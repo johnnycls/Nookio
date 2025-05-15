@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { profile } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import AppBar from "../../components/AppBar";
+import HomeAppBar from "./AppBar";
 import BottomTab from "../../components/BottomTab";
 import {
   Chatroom,
@@ -61,45 +61,14 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
       <Toast ref={toast} />
       <ConfirmDialog />
 
-      <AppBar>
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl">NookioAI</h1>
-
-          {isSelectMode && selectedChatroomIds.length > 0 && (
-            <div className="flex gap-1">
-              <Button
-                icon="pi pi-times"
-                onClick={() => {
-                  setIsSelectMode(false);
-                  setSelectedChatroomIds([]);
-                }}
-              />
-
-              <Button
-                icon="pi pi-trash"
-                onClick={() => {
-                  confirmDialog({
-                    message: t("home.deleteChatroomConfirmation"),
-                    accept: () => {
-                      deleteChatrooms(selectedChatroomIds);
-                    },
-                    reject: () => {
-                      setSelectedChatroomIds([]);
-                      setIsSelectMode(false);
-                    },
-                  });
-                }}
-              />
-            </div>
-          )}
-          {isSelectMode && selectedChatroomIds.length === 0 && (
-            <Button icon="pi pi-check" onClick={() => setIsSelectMode(false)} />
-          )}
-          {!isSelectMode && chatrooms && chatrooms.length > 0 && (
-            <Button icon="pi pi-pencil" onClick={() => setIsSelectMode(true)} />
-          )}
-        </div>
-      </AppBar>
+      <HomeAppBar
+        isSelectMode={isSelectMode}
+        selectedChatroomIds={selectedChatroomIds}
+        setIsSelectMode={setIsSelectMode}
+        setSelectedChatroomIds={setSelectedChatroomIds}
+        deleteChatrooms={deleteChatrooms}
+        chatrooms={chatrooms}
+      />
 
       <div className="w-full h-full overflow-y-auto">
         {chatrooms && chatrooms.length > 0 ? (

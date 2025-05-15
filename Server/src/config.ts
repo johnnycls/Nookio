@@ -18,7 +18,7 @@ export const SUMMARY_TEMPERATURE = 0.3;
 export const SUMMARY_MSG = 20;
 export const LLM_MODEL = "gemini-2.5-flash-preview-04-17";
 
-export const MAX_CHATROOMS = 1;
+export const MAX_CHATROOMS = 30;
 export const MIN_CREDITS_FOR_AUTO_CHAT = 5;
 
 export const CREDITS_FOR_RESPONSE = (history_length: number): number => {

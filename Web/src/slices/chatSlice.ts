@@ -1,11 +1,8 @@
 import { apiSlice } from "./apiSlice";
-import { chatroomSlice, Chatroom, ChatroomDetail } from "./chatroomSlice";
 
 type Message = {
   message: string;
   response: string;
-  lastReadPosition: number;
-  remainingCredits: number;
 };
 
 const chatSlice = apiSlice.injectEndpoints({
