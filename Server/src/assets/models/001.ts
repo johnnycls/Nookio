@@ -2,7 +2,7 @@ import Model from "./model";
 
 export const model001: Model = {
   _id: "001",
-  name: "梁志強 (Leung Chi Keung)",
+  name: "梁志強老師",
   gender: "male",
   dob: new Date("1965-11-05T08:00:00.000Z"),
   temperature: 0.6,

@@ -2,7 +2,7 @@ import Model from "./model";
 
 export const model003: Model = {
   _id: "003",
-  name: "何美詩 (Ho Mei Si)",
+  name: "何美詩",
   gender: "female",
   dob: new Date("2007-05-20T08:00:00.000Z"),
   temperature: 0.75,

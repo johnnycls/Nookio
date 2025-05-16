@@ -3,7 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { useTranslation } from "react-i18next";
 import { Button } from "primereact/button";
 import { useCreateChatroomMutation } from "../../slices/chatroomSlice";
-import { MODELS, Model } from "../../assets/models";
+import { MODELS, Model, SERIES } from "../../assets/models";
 import { Dropdown } from "primereact/dropdown";
 import LoadingScreen from "../../components/LoadingScreen";
 import { langs } from "../../assets/langs";
@@ -20,10 +20,16 @@ function matchGender(model: Model, gender: "male" | "female" | "both") {
   return false;
 }
 
+function matchSerie(model: Model, serieId: string) {
+  if (serieId === "all") return true;
+  return model.series.includes(serieId);
+}
+
 const NewChatroomDialog: React.FC<{
+  existingModelIds: string[];
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-}> = ({ isOpen, setIsOpen }) => {
+}> = ({ existingModelIds, isOpen, setIsOpen }) => {
   const { t } = useTranslation();
   const [createChatroom, { isLoading, isSuccess }] =
     useCreateChatroomMutation();
@@ -32,13 +38,48 @@ const NewChatroomDialog: React.FC<{
   const [selectedGender, setSelectedGender] = useState<
     "male" | "female" | "both"
   >("both");
-  const [selectedModel, setSelectedModel] = useState<Model | null>(MODELS[0]);
+  const [selectedSerieId, setSelectedSerieId] = useState<string>("all");
+
+  const [selectedModel, setSelectedModel] = useState<Model | null>(null);
+
+  const options = MODELS.filter(
+    (model) =>
+      !existingModelIds.includes(model._id) &&
+      matchLang(model, selectedLang) &&
+      matchGender(model, selectedGender) &&
+      matchSerie(model, selectedSerieId)
+  );
+  const serieIdOptions = [
+    "all",
+    ...SERIES.filter((serie) => {
+      return selectedLang === "all" || serie.langs.includes(selectedLang);
+    }).map((serie) => serie._id),
+  ];
 
   useEffect(() => {
     if (isSuccess) {
       setIsOpen(false);
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (options.find((option) => option._id === selectedModel?._id)) {
+      return;
+    }
+    if (options.length > 0) {
+      setSelectedModel(options[0]);
+    } else {
+      setSelectedModel(null);
+    }
+  }, [options]);
+
+  useEffect(() => {
+    if (selectedSerieId === "all") return;
+
+    if (serieIdOptions.includes(selectedSerieId)) return;
+
+    setSelectedSerieId("all");
+  }, [serieIdOptions]);
 
   const modelTemplate = (option: Model) => {
     if (!option) return <></>;
@@ -53,6 +94,17 @@ const NewChatroomDialog: React.FC<{
         <div>{option.name}</div>
       </div>
     );
+  };
+
+  const serieTemplate = (serieId: string) => {
+    if (serieId === "all") {
+      return <div>{t("home.newChatroom.allSeries")}</div>;
+    }
+
+    const serie = SERIES.find((s) => s._id === serieId);
+    if (!serie) return <></>;
+
+    return <div>{serie.label}</div>;
   };
 
   return (
@@ -81,13 +133,9 @@ const NewChatroomDialog: React.FC<{
             value={selectedLang}
             onChange={(e) => {
               setSelectedLang(e.value);
-
-              if (!selectedModel || !matchLang(selectedModel, e.value)) {
-                setSelectedModel(null);
-              }
             }}
           />
-          <Dropdown
+          {/* <Dropdown
             pt={{
               input: {
                 className: "!pr-0",
@@ -101,35 +149,49 @@ const NewChatroomDialog: React.FC<{
             value={selectedGender}
             onChange={(e) => {
               setSelectedGender(e.value);
-
-              if (!selectedModel || !matchGender(selectedModel, e.value)) {
-                setSelectedModel(null);
-              }
             }}
+          /> */}
+
+          <Dropdown
+            pt={{
+              input: {
+                className: "!pr-0",
+              },
+            }}
+            options={serieIdOptions}
+            value={selectedSerieId}
+            onChange={(e) => {
+              setSelectedSerieId(e.value);
+            }}
+            itemTemplate={serieTemplate}
+            valueTemplate={serieTemplate}
           />
         </div>
 
-        <Dropdown
-          options={MODELS.filter(
-            (model) =>
-              matchLang(model, selectedLang) &&
-              matchGender(model, selectedGender)
-          )}
-          value={selectedModel}
-          onChange={(e) => setSelectedModel(e.value)}
-          optionLabel="name"
-          itemTemplate={modelTemplate}
-          valueTemplate={modelTemplate}
-        />
+        {options.length > 0 ? (
+          <>
+            <Dropdown
+              options={options}
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.value)}
+              optionLabel="name"
+              itemTemplate={modelTemplate}
+              valueTemplate={modelTemplate}
+            />
 
-        <Button
-          label={t("home.newChatroom.create")}
-          disabled={!selectedModel}
-          onClick={() => {
-            if (!selectedModel) return;
-            createChatroom({ modelId: selectedModel._id });
-          }}
-        />
+            <Button
+              label={t("home.newChatroom.create")}
+              disabled={!selectedModel}
+              onClick={() => {
+                if (selectedModel) {
+                  createChatroom({ modelId: selectedModel._id });
+                }
+              }}
+            />
+          </>
+        ) : (
+          <p>{t("home.newChatroom.noOptions")}</p>
+        )}
       </div>
     </Dialog>
   );

@@ -38,6 +38,8 @@ export async function handleCreateRequest(user: IUser, modelId: string) {
         chatrooms: chatroom._id,
       },
     });
+
+    return chatroom;
   } catch (error) {
     console.error("Error creating chatrooms:", JSON.stringify(error));
     throw new Error("Error creating chatrooms:" + JSON.stringify(error));

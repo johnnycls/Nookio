@@ -2,7 +2,7 @@ import Model from "./model";
 
 export const model002: Model = {
   _id: "002",
-  name: "林詠詩 (Lam Wing Sze)",
+  name: "林詠詩老師",
   gender: "female",
   dob: new Date("1999-03-05T08:00:00.000Z"),
   temperature: 0.65,

@@ -31,9 +31,17 @@ const HomeAppBar: React.FC<HomeAppBarProps> = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const existingModelIds =
+    chatrooms?.map((chatroom) => chatroom.model._id) ?? [];
+
   return (
     <AppBar>
-      <NewChatroomDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+      <NewChatroomDialog
+        existingModelIds={existingModelIds}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+
       <div className="flex justify-between items-center w-full">
         <h1 className="text-3xl">NookioAI</h1>
 

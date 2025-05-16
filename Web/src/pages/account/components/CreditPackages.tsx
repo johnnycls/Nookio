@@ -70,14 +70,10 @@ const CreditPackages: React.FC<{}> = ({}) => {
         <div className="flex flex-col gap-2">
           {CREDIT_PACKAGES.map((pack) => (
             <Button
+              outlined
               key={pack.id}
               onClick={() => {
                 purchaseCredits({ packageId: pack.id });
-              }}
-              pt={{
-                label: {
-                  className: "text-2xl",
-                },
               }}
               label={t("account.package", {
                 price: pack?.price,
