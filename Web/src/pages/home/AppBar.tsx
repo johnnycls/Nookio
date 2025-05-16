@@ -5,8 +5,9 @@ import { useTranslation } from "react-i18next";
 import { Chatroom } from "../../slices/chatroomSlice";
 import AppBar from "../../components/AppBar";
 import NewChatroomDialog from "./NewChatroomDialog";
-import { MAX_CHATROOMS } from "../../config";
+import { MAX_CHATROOMS, MIN_CREDITS_FOR_AUTO_CHAT } from "../../config";
 import { profile } from "../../slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 interface HomeAppBarProps {
   isSelectMode: boolean;
@@ -15,6 +16,7 @@ interface HomeAppBarProps {
   setSelectedChatroomIds: (ids: string[]) => void;
   deleteChatrooms: (ids: string[]) => void;
   chatrooms?: Chatroom[];
+  profile?: profile;
 }
 
 const HomeAppBar: React.FC<HomeAppBarProps> = ({
@@ -24,10 +26,11 @@ const HomeAppBar: React.FC<HomeAppBarProps> = ({
   setSelectedChatroomIds,
   deleteChatrooms,
   chatrooms,
+  profile,
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   return (
     <AppBar>
       <NewChatroomDialog isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -39,7 +42,13 @@ const HomeAppBar: React.FC<HomeAppBarProps> = ({
             <Button
               icon="pi pi-plus"
               disabled={!chatrooms || chatrooms.length >= MAX_CHATROOMS}
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                if (profile && profile.credit < MIN_CREDITS_FOR_AUTO_CHAT) {
+                  navigate("/account");
+                } else {
+                  setIsOpen(true);
+                }
+              }}
             />
           )}
 

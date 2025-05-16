@@ -58,7 +58,7 @@ const Home: React.FC = () => {
   }
 
   if (chatroom) {
-    return <Content chatroom={chatroom} />;
+    return <Content chatroom={chatroom} profile={profile} />;
   }
 };
 

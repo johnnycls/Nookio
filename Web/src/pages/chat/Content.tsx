@@ -7,10 +7,16 @@ import { useSendMessageMutation } from "../../slices/chatSlice";
 import { useTranslation } from "react-i18next";
 import { Card } from "primereact/card";
 import { InputTextarea } from "primereact/inputtextarea";
-import { MESSAGE_LENGTH_LIMIT } from "../../config";
+import { CREDITS_FOR_RESPONSE, MESSAGE_LENGTH_LIMIT } from "../../config";
+import { profile } from "../../slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
+const Content: React.FC<{
+  chatroom: ChatroomDetail;
+  profile?: profile;
+}> = ({ chatroom, profile }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const toast = useRef<Toast>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -89,12 +95,20 @@ const Content: React.FC<{ chatroom: ChatroomDetail }> = ({ chatroom }) => {
           <Button
             rounded
             icon="pi pi-send"
+            disabled={message.trim().length === 0}
             onClick={() => {
-              sendMessage({
-                chatroomId: chatroom._id,
-                message: message,
-              });
-              setMessage("");
+              if (
+                profile &&
+                profile.credit < CREDITS_FOR_RESPONSE(chatroom.messages.length)
+              ) {
+                navigate("/account");
+              } else {
+                sendMessage({
+                  chatroomId: chatroom._id,
+                  message: message,
+                });
+                setMessage("");
+              }
             }}
           />
         )}

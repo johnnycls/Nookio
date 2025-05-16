@@ -68,6 +68,7 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
         setSelectedChatroomIds={setSelectedChatroomIds}
         deleteChatrooms={deleteChatrooms}
         chatrooms={chatrooms}
+        profile={profile}
       />
 
       <div className="w-full h-full overflow-y-auto">

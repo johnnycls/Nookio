@@ -64,8 +64,13 @@ const NewChatroomDialog: React.FC<{
     >
       {isLoading && <LoadingScreen isLoading={isLoading} />}
       <div className="flex flex-col gap-2">
-        {/* <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
           <Dropdown
+            pt={{
+              input: {
+                className: "!pr-0",
+              },
+            }}
             options={[
               { label: t("home.newChatroom.allLangs"), value: "all" },
               ...langs.map((lang) => ({
@@ -83,6 +88,11 @@ const NewChatroomDialog: React.FC<{
             }}
           />
           <Dropdown
+            pt={{
+              input: {
+                className: "!pr-0",
+              },
+            }}
             options={[
               { label: t("home.newChatroom.male"), value: "male" },
               { label: t("home.newChatroom.female"), value: "female" },
@@ -97,7 +107,7 @@ const NewChatroomDialog: React.FC<{
               }
             }}
           />
-        </div> */}
+        </div>
 
         <Dropdown
           options={MODELS.filter(
