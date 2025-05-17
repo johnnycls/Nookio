@@ -37,8 +37,8 @@ i18n
             mac: {
               title: "Install Nookio on Mac",
               1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
-              2: "Click on the '...' menu in the top-right corner",
-              3: "Select 'Install Nookio...' from the menu",
+              2: "Click on the browser menu in the top-right corner",
+              3: 'Select "Add to Home Screen" or "Install Nookio" from the menu',
               4: 'Click "Install" in the pop-up window',
             },
             ios: {
@@ -51,7 +51,7 @@ i18n
             android: {
               title: "Install Nookio on Android",
               1: "It's recommended to open this page with Google Chrome",
-              2: "Tap the '...' menu (if install button is not popped up)",
+              2: "Tap the browser menu and select 'Add to Home Screen' or 'Install' (if install button is not popped up)",
               3: 'Tap "Install" in the pop-up window',
             },
             unknown: {
@@ -78,7 +78,7 @@ i18n
 
           home: {
             newChatroom: {
-              title: "Create Chatroom",
+              title: "Choose Character",
               create: "Create",
               allLangs: "All Languages",
               male: "Male",
@@ -89,7 +89,8 @@ i18n
             },
             deleteChatroomConfirmation:
               "Are you sure you want to delete these chatrooms?",
-            noChatrooms: "No chatrooms found",
+            noChatrooms:
+              "No chatrooms, Please pressed the + button at the top right corner to create chatroom",
           },
 
           account: {
@@ -184,8 +185,8 @@ i18n
             mac: {
               title: "在 Mac 上安裝 Nookio",
               1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
-              2: "點擊右上角的「...」選單",
-              3: "從選單中選擇「安裝 Nookio...」",
+              2: "點擊瀏覽器選單",
+              3: "從選單中選擇「安裝 Nookio」",
               4: "在彈出視窗中點擊「安裝」",
             },
             ios: {
@@ -198,7 +199,7 @@ i18n
             android: {
               title: "在 Android 上安裝 Nookio",
               1: "建議使用 Google Chrome 開啟此頁面",
-              2: "點擊「...」選單（如果安裝按鈕未自動彈出）",
+              2: "點擊瀏覽器選單並選擇「加入主畫面」或「安裝」（如果安裝按鈕未自動彈出）",
               3: "在彈出視窗中點擊「安裝」",
             },
             unknown: {
@@ -223,8 +224,8 @@ i18n
           sendMsgError: "傳送訊息時發生錯誤：{{error}}",
           home: {
             newChatroom: {
-              title: "創建聊天室",
-              create: "建立",
+              title: "選擇角色",
+              create: "開始對話",
               allLangs: "所有語言",
               male: "男性",
               female: "女性",
@@ -233,7 +234,7 @@ i18n
               allSeries: "所有系列",
             },
             deleteChatroomConfirmation: "您確定要刪除這些聊天室嗎？",
-            noChatrooms: "找不到聊天室",
+            noChatrooms: "未有聊天室，請點擊右上角的+按鈕創建聊天室",
           },
           account: {
             remainingCredit: "剩餘點數",
@@ -324,20 +325,20 @@ i18n
             mac: {
               title: "喺Mac Download Nookio",
               1: "建議用Google Chrome開（用手機體驗會好啲）",
-              2: "撳右上角嘅「...」選單",
+              2: "撳Browser嘅選單",
               3: "揀「安裝 Nookio...」",
             },
             ios: {
               title: "喺iOS Download Nookio",
               1: "建議用Google Chrome開",
               2: "撳Share制",
-              3: "向下碌然後撳「加入主畫面」",
+              3: "向下碌然後撳「加入主畫面」或者「安裝」",
               4: "撳右上角嘅「加入」",
             },
             android: {
               title: "喺Android Download Nookio",
               1: "建議用Google Chrome開",
-              2: "撳「...」Menu（如果安裝制唔彈出）",
+              2: "撳Browser嘅Menu然後揀「加入主畫面」或者「安裝」（如果安裝制唔彈出）",
               3: "喺個Popup到撳「安裝」",
             },
             unknown: {
@@ -362,8 +363,8 @@ i18n
           sendMsgError: "send msg嘅時候Bug L咗：{{error}}",
           home: {
             newChatroom: {
-              title: "創建聊天室",
-              create: "建立",
+              title: "選擇角色",
+              create: "開始對話",
               allLangs: "所有語言",
               male: "男",
               female: "女",
@@ -372,7 +373,7 @@ i18n
               allSeries: "所有系列",
             },
             deleteChatroomConfirmation: "您真係要剷依啲chatrooms？",
-            noChatrooms: "搵唔到chatrooms",
+            noChatrooms: "未有chatrooms，請撳右上角嘅+制創建chatroom",
           },
           account: {
             remainingCredit: "剩返幾多點數",
@@ -463,8 +464,8 @@ i18n
             mac: {
               title: "在 Mac 上安装 Nookio",
               1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
-              2: "点击右上角的“...”菜单",
-              3: "选择“安装 Nookio...”",
+              2: "点击浏览器的菜单",
+              3: "选择“安装 Nookio”或“加入主画面”",
             },
             ios: {
               title: "在 iOS 上安装 Nookio",
@@ -476,7 +477,7 @@ i18n
             android: {
               title: "在 Android 上安装 Nookio",
               1: "建议使用 Google Chrome 打开此页面",
-              2: "点击“...”菜单（如果安装按钮未自动弹出）",
+              2: "点击浏览器菜单，并选择“安装 Nookio”或“加入主画面”（如果安装按钮未自动弹出）",
               3: "在弹出窗口中点击“安装”",
             },
             unknown: {
@@ -501,8 +502,8 @@ i18n
           sendMsgError: "发送消息时发生错误：{{error}}",
           home: {
             newChatroom: {
-              title: "创建聊天室",
-              create: "创建",
+              title: "选择角色",
+              create: "开始对话",
               allLangs: "所有语言",
               male: "男",
               female: "女",
@@ -511,7 +512,7 @@ i18n
               allSeries: "所有系列",
             },
             deleteChatroomConfirmation: "您确定要删除这些聊天室吗？",
-            noChatrooms: "未找到聊天室",
+            noChatrooms: "未有聊天室，请按右上角的+按钮创建聊天室",
           },
           account: {
             remainingCredit: "剩余积分",

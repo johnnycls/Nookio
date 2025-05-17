@@ -32,7 +32,9 @@ const Home: React.FC = () => {
   }, [profile, navigate]);
 
   if (isProfileError) {
-    return <Error onReload={refetchProfile} errorText={t("profile.error")} />;
+    return (
+      <Error onReload={refetchProfile} errorText={t("fetchProfileError")} />
+    );
   }
 
   if (isProfileLoading) {

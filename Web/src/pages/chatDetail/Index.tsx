@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   }, [profile, navigate]);
 
   return isError ? (
-    <Error onReload={refetch} errorText={t("error.error")} />
+    <Error onReload={refetch} errorText={t("error.message")} />
   ) : (
     <>
       <LoadingScreen isLoading={isLoading} />

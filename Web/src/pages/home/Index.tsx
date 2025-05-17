@@ -40,12 +40,14 @@ const Home: React.FC = () => {
   }, [profile, navigate, isProfileSuccess]);
 
   if (isProfileError) {
-    return <Error onReload={refetchProfile} errorText={t("profile.error")} />;
+    return (
+      <Error onReload={refetchProfile} errorText={t("fetchProfileError")} />
+    );
   }
 
   if (isChatroomsError) {
     return (
-      <Error onReload={refetchChatrooms} errorText={t("chatroom.error")} />
+      <Error onReload={refetchChatrooms} errorText={t("fetchChatroomsError")} />
     );
   }
 
