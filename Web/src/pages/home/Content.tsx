@@ -73,29 +73,35 @@ const Content: React.FC<{ profile?: profile; chatrooms?: Chatroom[] }> = ({
 
       <div className="w-full h-full overflow-y-auto">
         {chatrooms && chatrooms.length > 0 ? (
-          chatrooms?.map((chatroom) => (
-            <ChatroomItem
-              key={chatroom._id}
-              chatroom={chatroom}
-              isSelected={selectedChatroomIds.includes(chatroom._id)}
-              onClick={() => {
-                if (isSelectMode) {
-                  if (selectedChatroomIds.includes(chatroom._id)) {
-                    setSelectedChatroomIds(
-                      selectedChatroomIds.filter((id) => id !== chatroom._id)
-                    );
+          chatrooms
+            ?.toSorted(
+              (a, b) =>
+                new Date(b.lastMessage.timestamp).getTime() -
+                new Date(a.lastMessage.timestamp).getTime()
+            )
+            .map((chatroom) => (
+              <ChatroomItem
+                key={chatroom._id}
+                chatroom={chatroom}
+                isSelected={selectedChatroomIds.includes(chatroom._id)}
+                onClick={() => {
+                  if (isSelectMode) {
+                    if (selectedChatroomIds.includes(chatroom._id)) {
+                      setSelectedChatroomIds(
+                        selectedChatroomIds.filter((id) => id !== chatroom._id)
+                      );
+                    } else {
+                      setSelectedChatroomIds([
+                        ...selectedChatroomIds,
+                        chatroom._id,
+                      ]);
+                    }
                   } else {
-                    setSelectedChatroomIds([
-                      ...selectedChatroomIds,
-                      chatroom._id,
-                    ]);
+                    navigate(`/chat/${chatroom._id}`);
                   }
-                } else {
-                  navigate(`/chat/${chatroom._id}`);
-                }
-              }}
-            />
-          ))
+                }}
+              />
+            ))
         ) : (
           <div className="h-full w-full p-2 text-xl">
             {t("home.noChatrooms")}

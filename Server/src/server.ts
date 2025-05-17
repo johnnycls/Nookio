@@ -20,18 +20,11 @@ InitiateMongoServer();
 const app: Express = express();
 const port = PORT || 8080;
 
-// TODO: Remove this
 app.use(
   cors({
-    origin: true,
+    origin: [WEB_URL || "http://localhost:5173", "1.64.219.136"],
   })
 );
-
-// app.use(
-//   cors({
-//     origin: [WEB_URL || "http://localhost:5173"],
-//   })
-// );
 
 app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(limiter);
