@@ -10,7 +10,7 @@ import chatroomRoutes from "./routes/chatroom";
 
 const limiter = rateLimit({
   windowMs: 1000,
-  limit: 6,
+  limit: 10,
   standardHeaders: "draft-7",
   legacyHeaders: false,
 });
@@ -22,7 +22,7 @@ const port = PORT || 8080;
 
 app.use(
   cors({
-    origin: [WEB_URL || "http://localhost:5173", "http://1.64.219.136:5173"],
+    origin: [WEB_URL || "http://localhost:5173", "http://localhost:6376"],
   })
 );
 
