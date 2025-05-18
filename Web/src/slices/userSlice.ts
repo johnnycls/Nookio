@@ -27,7 +27,7 @@ const userSlice = apiSlice.injectEndpoints({
         url: "user/profile/",
       }),
       transformResponse: (response: profileResponse) => {
-        if (response.lang) {
+        if (response.lang !== "") {
           i18next.changeLanguage(response.lang);
         }
         return response;

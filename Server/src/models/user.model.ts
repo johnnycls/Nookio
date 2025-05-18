@@ -19,7 +19,7 @@ const userSchema: Schema = new Schema(
     gender: { type: String, default: "" },
     dob: { type: Date, default: null },
     credit: { type: Number, default: 1000 },
-    lang: { type: String, default: "en" },
+    lang: { type: String, default: "" },
     chatrooms: { type: [Schema.Types.ObjectId], default: [] },
   },
   {

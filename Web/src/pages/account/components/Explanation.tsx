@@ -11,6 +11,7 @@ const data = [
   { turn: 10, cost: 15 },
   { turn: 11, cost: 16 },
   { turn: 12, cost: 16 },
+  { turn: 20, cost: 16 },
   { turn: 21, cost: 17 },
   { turn: 30, cost: 17 },
   { turn: 31, cost: 18 },

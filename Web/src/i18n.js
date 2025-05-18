@@ -17,7 +17,7 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: "en",
+    fallbackLng: "zh-HK",
     debug: true,
 
     interpolation: {
@@ -30,13 +30,13 @@ i18n
           install: {
             windows: {
               title: "Install Nookio on Windows",
-              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              1: "It's recommended to open this page with Google Chrome",
               2: "Click on the install button at the right of the address bar",
               3: 'Click "Install" in the pop-up window',
             },
             mac: {
               title: "Install Nookio on Mac",
-              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              1: "It's recommended to open this page with Google Chrome",
               2: "Click on the browser menu in the top-right corner",
               3: 'Select "Add to Home Screen" or "Install Nookio" from the menu',
               4: 'Click "Install" in the pop-up window',
@@ -56,7 +56,7 @@ i18n
             },
             unknown: {
               title: "Install Nookio",
-              1: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+              1: "It's recommended to open this page with Google Chrome",
               2: "Look for an 'Install' or 'Add to Home Screen' option in your browser's menu",
               3: 'Tap "Install" or "Add" in the pop-up',
             },
@@ -111,7 +111,7 @@ i18n
               explanation3:
                 "Longer Conversation (After 10 turns): Once you've had more than 10 turns, it's an extra 1 credit for every 10 additional turns.",
               turn: "Turn",
-              credit: "Credit",
+              credit: "Credit Use",
             },
           },
 
@@ -178,13 +178,13 @@ i18n
           install: {
             windows: {
               title: "在 Windows 上安裝 Nookio",
-              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              1: "建議使用 Google Chrome 開啟此頁面",
               2: "點擊地址欄右邊的安裝按鈕",
               3: "在彈出視窗中點擊「安裝」",
             },
             mac: {
               title: "在 Mac 上安裝 Nookio",
-              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              1: "建議使用 Google Chrome 開啟此頁面",
               2: "點擊瀏覽器選單",
               3: "從選單中選擇「安裝 Nookio」",
               4: "在彈出視窗中點擊「安裝」",
@@ -204,7 +204,7 @@ i18n
             },
             unknown: {
               title: "安裝 Nookio",
-              1: "建議使用 Google Chrome 開啟此頁面（使用手機有更好的使用者體驗）",
+              1: "建議使用 Google Chrome 開啟此頁面",
               2: "在瀏覽器選單中尋找「安裝」或「加入主畫面」選項",
               3: "在彈出視窗中點擊「安裝」或「加入」",
             },
@@ -253,7 +253,7 @@ i18n
               explanation3:
                 "較長對話（10回合後）：一旦對話超過 10 回合，每10回合將額外消耗1點數。",
               turn: "回合",
-              credit: "點數",
+              credit: "消耗點數",
             },
           },
           profile: {
@@ -318,15 +318,15 @@ i18n
           install: {
             windows: {
               title: "喺Windows Download Nookio",
-              1: "建議用Google Chrome開（用手機體驗會好啲）",
+              1: "建議用Google Chrome開",
               2: "撳Address Bar右邊嘅安裝制",
               3: "喺個Popup到撳「安裝」",
             },
             mac: {
               title: "喺Mac Download Nookio",
-              1: "建議用Google Chrome開（用手機體驗會好啲）",
+              1: "建議用Google Chrome開",
               2: "撳Browser嘅選單",
-              3: "揀「安裝 Nookio...」",
+              3: "揀「安裝 Nookio」",
             },
             ios: {
               title: "喺iOS Download Nookio",
@@ -343,8 +343,8 @@ i18n
             },
             unknown: {
               title: "Download Nookio",
-              1: "建議用Google Chrome開（用手機體驗會好啲）",
-              2: "喺Browser Menu度搵「安裝」或「加入主畫面」",
+              1: "建議用Google Chrome開",
+              2: "喺Browser Menu或者Address Bar度搵「安裝」或「加入主畫面」",
               3: "喺個Popup到撳「安裝」或「加入」",
             },
           },
@@ -392,7 +392,7 @@ i18n
               explanation3:
                 "較長對話（10回合後）：一旦對話超過 10 回合，每10回合將額外消耗1點數。",
               turn: "回合",
-              credit: "點數",
+              credit: "消耗點數",
             },
           },
           profile: {
@@ -457,13 +457,13 @@ i18n
           install: {
             windows: {
               title: "在 Windows 上安装 Nookio",
-              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              1: "建议使用 Google Chrome 打开此页面",
               2: "点击地址栏右侧的安装按钮",
               3: "在弹出窗口中点击“安装”",
             },
             mac: {
               title: "在 Mac 上安装 Nookio",
-              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              1: "建议使用 Google Chrome 打开此页面",
               2: "点击浏览器的菜单",
               3: "选择“安装 Nookio”或“加入主画面”",
             },
@@ -482,7 +482,7 @@ i18n
             },
             unknown: {
               title: "安装 Nookio",
-              1: "建议使用 Google Chrome 打开此页面（使用手机体验会更好）",
+              1: "建议使用 Google Chrome 打开此页面",
               2: "在浏览器菜单中寻找“安装”或“添加到主屏幕”选项",
               3: "在弹出窗口中点击“安装”或“添加”",
             },
@@ -531,7 +531,7 @@ i18n
               explanation3:
                 "较长对话（10 轮后）：一旦对话超过10轮，每10轮额外消耗 1 积分。",
               turn: "轮",
-              credit: "积分",
+              credit: "消耗积分",
             },
           },
           profile: {

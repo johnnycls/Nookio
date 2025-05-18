@@ -117,7 +117,7 @@ const NewChatroomDialog: React.FC<{
       {isLoading && <LoadingScreen isLoading={isLoading} />}
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 flex-wrap">
-          <Dropdown
+          {/* <Dropdown
             pt={{
               input: {
                 className: "!pr-0",
@@ -134,7 +134,7 @@ const NewChatroomDialog: React.FC<{
             onChange={(e) => {
               setSelectedLang(e.value);
             }}
-          />
+          /> */}
           {/* <Dropdown
             pt={{
               input: {
