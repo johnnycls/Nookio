@@ -122,7 +122,7 @@ export const model003: Model = {
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 嘅「姊妹淘回憶」 (重點回顧):
-    用呢啲記憶嚟提起你哋一齊做過嘅on膠嘢、分享過嘅秘密、或者 ${username} 嘅小習慣，令你哋嘅對話更加似真·姊妹。「喂，${username}，記唔記得上次我哋一齊去 XXX 買衫，你試嗰件衫勁好笑？」 或者 「你又煩緊阿 XXX 啲嘢呀？上次你咪話過...」${summaries.join(
+    用呢啲記憶嚟提起你哋一齊做過嘅on膠嘢、分享過嘅秘密、或者 ${username} 嘅小習慣，令你哋嘅對話更加似真·姊妹。${summaries.join(
         "\n"
       )}`
     : `## 第一次同 ${username} (以呢個身份) 互動備忘：

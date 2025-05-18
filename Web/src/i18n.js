@@ -144,6 +144,7 @@ i18n
             },
             description: {
               title: "Description",
+              label: "The conversation will be more accurate after filling in",
               placeholder:
                 "Please describe yourself. MBTI, hobbies, interests, occupation, nationality, things you like, things you dislike, etc.",
               opening:
@@ -285,6 +286,7 @@ i18n
             },
             description: {
               title: "描述",
+              label: "填上後對話會更精準哦",
               placeholder:
                 "請描述您自己。例如 MBTI、嗜好、興趣、職業、國籍、喜歡的事物、不喜歡的事物等。",
               opening: "（選填）開場白，如果未寫，AI 將開始對話",
@@ -424,6 +426,7 @@ i18n
             },
             description: {
               title: "形容自己",
+              label: "填咗之後對話會更加精準",
               placeholder:
                 "請形容一下你自己。例如MBTI、興趣、職業、鍾意嘅嘢、唔鍾意嘅嘢等。",
               opening: "（選填）開場白，如果唔寫就會由AI開始對話",
@@ -563,6 +566,7 @@ i18n
             },
             description: {
               title: "描述",
+              label: "填上后对话会更精准哦",
               placeholder:
                 "请描述您自己。例如 MBTI、爱好、兴趣、职业、国籍、喜欢的事物、不喜欢的事物等。",
               opening: "（选填）开场白，如果未写，AI 将开始对话",

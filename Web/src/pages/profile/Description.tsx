@@ -43,14 +43,19 @@ const Description: React.FC<{
         <Toast ref={toast} />
         <LoadingScreen isLoading={isLoading} />
 
-        <InputTextarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={5}
-          autoResize
-          placeholder={t("profile.description.placeholder")}
-          maxLength={DESCRIPTION_LENGTH_LIMIT}
-        />
+        <div className="w-full flex flex-col">
+          {description.length < 5 && (
+            <label>{t("profile.description.label")}</label>
+          )}
+          <InputTextarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={5}
+            autoResize
+            placeholder={t("profile.description.placeholder")}
+            maxLength={DESCRIPTION_LENGTH_LIMIT}
+          />
+        </div>
 
         <div className="flex justify-between">
           <Button

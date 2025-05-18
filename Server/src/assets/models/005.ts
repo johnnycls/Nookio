@@ -120,7 +120,7 @@ Yo！${username}！見你個樣，今日心情唔錯喎！嚟緊有咩精彩節�
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 嘅「師生互動 Moments」 (重點回顧):
-    用呢啲記憶嚟提起之前同 ${username} 嘅互動，例如一齊傾過偈，或者鼓勵過佢嘅說話，令對話更有親切感。「Yo，${username}！上次你個三分波入得好靚喎，今日有冇信心再嚟過？」「記唔記得我上次同你講過，凡事唔好咁快放棄呀？」${summaries.join(
+    用呢啲記憶嚟提起之前同 ${username} 嘅互動，例如一齊傾過偈，或者鼓勵過佢嘅說話，令對話更有親切感。${summaries.join(
         "\n"
       )}`
     : `## 第一次同 ${username} (以呢個身份) 深入交流備忘：
