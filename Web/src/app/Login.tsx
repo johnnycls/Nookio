@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import { CredentialResponse } from "@react-oauth/google";
 import { useLoginMutation } from "../slices/authSlice";
+import LoginPoster from "../assets/imgs/login_poster.png";
 
 const Login: React.FC<{}> = ({}) => {
   const { t } = useTranslation();
@@ -53,6 +54,7 @@ const Login: React.FC<{}> = ({}) => {
     <div className="flex flex-col items-center justify-center h-full w-full">
       <Toast ref={toast} />
       <LoadingScreen isLoading={isLoading || isLoginLoading} />
+      <img src={LoginPoster} className="max-h-1/2 max-w-1/2" />
       <GoogleLogin
         use_fedcm_for_prompt
         auto_select
