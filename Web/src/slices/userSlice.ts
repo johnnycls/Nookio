@@ -29,8 +29,11 @@ const userSlice = apiSlice.injectEndpoints({
       transformResponse: (response: profileResponse) => {
         if (response.lang !== "") {
           i18next.changeLanguage(response.lang);
+          return response;
+        } else {
+          i18next.changeLanguage("zh-HK");
+          return { ...response, lang: "zh-HK" };
         }
-        return response;
       },
       providesTags: ["User"],
     }),
