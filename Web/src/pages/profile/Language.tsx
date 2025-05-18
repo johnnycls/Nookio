@@ -71,6 +71,7 @@ const Language: React.FC<{
         </div>
 
         <Button
+          disabled={lang === ""}
           label={t("profile.navigation.next")}
           icon="pi pi-arrow-right"
           iconPos="right"
