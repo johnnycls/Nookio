@@ -87,7 +87,7 @@ router.get("/profile", authMiddleware, async (req: Request, res: Response) => {
       gender: user.gender || "",
       dob: user.dob || new Date(),
       credit: user.credit || 0,
-      lang: user.lang || "en",
+      lang: user.lang ?? "",
     };
 
     res.status(200).json(profile);
