@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
+import PromptInstallIfNotStandalone from "./PromptInstallIfNotStandalone";
 
 const AppBar: React.FC<{ children?: React.ReactNode; onBack?: () => void }> = ({
   children,
@@ -30,6 +31,7 @@ const AppBar: React.FC<{ children?: React.ReactNode; onBack?: () => void }> = ({
         />
       )}
       <div className="flex-1">{children}</div>
+      <PromptInstallIfNotStandalone />
     </div>
   );
 };

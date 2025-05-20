@@ -1,14 +1,9 @@
-/* @layer tailwind-base, primereact, tailwind-utilities; */
-
 @import "tailwindcss";
 @import "./assets/theme/theme.css";
 
-/* @layer utilities {
-  .glow-white {
-    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #fff,
-      0 0 82px #fff, 0 0 92px #fff, 0 0 102px #fff, 0 0 151px #fff;
-  }
-} */
+html {
+  scrollbar-gutter: stable !important;
+}
 
 body {
   margin: 0;
@@ -36,10 +31,11 @@ body {
 #root {
   margin: 0;
   padding: 0;
-  width: 100svw;
-  height: 100svh;
+  width: 100dvw;
+  height: 100dvh;
 }
 
 * {
+  scrollbar-gutter: stable !important;
   box-sizing: border-box;
 }

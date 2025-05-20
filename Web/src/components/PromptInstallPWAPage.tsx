@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import usePlatform, { Platform } from "../hooks/usePlatform";
 import { useTranslation } from "react-i18next";
 import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
 
 interface Instruction {
   title: string;
@@ -11,7 +12,7 @@ interface Instruction {
 const PromptInstallPWAPage: React.FC = () => {
   const platform = usePlatform();
   const { t } = useTranslation();
-  const [visible, setVisible] = useState<boolean>(true);
+  const [visible, setVisible] = useState<boolean>(false);
 
   const instructions: Record<Platform, Instruction> = {
     windows: {
@@ -66,31 +67,42 @@ const PromptInstallPWAPage: React.FC = () => {
   };
 
   return (
-    <Dialog
-      visible={visible}
-      onHide={() => setVisible(false)}
-      header={currentInstructions.title}
-    >
-      <ul className="space-y-6">
-        {currentInstructions.steps.map((step, index) => (
-          <li key={index}>
-            <div className="flex items-center">
-              <span
-                className="flex items-center justify-center text-white rounded-full w-8 h-8 mr-4 flex-shrink-0 text-sm font-bold"
-                style={{ backgroundColor: "var(--primary-color)" }}
-              >
-                {index + 1}
-              </span>
-              <div>
-                <p className="" style={{ color: colors.lightText }}>
-                  {step}
-                </p>
+    <>
+      <Dialog
+        closable
+        visible={visible}
+        onHide={() => setVisible(false)}
+        header={currentInstructions.title}
+        closeIcon="pi pi-times"
+      >
+        <ul className="space-y-6">
+          {currentInstructions.steps.map((step, index) => (
+            <li key={index}>
+              <div className="flex items-center">
+                <span
+                  className="flex items-center justify-center text-white rounded-full w-8 h-8 mr-4 flex-shrink-0 text-sm font-bold"
+                  style={{ backgroundColor: "var(--primary-color)" }}
+                >
+                  {index + 1}
+                </span>
+                <div>
+                  <p className="" style={{ color: colors.lightText }}>
+                    {step}
+                  </p>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </Dialog>
+            </li>
+          ))}
+        </ul>
+      </Dialog>
+
+      <Button
+        icon="pi pi-download"
+        onClick={() => {
+          setVisible(true);
+        }}
+      />
+    </>
   );
 };
 
