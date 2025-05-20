@@ -4,7 +4,7 @@ import Home from "../pages/home/Index";
 import Profile from "../pages/profile/Index";
 import Account from "../pages/account/Index";
 import Chat from "../pages/chat/Index";
-import ChatDetail from "../pages/chatDetail/Index";
+import Games from "../pages/games/Index";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "account", element: <Account /> },
       { path: "chat/:chatroomId", element: <Chat /> },
-      { path: "chatdetail/:chatroomId", element: <ChatDetail /> },
+      { path: "games", element: <Games /> },
     ],
   },
 ]);

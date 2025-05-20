@@ -1,3 +1,4 @@
+import { langs } from "../assets/langs";
 import { apiSlice } from "./apiSlice";
 import i18next from "i18next";
 
@@ -30,6 +31,10 @@ const userSlice = apiSlice.injectEndpoints({
         if (response.lang !== "") {
           i18next.changeLanguage(response.lang);
           return response;
+        } else if (
+          langs.find((lang) => lang.code === i18next.language) !== undefined
+        ) {
+          return { ...response, lang: i18next.language };
         } else {
           i18next.changeLanguage("zh-HK");
           return { ...response, lang: "zh-HK" };
