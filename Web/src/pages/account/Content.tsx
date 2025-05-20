@@ -19,7 +19,7 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
         <Explanation />
       </div>
 
-      <BottomTab activeIndex={2} />
+      <BottomTab activeIndex={3} />
     </div>
   );
 };

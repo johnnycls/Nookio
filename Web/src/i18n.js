@@ -105,12 +105,12 @@ i18n
             explanation: {
               title: "Payment Mode",
               explanation1:
-                "Starting Fee: Each time the AI messages or replies, it costs 5 credits.",
+                "Basic Fee: Each time the AI messages or replies, it costs 5 credits.",
               explanation2:
-                "Early Conversation (First 10 turns): For each of the first 10 back-and-forth exchanges (turns), it's an extra 1 credit per turn.",
+                "First 10 messages: For each AI message, it's an extra 1 credit",
               explanation3:
-                "Longer Conversation (After 10 turns): Once you've had more than 10 turns, it's an extra 1 credit for every 10 additional turns.",
-              turn: "Turn",
+                "After 10 messages: Once you've had more than 10 AI messages, it's an extra 1 credit for every 10 additional messages.",
+              turn: "Message Number",
               credit: "Credit Use",
             },
           },
@@ -248,12 +248,10 @@ i18n
             },
             explanation: {
               title: "付款模式",
-              explanation1: "起始費用：AI 每次傳送訊息或回覆，將消耗5點數。",
-              explanation2:
-                "初期對話（前10回合）：在前10次來回交流（回合）中，每回合額外消耗1點數。",
-              explanation3:
-                "較長對話（10回合後）：一旦對話超過 10 回合，每10回合將額外消耗1點數。",
-              turn: "回合",
+              explanation1: "基本費用：AI每次傳送訊息都會消耗5點數",
+              explanation2: "前10個訊息：每個訊息會多消耗1點數",
+              explanation3: "10個訊息後：每10個訊息才會多消耗1點數。",
+              turn: "第n個訊息",
               credit: "消耗點數",
             },
           },
@@ -388,12 +386,11 @@ i18n
             },
             explanation: {
               title: "點收費",
-              explanation1: "起始費用：AI每次send嘢俾你都要用5點數。",
-              explanation2:
-                "初期對話（前10回合）：在前10次來回交流中，每回合額外用1點數。",
+              explanation1: "基本費用：AI每次send嘢俾你都要用5點數",
+              explanation2: "前10訊息：頭十個AI嘅訊息，每個訊息會用多1點數",
               explanation3:
-                "較長對話（10回合後）：一旦對話超過 10 回合，每10回合將額外消耗1點數。",
-              turn: "回合",
+                "10個訊息之後：一旦send多過10個訊息，每10個訊息先會用多1點數",
+              turn: "第n個訊息",
               credit: "消耗點數",
             },
           },
@@ -528,12 +525,10 @@ i18n
             },
             explanation: {
               title: "计费模式",
-              explanation1: "起始费用：AI 每次发送消息或回复，消耗 5 积分。",
-              explanation2:
-                "初期对话（前 10 轮）：在前 10 次互动（轮）中，每轮额外消耗 1 积分。",
-              explanation3:
-                "较长对话（10 轮后）：一旦对话超过10轮，每10轮额外消耗 1 积分。",
-              turn: "轮",
+              explanation1: "基本费用：AI 每次发送消息或回复，消耗 5 积分",
+              explanation2: "前 10 轮：在前 10 次互动中，每轮多消耗 1 积分",
+              explanation3: "10 轮后：一旦对话超过10轮，每10轮多消耗 1 积分。",
+              turn: "第n轮",
               credit: "消耗积分",
             },
           },

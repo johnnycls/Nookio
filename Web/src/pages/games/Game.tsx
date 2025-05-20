@@ -9,7 +9,8 @@ const Game: React.FC<{ gameSrc: string; close: () => void }> = ({
     <>
       <iframe src={gameSrc} className="w-full h-full" />
       <Button
-        className="!fixed !right-0 !top-0"
+        className="!fixed !right-2 !top-2"
+        text
         icon="pi pi-times"
         onClick={close}
       />

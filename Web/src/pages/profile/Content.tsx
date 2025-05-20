@@ -72,7 +72,7 @@ const Content: React.FC<{ profile?: profile }> = ({ profile }) => {
       {profile?.name &&
         profile?.description &&
         profile?.gender &&
-        profile?.dob && <BottomTab activeIndex={1} />}
+        profile?.dob && <BottomTab activeIndex={2} />}
     </div>
   );
 };
