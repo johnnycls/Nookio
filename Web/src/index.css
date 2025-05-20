@@ -8,8 +8,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background-image: linear-gradient(
       to top,
       transparent 50%,
@@ -31,8 +31,8 @@ body {
 #root {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
 }
 
 * {
