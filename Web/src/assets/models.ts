@@ -59,7 +59,7 @@ export const MODELS: Model[] = [
   },
   {
     _id: "005",
-    name: "方力行老師",
+    name: "方文力老師",
     gender: "male",
     languages: ["zh-HK"],
     series: ["000"],
@@ -67,7 +67,7 @@ export const MODELS: Model[] = [
   },
   {
     _id: "006",
-    name: "張志偉老闆",
+    name: "張總志老闆",
     gender: "male",
     languages: ["zh-HK"],
     series: ["002"],
