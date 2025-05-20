@@ -107,7 +107,7 @@ i18n
               explanation1:
                 "Basic Fee: Each time the AI messages or replies, it costs 5 credits.",
               explanation2:
-                "First 10 messages: For each AI message, it's an extra 1 credit",
+                "First 10 messages: For each AI message, it's an extra 1 credit.",
               explanation3:
                 "After 10 messages: Once you've had more than 10 AI messages, it's an extra 1 credit for every 10 additional messages.",
               turn: "Message Number",
@@ -250,7 +250,7 @@ i18n
               title: "付款模式",
               explanation1: "基本費用：AI每次傳送訊息都會消耗5點數",
               explanation2: "前10個訊息：每個訊息會多消耗1點數",
-              explanation3: "10個訊息後：每10個訊息才會多消耗1點數。",
+              explanation3: "10個訊息後：每10個訊息才會多消耗1點數",
               turn: "第n個訊息",
               credit: "消耗點數",
             },
@@ -527,7 +527,7 @@ i18n
               title: "计费模式",
               explanation1: "基本费用：AI 每次发送消息或回复，消耗 5 积分",
               explanation2: "前 10 轮：在前 10 次互动中，每轮多消耗 1 积分",
-              explanation3: "10 轮后：一旦对话超过10轮，每10轮多消耗 1 积分。",
+              explanation3: "10 轮后：一旦对话超过10轮，每10轮多消耗 1 积分",
               turn: "第n轮",
               credit: "消耗积分",
             },
