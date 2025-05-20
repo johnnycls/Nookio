@@ -2,7 +2,7 @@
 @import "./assets/theme/theme.css";
 
 html {
-  scrollbar-gutter: stable both-edges !important;
+  scrollbar-gutter: stable !important;
 }
 
 body {
@@ -36,6 +36,5 @@ body {
 }
 
 * {
-  scrollbar-gutter: stable both-edges !important;
   box-sizing: border-box;
 }
