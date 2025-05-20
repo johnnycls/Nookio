@@ -14,7 +14,7 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     background_color: "#ffffff",
     display: "standalone",
     start_url: "/",
-    orientation: "natural",
+    orientation: "any",
     icons: [
       {
         src: "/android-chrome-192x192.png",
