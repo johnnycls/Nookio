@@ -26,10 +26,11 @@ function matchSerie(model: Model, serieId: string) {
 }
 
 const NewChatroomDialog: React.FC<{
+  userLang?: string;
   existingModelIds: string[];
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-}> = ({ existingModelIds, isOpen, setIsOpen }) => {
+}> = ({ userLang, existingModelIds, isOpen, setIsOpen }) => {
   const { t } = useTranslation();
   const [createChatroom, { isLoading, isSuccess }] =
     useCreateChatroomMutation();
@@ -81,6 +82,13 @@ const NewChatroomDialog: React.FC<{
 
     setSelectedSerieId("all");
   }, [serieIdOptions]);
+
+  useEffect(() => {
+    console.log("userLang", userLang);
+    if (userLang && langs.find((lang) => lang.code === userLang)) {
+      setSelectedLang(userLang);
+    }
+  }, [userLang]);
 
   const modelTemplate = (option: Model) => {
     if (!option) return <></>;

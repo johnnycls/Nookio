@@ -37,6 +37,7 @@ const HomeAppBar: React.FC<HomeAppBarProps> = ({
   return (
     <AppBar>
       <NewChatroomDialog
+        userLang={profile?.lang}
         existingModelIds={existingModelIds}
         isOpen={isOpen}
         setIsOpen={setIsOpen}

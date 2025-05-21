@@ -55,7 +55,7 @@ const Home: React.FC = () => {
     return <LoadingScreen isLoading={true} />;
   }
 
-  return <Content chatrooms={chatrooms} />;
+  return <Content chatrooms={chatrooms} profile={profile} />;
 };
 
 export default Home;
