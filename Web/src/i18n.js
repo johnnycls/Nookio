@@ -113,6 +113,8 @@ i18n
               turn: "Message Number",
               credit: "Credit Use",
             },
+            query:
+              "If you have any questions, please contact us: contacttrymenow@gmail.com",
           },
 
           profile: {
@@ -254,6 +256,7 @@ i18n
               turn: "第n個訊息",
               credit: "消耗點數",
             },
+            query: "如有任何問題，請聯絡contacttrymenow@gmail.com",
           },
           profile: {
             title: "設定個人資料",
@@ -393,6 +396,7 @@ i18n
               turn: "第n個訊息",
               credit: "消耗點數",
             },
+            query: "如有任何問題，請聯絡contacttrymenow@gmail.com",
           },
           profile: {
             title: "set個人資料",
@@ -531,6 +535,7 @@ i18n
               turn: "第n轮",
               credit: "消耗积分",
             },
+            query: "如有任何问题，请联络contacttrymenow@gmail.com",
           },
           profile: {
             title: "设置个人资料",
