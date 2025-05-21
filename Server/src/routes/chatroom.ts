@@ -136,20 +136,6 @@ router.delete("/", authMiddleware, async (req: Request, res: Response) => {
       $expr: { $lt: [{ $size: "$messages" }, 5] },
     });
 
-    // // Create new chatroom
-    // const currentChatrooms = user.chatrooms.length;
-    // const additionalChatrooms = Math.max(
-    //   0,
-    //   user.targetChatrooms - currentChatrooms
-    // );
-    // const requiredCredits = additionalChatrooms * MIN_CREDITS_FOR_AUTO_CHAT;
-
-    // if (user.credit >= requiredCredits && additionalChatrooms > 0) {
-    //   await handleCreateRequest(user, additionalChatrooms);
-    //   user.credit -= requiredCredits;
-    //   await user.save();
-    // }
-
     res.status(200).json({ message: "Chatroom removed successfully" });
   } catch (error) {
     console.error(JSON.stringify(error));
@@ -176,42 +162,6 @@ router.post("/", authMiddleware, async (req: Request, res: Response) => {
 
     await handleCreateRequest(user, modelId);
     user.credit -= MIN_CREDITS_FOR_AUTO_CHAT;
-    await user.save();
-
-    res.status(200).json({
-      message: "Chatroom created successfully",
-    });
-  } catch (error) {
-    console.error("Error sending message:", JSON.stringify(error));
-    res.status(500).json({
-      message: "Error sending message",
-      error: JSON.stringify(error),
-    });
-  }
-});
-
-router.post("/batch", authMiddleware, async (req: Request, res: Response) => {
-  try {
-    const { modelIds } = req.body as { modelIds: string[] };
-    const user = await User.findOne({ email: res.locals.email });
-
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
-    }
-
-    const requiredCredits = MIN_CREDITS_FOR_AUTO_CHAT * modelIds.length;
-    if (user.credit < requiredCredits) {
-      res.status(400).json({ message: "Insufficient credits" });
-      return;
-    }
-
-    await Promise.all(
-      modelIds.map(async (modelId) => {
-        return await handleCreateRequest(user, modelId);
-      })
-    );
-    user.credit -= requiredCredits;
     await user.save();
 
     res.status(200).json({

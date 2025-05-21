@@ -6,7 +6,7 @@ import { MAX_CHATROOMS } from "../config";
 
 export async function handleCreateRequest(user: IUser, modelId: string) {
   try {
-    if (!models.hasOwnProperty(modelId)) {
+    if (!models.hasOwnProperty(modelId) || modelId === "014") {
       throw new Error("Invalid model ID");
     }
 
