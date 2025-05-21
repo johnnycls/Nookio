@@ -1,10 +1,9 @@
 export type Model = {
   _id: string;
   name: string;
-  gender: "male" | "female";
+  gender: "male" | "female" | "other";
   languages: string[];
   series: string[];
-  avatar: string;
 };
 
 export type Serie = { _id: string; label: string; langs: string[] };
@@ -14,6 +13,11 @@ export const SERIES: Serie[] = [
   // { _id: "001", label: "特別角色", langs: ["zh-HK"] },
   { _id: "002", label: "香港打工仔", langs: ["zh-HK"] },
   { _id: "003", label: "香港領養兒童", langs: ["zh-HK"] },
+  {
+    _id: "004",
+    label: "Story Mode (故事模式)",
+    langs: ["en", "zh-HK", "zh-TW"],
+  },
 ];
 
 export const MODELS: Model[] = [
@@ -23,7 +27,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/000.jpg",
   },
   {
     _id: "001",
@@ -31,7 +34,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/001.jpg",
   },
   {
     _id: "002",
@@ -39,7 +41,6 @@ export const MODELS: Model[] = [
     gender: "female",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/002.jpg",
   },
   {
     _id: "003",
@@ -47,7 +48,6 @@ export const MODELS: Model[] = [
     gender: "female",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/003.jpg",
   },
   {
     _id: "004",
@@ -55,7 +55,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/004.jpg",
   },
   {
     _id: "005",
@@ -63,7 +62,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["000"],
-    avatar: "/avatars/005.jpg",
   },
   {
     _id: "006",
@@ -71,7 +69,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["002"],
-    avatar: "/avatars/006.jpg",
   },
   {
     _id: "007",
@@ -79,7 +76,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["002"],
-    avatar: "/avatars/007.jpg",
   },
   {
     _id: "008",
@@ -87,7 +83,6 @@ export const MODELS: Model[] = [
     gender: "female",
     languages: ["zh-HK"],
     series: ["002"],
-    avatar: "/avatars/008.jpg",
   },
   {
     _id: "009",
@@ -95,7 +90,6 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["003"],
-    avatar: "/avatars/009.jpg",
   },
   {
     _id: "010",
@@ -103,6 +97,26 @@ export const MODELS: Model[] = [
     gender: "male",
     languages: ["zh-HK"],
     series: ["003"],
-    avatar: "/avatars/010.jpg",
+  },
+  {
+    _id: "011",
+    name: "故事模式（廣東話）",
+    gender: "other",
+    languages: ["zh-HK"],
+    series: ["004"],
+  },
+  {
+    _id: "012",
+    name: "故事模式（普通話）",
+    gender: "other",
+    languages: ["zh-TW"],
+    series: ["004"],
+  },
+  {
+    _id: "013",
+    name: "Story Mode",
+    gender: "other",
+    languages: ["en"],
+    series: ["004"],
   },
 ];

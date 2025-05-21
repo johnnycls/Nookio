@@ -1,14 +1,9 @@
 import { apiSlice } from "./apiSlice";
 
-type Message = {
-  message: string;
-  response: string;
-};
-
 const chatSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendMessage: builder.mutation<
-      Message,
+      void,
       { chatroomId: string; message: string }
     >({
       query: ({ chatroomId, message }) => ({

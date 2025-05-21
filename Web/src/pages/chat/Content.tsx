@@ -10,6 +10,8 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { CREDITS_FOR_RESPONSE, MESSAGE_LENGTH_LIMIT } from "../../config";
 import { profile } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import Message from "./Message";
+import { MODELS } from "../../assets/models";
 
 const Content: React.FC<{
   chatroom: ChatroomDetail;
@@ -51,29 +53,25 @@ const Content: React.FC<{
 
       <div className="w-full flex-1 px-3 pt-3 min-h-0 overflow-y-auto">
         <div className="flex flex-col h-full gap-2">
-          {chatroom.messages.map((message) => (
-            <div
-              className={`w-full flex ${
-                message.sender === "user" ? "flex-row-reverse" : "flex-row"
-              }`}
+          {chatroom.messages.map((message, idx) => (
+            <Message
+              onOptionClick={(message: string) => {
+                sendMessage({
+                  chatroomId: chatroom._id,
+                  message: message,
+                });
+              }}
               key={message.timestamp}
-            >
-              <Card
-                className="max-w-[70%]"
-                pt={{
-                  body: {
-                    className: "!p-2 !gap-0",
-                  },
-                }}
-                footer={
-                  <div className={`text-xs text-gray-500 text-right`}>
-                    {new Date(message.timestamp).toLocaleTimeString()}
-                  </div>
-                }
-              >
-                {message.content}
-              </Card>
-            </div>
+              content={message.content}
+              timestamp={message.timestamp}
+              sender={message.sender}
+              series={
+                MODELS.find((model) => model._id === chatroom.model._id)
+                  ?.series ?? []
+              }
+              isLast={idx === chatroom.messages.length - 1}
+              isLoading={isSending}
+            />
           ))}
           <div ref={messagesEndRef} />
         </div>

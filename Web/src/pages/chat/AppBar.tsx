@@ -13,7 +13,7 @@ const ChatroomAppBar: React.FC<{ chatroom: ChatroomDetail }> = ({
       <div className="flex items-center gap-2 items-center">
         <Image
           preview
-          src={`/avatars/${chatroom.model.avatar}`}
+          src={`/avatars/${chatroom.model._id}.jpg`}
           alt={chatroom.model.name}
           width="60rem"
           height="60rem"

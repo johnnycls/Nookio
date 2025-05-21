@@ -5,11 +5,6 @@ export const langs: { code: string; name: string; nativeName: string }[] = [
     nativeName: "English",
   },
   {
-    code: "zh-CN",
-    name: "Simplified Chinese",
-    nativeName: "简体中文",
-  },
-  {
     code: "zh-TW",
     name: "Traditional Chinese",
     nativeName: "繁體中文",

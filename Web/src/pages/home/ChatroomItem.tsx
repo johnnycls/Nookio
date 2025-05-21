@@ -1,8 +1,19 @@
-import { Avatar } from "primereact/avatar";
 import { Chatroom } from "../../slices/chatroomSlice";
 import { Divider } from "primereact/divider";
 import { displayDate } from "../../utils/time";
 import { Image } from "primereact/image";
+import { isParsableJSON } from "../../utils/general";
+
+const messagePreview = (message: string) => {
+  if (isParsableJSON(message)) {
+    const parsedMessage = JSON.parse(message);
+    if (parsedMessage.hasOwnProperty("text")) {
+      return parsedMessage.text;
+    }
+    return parsedMessage;
+  }
+  return message;
+};
 
 const ChatroomItem: React.FC<{
   chatroom: Chatroom;
@@ -19,7 +30,7 @@ const ChatroomItem: React.FC<{
         onClick={onClick}
       >
         <Image
-          src={`/avatars/${chatroom.model.avatar}`}
+          src={`/avatars/${chatroom.model._id}.jpg`}
           alt={chatroom.model.name}
           width="60rem"
           height="60rem"
@@ -41,7 +52,7 @@ const ChatroomItem: React.FC<{
           <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
             {`${
               chatroom.lastMessage.sender === "model" && chatroom.model.name
-            }: ${chatroom.lastMessage.content}`}
+            }: ${messagePreview(chatroom.lastMessage.content)}`}
           </p>
         </div>
       </div>

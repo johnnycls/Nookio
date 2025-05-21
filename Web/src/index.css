@@ -11,9 +11,8 @@ body {
   width: 100svw;
   height: 100svh;
   background-image: linear-gradient(
-      to top,
-      transparent 50%,
-      rgba(255, 255, 255, 1) 85%
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
     ),
     url("./assets/imgs/BackgroundImage.webp");
   background-size: cover;

@@ -1,5 +1,11 @@
 import { apiSlice } from "./apiSlice";
 
+export type OptionMessage = {
+  text: string;
+  isEnded: boolean;
+  options: string[];
+};
+
 export type Message = {
   content: string;
   sender: string;
@@ -14,7 +20,6 @@ export type Chatroom = {
     name: string;
     gender: string;
     dob: string;
-    avatar: string;
   };
 };
 
@@ -26,7 +31,6 @@ export type ChatroomDetail = {
     name: string;
     gender: string;
     dob: string;
-    avatar: string;
   };
 };
 

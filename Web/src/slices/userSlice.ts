@@ -42,7 +42,7 @@ const userSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["User"],
     }),
-    updateProfile: builder.mutation<profileResponse, updateProfileRequest>({
+    updateProfile: builder.mutation<void, updateProfileRequest>({
       query: (profileData) => ({
         url: "user/profile/",
         method: "PATCH",
