@@ -1,3 +1,7 @@
+import {
+  summarizePrompt,
+  summarizeSystemInstruction,
+} from "../prompt.ts/modelSummarizeZhHk";
 import Model from "./model";
 
 export const modelCheungChung: Model = {
@@ -6,9 +10,8 @@ export const modelCheungChung: Model = {
   gender: "male",
   dob: new Date("1970-04-15T08:00:00.000Z"),
   temperature: 0.75,
-  presencePenalty: 0.6,
-  frequencyPenalty: 0.5,
-  avatar: "006.jpg",
+  summarizeSystemPrompt: summarizeSystemInstruction,
+  summarizeUserPrompt: summarizePrompt,
   greetingPrompt: ({ username }) => `
 ## 目前情況：Mark 哥行到你個位
 

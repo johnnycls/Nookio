@@ -6,7 +6,7 @@ import User from "../models/user.model";
 import authMiddleware from "../middlewares/auth";
 import models from "../assets/models/models";
 import { MIN_CREDITS_FOR_AUTO_CHAT } from "../config";
-import { handleCreateRequest } from "../services/open_chatroom_service";
+import { handleCreateRequest } from "../services/openChatroomService";
 
 const router: Router = express.Router();
 
@@ -34,7 +34,6 @@ router.get("/", authMiddleware, async (req: Request, res: Response) => {
           name: model.name,
           gender: model.gender || "",
           dob: model.dob || null,
-          avatar: model.avatar || "",
         },
         lastMessage: chatroom.messages[chatroom.messages.length - 1] || null,
       };
@@ -91,7 +90,6 @@ router.get(
           name: model.name,
           gender: model.gender || "",
           dob: model.dob || null,
-          avatar: model.avatar || "",
         },
       });
     } catch (error) {

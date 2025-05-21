@@ -11,6 +11,9 @@ import model007 from "./007";
 import model008 from "./008";
 import model009 from "./009";
 import model010 from "./010";
+import model011 from "./011";
+import model012 from "./012";
+import model013 from "./013";
 import model014 from "./014";
 
 export const models: { [key: string]: Model } = {
@@ -25,6 +28,9 @@ export const models: { [key: string]: Model } = {
   "008": model008,
   "009": model009,
   "010": model010,
+  "011": model011,
+  "012": model012,
+  "013": model013,
   "014": model014,
 };
 

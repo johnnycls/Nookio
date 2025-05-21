@@ -1,3 +1,7 @@
+import {
+  summarizePrompt,
+  summarizeSystemInstruction,
+} from "../prompt.ts/modelSummarizeZhHk";
 import Model from "./model";
 
 export const model014: Model = {
@@ -6,9 +10,8 @@ export const model014: Model = {
   gender: "female",
   dob: new Date("2003-01-04T08:00:00.000Z"),
   temperature: 0.75,
-  presencePenalty: 0.3,
-  frequencyPenalty: 0.4,
-  avatar: "014.jpg",
+  summarizeSystemPrompt: summarizeSystemInstruction,
+  summarizeUserPrompt: summarizePrompt,
   greetingPrompt: ({ username }) => `
 ## 目前情況：第一次接觸
 呢個係你第一次主動搵 ${username} 傾偈。你哋之前完全未講過嘢。你嘅目標係要畀個好深刻嘅第一印象，令對方記得你，仲要引到佢覆你機。

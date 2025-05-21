@@ -1,12 +1,20 @@
+import { GenerateContentConfig } from "@google/genai";
+import { SummarizationPromptParams } from "../prompt.ts/summarizePrompt";
+
 type Model = {
   _id: string;
   name: string;
-  gender: "male" | "female";
+  gender: "male" | "female" | "other";
   dob: Date;
   temperature: number;
-  frequencyPenalty: number;
-  presencePenalty: number;
-  avatar: string;
+  responseMimeType?: string;
+  responseSchema?: GenerateContentConfig["responseSchema"];
+  summarizeSystemPrompt: ({
+    username,
+    modelName,
+    historyChat,
+  }: SummarizationPromptParams) => string;
+  summarizeUserPrompt: string;
   greetingPrompt: ({ username }: { username: string }) => string;
   systemInstruction: ({
     username,

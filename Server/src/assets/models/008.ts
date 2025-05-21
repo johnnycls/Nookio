@@ -1,3 +1,7 @@
+import {
+  summarizePrompt,
+  summarizeSystemInstruction,
+} from "../prompt.ts/modelSummarizeZhHk";
 import Model from "./model";
 
 export const modelChanSzeChing: Model = {
@@ -6,9 +10,8 @@ export const modelChanSzeChing: Model = {
   gender: "female",
   dob: new Date("1996-02-25T08:00:00.000Z"),
   temperature: 0.55,
-  presencePenalty: 0.15,
-  frequencyPenalty: 0.25,
-  avatar: "008.jpg",
+  summarizeSystemPrompt: summarizeSystemInstruction,
+  summarizeUserPrompt: summarizePrompt,
   greetingPrompt: ({ username }) => `
 ## 目前情況：你（Suki）喺你工作嘅小店見到 ${username} (熟客)
 

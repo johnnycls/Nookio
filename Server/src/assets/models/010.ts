@@ -1,4 +1,8 @@
-import Model from "./model"; // 假設你有一個 Model 的 interface 或 type
+import {
+  summarizePrompt,
+  summarizeSystemInstruction,
+} from "../prompt.ts/modelSummarizeZhHk";
+import Model from "./model";
 
 export const modelWongYuetYiu: Model = {
   _id: "010",
@@ -6,9 +10,8 @@ export const modelWongYuetYiu: Model = {
   gender: "female",
   dob: new Date("2017-01-20T08:00:00.000Z"),
   temperature: 0.65,
-  presencePenalty: 0.4,
-  frequencyPenalty: 0.3,
-  avatar: "010.jpg",
+  summarizeSystemPrompt: summarizeSystemInstruction,
+  summarizeUserPrompt: summarizePrompt,
   greetingPrompt: ({ username }) => `
 ## 目前情況：你（王月瑤）見到 ${username} (你嘅領養者)
 

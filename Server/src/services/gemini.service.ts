@@ -8,10 +8,6 @@ import {
 } from "../config";
 import { IUser } from "../models/user.model";
 import { IChatroom, IMessage } from "../models/chatroom.model";
-import {
-  summarizePrompt,
-  summarizeSystemInstruction,
-} from "../utils/summarize";
 import Model from "../assets/models/model";
 import { langs } from "../assets/langs";
 
@@ -61,7 +57,7 @@ export const generateSummary = async (
       )
       .join("\n");
 
-    const systemInstruction = summarizeSystemInstruction({
+    const systemInstruction = model.summarizeSystemPrompt({
       username: user.name,
       modelName: model.name,
       historyChat: historyChat,
@@ -69,7 +65,7 @@ export const generateSummary = async (
 
     const result = await ai.models.generateContent({
       model: LLM_MODEL,
-      contents: summarizePrompt,
+      contents: model.summarizeUserPrompt,
       config: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: SUMMARY_TEMPERATURE,
@@ -109,6 +105,8 @@ export const generateResponse = async (
       model: LLM_MODEL,
       contents: messages,
       config: {
+        responseMimeType: model.responseMimeType,
+        responseSchema: model.responseSchema,
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
         systemInstruction: generateSystemInstruction(
@@ -116,8 +114,6 @@ export const generateResponse = async (
           model,
           chatroom.summaries
         ),
-        // frequencyPenalty: model.frequencyPenalty,
-        // presencePenalty: model.presencePenalty,
         thinkingConfig: {
           thinkingBudget: 0,
         },
@@ -140,11 +136,11 @@ export const generateGreeting = async (
       model: LLM_MODEL,
       contents: generateGreetingPrompt(user, model),
       config: {
+        responseMimeType: model.responseMimeType,
+        responseSchema: model.responseSchema,
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         temperature: model.temperature,
         systemInstruction: generateSystemInstruction(user, model, []),
-        // frequencyPenalty: model.frequencyPenalty,
-        // presencePenalty: model.presencePenalty,
         thinkingConfig: {
           thinkingBudget: 0,
         },

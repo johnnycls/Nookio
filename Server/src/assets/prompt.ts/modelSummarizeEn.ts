@@ -1,8 +1,4 @@
-interface SummarizationPromptParams {
-  username: string;
-  modelName: string;
-  historyChat: string;
-}
+import { SummarizationPromptParams } from "./summarizePrompt";
 
 export const summarizeSystemInstruction = ({
   username,

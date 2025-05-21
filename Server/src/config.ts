@@ -11,12 +11,12 @@ export const JWT_SECRET = process.env.JWT_SECRET;
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-export const MAX_INPUT_TOKENS = 750;
-export const MAX_OUTPUT_TOKENS = 750;
+export const MAX_INPUT_TOKENS = 600;
+export const MAX_OUTPUT_TOKENS = 600;
 
-export const SUMMARY_TEMPERATURE = 0.3;
+export const SUMMARY_TEMPERATURE = 0.2;
 export const SUMMARY_MSG = 20;
-export const LLM_MODEL = "gemini-2.5-flash-preview-04-17";
+export const LLM_MODEL = "gemini-2.5-flash-preview-05-20";
 
 export const MAX_CHATROOMS = 30;
 export const MIN_CREDITS_FOR_AUTO_CHAT = 5;
