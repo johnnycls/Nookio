@@ -11,7 +11,7 @@ export type Serie = { _id: string; label: string; langs: string[] };
 
 export const SERIES: Serie[] = [
   { _id: "000", label: "香港校園", langs: ["zh-HK"] },
-  { _id: "001", label: "特別角色", langs: ["zh-HK"] },
+  // { _id: "001", label: "特別角色", langs: ["zh-HK"] },
   { _id: "002", label: "香港打工仔", langs: ["zh-HK"] },
   { _id: "003", label: "香港領養兒童", langs: ["zh-HK"] },
 ];
@@ -104,13 +104,5 @@ export const MODELS: Model[] = [
     languages: ["zh-HK"],
     series: ["003"],
     avatar: "/avatars/010.jpg",
-  },
-  {
-    _id: "014",
-    name: "米亞 (Mya)",
-    gender: "female",
-    languages: ["zh-HK"],
-    series: ["001"],
-    avatar: "/avatars/014.jpg",
   },
 ];
