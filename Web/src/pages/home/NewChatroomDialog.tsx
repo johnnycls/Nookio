@@ -44,7 +44,8 @@ const NewChatroomDialog: React.FC<{
 
   const options = MODELS.filter(
     (model) =>
-      !existingModelIds.includes(model._id) &&
+      (!existingModelIds.includes(model._id) ||
+        MODELS.find((m) => m._id === model._id)?.series.includes("004")) &&
       matchLang(model, selectedLang) &&
       matchGender(model, selectedGender) &&
       matchSerie(model, selectedSerieId)
