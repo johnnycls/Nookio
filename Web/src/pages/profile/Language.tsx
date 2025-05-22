@@ -77,7 +77,7 @@ const Language: React.FC<{
           iconPos="right"
           onClick={() => {
             if (lang === profile?.lang) {
-              nextCallback();
+              updateProfile({ lang });
             } else {
               updateProfile({ lang });
             }
