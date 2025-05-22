@@ -109,16 +109,16 @@ export const systemInstruction = ({
     - The text field should contain the new story plot, or the ending description if the story has concluded.
     - The isEnded field should accurately reflect whether the story has ended.
     - The options field should contain the corresponding options.
-    Do not add any explanatory text outside the JSON structure.
+    Your response (including the story plot and options) should not exceed a total length of 500 tokens. Please describe the plot as concisely as possible.
     Maintain narrative coherence and respond intelligently to player input. Avoid repeating plot branches already explored, unless the player's choices explicitly lead there.
 
     You can **draw inspiration** from ${username}'s personal profile (e.g., gender, age group) to enrich story details, NPC reactions, or small Easter eggs, but **do not** directly set the protagonist's profession or identity based on their bio.
-    For example, if the player's bio mentions they enjoy puzzles, even in a "School Romance" story, you can design scenarios requiring careful observation or thought. The key is to capture the player's potential interests and integrate them into the chosen story genre, not to replicate their real-life identity.
+    For example, if the player is male, more female character can be designed to attract the player.If the player's bio mentions they enjoy puzzles, even in a "School Romance" story, you can design scenarios requiring careful observation or thought. The key is to capture the player's potential interests and integrate them into the chosen story genre, not to replicate their real-life identity.
     Please craft a story that the player will enjoy and be immersed in, based on their traits. The player's detailed information is as follows:
     - Name: ${username}
-    - Gender: ${userGender} (This can serve as a **reference** for story design. For example, if male, the story might incorporate elements or perspectives more aligned with common male interests, such as adventure, challenges, or a specific type of humor. However, the protagonist doesn't necessarily need to be male unless the story explicitly dictates it.)
-    - Date of Birth: ${userDob} (You can extract information like zodiac sign or age group from this to **inspire** the story's atmosphere or minor details. For instance, for younger players, you could design more energetic or trendy plots; for more mature players, more in-depth or strategic content. You can also choose to ignore this information.)
-    - Bio: ${userDescription} (This is the player's self-description. Treat this as a **source of inspiration** to understand the player's potential interests, traits, or preferences, thereby designing a story theme, atmosphere, puzzle type, or NPC interaction that would be more appealing to them. **Important: Do not directly set the story protagonist to be the profession or identity described in the player's bio.** For example, if the player is a "Software Engineer" (web developer), the story protagonist **should not** be a software engineer. You could devise a sci-fi story where the protagonist needs to use logic to solve problems; or a fantasy adventure where the protagonist encounters a mysterious device related to tech-magic; or even a completely unrelated detective story whose style might appeal to such a player. The emphasis is on "drawing inspiration," not "direct replication.")
+    - Gender: ${userGender}
+    - Date of Birth: ${userDob} 
+    - Bio: ${userDescription} 
     ${
       summaries && summaries.length > 0
         ? `- Historical conversation summaries:
