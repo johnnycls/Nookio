@@ -11,6 +11,8 @@ const OptionButton: React.FC<{
       <Button
         disabled={disabled}
         raised
+        outlined
+        className="!bg-white w-[90%]"
         size="small"
         label={option}
         onClick={onClick}
