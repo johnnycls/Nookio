@@ -7,7 +7,7 @@ import Model from "./model";
 
 export const model: Model = {
   _id: "011",
-  name: "故事模式（廣東話）",
+  name: "文字冒險遊戲（廣東話）",
   gender: "other",
   dob: new Date(),
   temperature: 0.65,

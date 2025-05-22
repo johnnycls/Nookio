@@ -7,7 +7,7 @@ import Model from "./model";
 
 export const model: Model = {
   _id: "013",
-  name: "Story Mode",
+  name: "Text Adventure",
   gender: "other",
   dob: new Date(),
   temperature: 0.65,

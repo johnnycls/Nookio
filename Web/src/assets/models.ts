@@ -15,7 +15,7 @@ export const SERIES: Serie[] = [
   { _id: "003", label: "香港領養兒童", langs: ["zh-HK"] },
   {
     _id: "004",
-    label: "Story Mode (故事模式)",
+    label: "Text Adventure（文字冒險）",
     langs: ["en", "zh-HK", "zh-TW"],
   },
 ];
@@ -100,21 +100,21 @@ export const MODELS: Model[] = [
   },
   {
     _id: "011",
-    name: "故事模式（廣東話）",
+    name: "文字冒險（廣東話）",
     gender: "other",
     languages: ["zh-HK"],
     series: ["004"],
   },
   {
     _id: "012",
-    name: "故事模式（普通話）",
+    name: "文字冒險（普通話）",
     gender: "other",
     languages: ["zh-TW"],
     series: ["004"],
   },
   {
     _id: "013",
-    name: "Story Mode",
+    name: "Text Adventure",
     gender: "other",
     languages: ["en"],
     series: ["004"],

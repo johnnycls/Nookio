@@ -12,6 +12,7 @@ import { profile } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import Message from "./Message";
 import { MODELS } from "../../assets/models";
+import { isParsableJSON } from "../../utils/general";
 
 const Content: React.FC<{
   chatroom: ChatroomDetail;
@@ -46,6 +47,11 @@ const Content: React.FC<{
     }
   }, [isSendingError]);
 
+  const series =
+    MODELS.find((model) => model._id === chatroom.model._id)?.series ?? [];
+  const lastMessageContent =
+    chatroom.messages[chatroom.messages.length - 1].content;
+
   return (
     <div className="w-full h-full flex flex-col justify-between">
       <Toast ref={toast} />
@@ -61,14 +67,11 @@ const Content: React.FC<{
                   message: message,
                 });
               }}
-              key={message.timestamp}
+              key={idx}
               content={message.content}
               timestamp={message.timestamp}
               sender={message.sender}
-              series={
-                MODELS.find((model) => model._id === chatroom.model._id)
-                  ?.series ?? []
-              }
+              series={series}
               isLast={idx === chatroom.messages.length - 1}
               isLoading={isSending}
             />
@@ -77,40 +80,47 @@ const Content: React.FC<{
         </div>
       </div>
 
-      <div className="w-full flex gap-2 p-2 pb-4">
-        <InputTextarea
-          className="flex-1 "
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          autoResize
-          rows={1}
-          maxLength={MESSAGE_LENGTH_LIMIT}
-        />
-
-        {isSending ? (
-          <Button disabled icon="pi pi-spin pi-spinner" />
-        ) : (
-          <Button
-            rounded
-            icon="pi pi-send"
-            disabled={message.trim().length === 0}
-            onClick={() => {
-              if (
-                profile &&
-                profile.credit < CREDITS_FOR_RESPONSE(chatroom.messages.length)
-              ) {
-                navigate("/account");
-              } else {
-                sendMessage({
-                  chatroomId: chatroom._id,
-                  message: message,
-                });
-                setMessage("");
-              }
-            }}
+      {!(
+        isParsableJSON(lastMessageContent) &&
+        JSON.parse(lastMessageContent).hasOwnProperty("isEnded") &&
+        JSON.parse(lastMessageContent).isEnded
+      ) && (
+        <div className="w-full flex gap-2 p-2 pb-4">
+          <InputTextarea
+            className="flex-1 "
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            autoResize
+            rows={1}
+            maxLength={MESSAGE_LENGTH_LIMIT}
           />
-        )}
-      </div>
+
+          {isSending ? (
+            <Button disabled icon="pi pi-spin pi-spinner" />
+          ) : (
+            <Button
+              rounded
+              icon="pi pi-send"
+              disabled={message.trim().length === 0}
+              onClick={() => {
+                if (
+                  profile &&
+                  profile.credit <
+                    CREDITS_FOR_RESPONSE(chatroom.messages.length)
+                ) {
+                  navigate("/account");
+                } else {
+                  sendMessage({
+                    chatroomId: chatroom._id,
+                    message: message,
+                  });
+                  setMessage("");
+                }
+              }}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
