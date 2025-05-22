@@ -10,10 +10,8 @@ const OptionButton: React.FC<{
     <div className={"w-full flex items-center justify-center"}>
       <Button
         disabled={disabled}
-        raised
         outlined
-        className="!bg-white w-[90%]"
-        size="small"
+        className="!bg-white w-[90%] !border-2"
         label={option}
         onClick={onClick}
       />
