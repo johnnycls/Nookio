@@ -12,7 +12,7 @@ const OptionButton: React.FC<{
         disabled={disabled}
         outlined
         className="!bg-white w-[90%] !border-2"
-        label={option}
+        label={option.slice(0, option.length - 1)}
         onClick={onClick}
       />
     </div>

@@ -1,17 +1,17 @@
 import {
   summarizePrompt,
   summarizeSystemInstruction,
-} from "../prompt.ts/storySummarizeZhHk";
+} from "../prompt.ts/storySummarizeEn";
 import Model from "./model";
 import {
   greetingPrompt,
   responseSchema,
   systemInstruction,
-} from "../prompt.ts/storyPromptZhHk";
+} from "../prompt.ts/storyPromptEn";
 
 export const model: Model = {
-  _id: "011",
-  name: "奇幻故仔",
+  _id: "013",
+  name: "School Romance Story",
   gender: "other",
   dob: new Date(),
   temperature: 1.0,
@@ -19,7 +19,7 @@ export const model: Model = {
   summarizeUserPrompt: summarizePrompt,
   responseMimeType: "application/json",
   responseSchema: responseSchema,
-  greetingPrompt: ({ username }) => greetingPrompt({ username, genre: "000" }),
+  greetingPrompt: ({ username }) => greetingPrompt({ username, genre: "002" }),
   systemInstruction: ({
     username,
     userGender,
@@ -35,7 +35,7 @@ export const model: Model = {
       userDob,
       userLang,
       summaries,
-      genre: "000",
+      genre: "002",
     }),
 };
 

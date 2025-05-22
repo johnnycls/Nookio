@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "primereact/card";
+import { send } from "vite";
 
 type MessageProps = {
   content: string;
@@ -19,10 +20,10 @@ const MessageCard: React.FC<MessageProps> = ({
       }`}
     >
       <Card
-        className="max-w-[70%]"
+        className={`max-w-[70%] ${sender === "user" ? "!bg-purple-100" : ""}`}
         pt={{
           body: {
-            className: "!p-2 !gap-0",
+            className: `!p-2 !gap-0`,
           },
         }}
         footer={

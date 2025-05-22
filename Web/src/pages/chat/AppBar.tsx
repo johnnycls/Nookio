@@ -23,7 +23,7 @@ const ChatroomAppBar: React.FC<{ chatroom: ChatroomDetail }> = ({
             },
           }}
         />
-        <h1 className="text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
+        <h1 className="text-xl overflow-hidden text-ellipsis whitespace-nowrap">
           {chatroom.model.name}
         </h1>
       </div>
