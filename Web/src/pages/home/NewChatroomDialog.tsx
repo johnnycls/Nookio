@@ -66,7 +66,6 @@ const NewChatroomDialog: React.FC<{
       toast.current?.show({
         severity: "error",
         summary: t("createChatroomError"),
-        detail: JSON.stringify(error),
       });
     }
   }, [isError]);
