@@ -113,7 +113,7 @@ export const systemInstruction = ({
     請根據玩家的特質，創作一個玩家會喜歡、會沉浸其中的故事。玩家的詳細資料如下：
     - 姓名：${username}
     - 性別：${userGender}
-    - 生日：${userDob} 
+    - 生日：${userDob.toDateString()} 
     - 簡介：${userDescription} 
     ${
       summaries && summaries.length > 0
