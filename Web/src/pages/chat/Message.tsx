@@ -1,5 +1,5 @@
 import React from "react";
-import { isParsableJSON } from "../../utils/general";
+import { hasIntersection, isParsableJSON } from "../../utils/general";
 import MessageCard from "./MessageCard";
 import OptionButton from "./OptionButton";
 
@@ -53,7 +53,9 @@ const Message: React.FC<MessageProps> = ({
   return (
     <MessageCard
       content={content}
-      timestamp={series.includes("004") ? undefined : timestamp}
+      timestamp={
+        hasIntersection(series, ["004", "005", "006"]) ? undefined : timestamp
+      }
       sender={sender}
     />
   );

@@ -14,7 +14,7 @@ export const model: Model = {
   name: "校園愛情故仔",
   gender: "other",
   dob: new Date(),
-  temperature: 1.0,
+  temperature: 0.7,
   summarizeSystemPrompt: summarizeSystemInstruction,
   summarizeUserPrompt: summarizePrompt,
   responseMimeType: "application/json",

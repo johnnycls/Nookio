@@ -7,6 +7,7 @@ import { MODELS, Model, SERIES } from "../../assets/models";
 import { Dropdown } from "primereact/dropdown";
 import LoadingScreen from "../../components/LoadingScreen";
 import { langs } from "../../assets/langs";
+import { hasIntersection } from "../../utils/general";
 
 function matchLang(model: Model, lang: string) {
   if (lang === "all") return true;
@@ -46,7 +47,7 @@ const NewChatroomDialog: React.FC<{
   const options = MODELS.filter(
     (model) =>
       (!existingModelIds.includes(model._id) ||
-        MODELS.find((m) => m._id === model._id)?.series.includes("004")) &&
+        hasIntersection(model.series, ["004", "005", "006"])) &&
       matchLang(model, selectedLang) &&
       matchGender(model, selectedGender) &&
       matchSerie(model, selectedSerieId)
