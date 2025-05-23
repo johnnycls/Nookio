@@ -109,7 +109,7 @@ export const model014: Model = {
 
 - 佢嘅個人簡介係：**${userDescription}**；
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 
 ${
   summaries && summaries.length > 0

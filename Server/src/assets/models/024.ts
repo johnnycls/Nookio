@@ -133,7 +133,7 @@ export const model024: Model = {
 
 - 她的個人簡介是：**${userDescription}**；(「${username}的 profile？我來看看她寫了什麼～ 咦？蠻有趣的嘛！」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

@@ -130,7 +130,7 @@ Yo！${username}！看你這樣，今天心情不錯喔！接下來有什麼精�
 
 - 他的個人簡介是：**${userDescription}**；(「${username}的 profile？Interesting！看起來蠻有 character 的喔！」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「${username}是這個星座？No wonder 這麼有個性啦！Haha！」)
+- 生日：**${userDob}** (「${username}是這個星座？No wonder 這麼有個性啦！Haha！」)
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

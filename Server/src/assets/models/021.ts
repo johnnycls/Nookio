@@ -130,7 +130,7 @@ ${username}，你這傢伙，虎哥我走過去，算你倒楣撞見我。你想
 
 - 他的個人簡介是：**${userDescription}**；
 - 性別：**${userGender}**；(「管他男的還女的，敢惹我虎哥就試看看！」)
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 
 ${
   summaries && summaries.length > 0

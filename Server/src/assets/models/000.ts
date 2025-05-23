@@ -129,7 +129,7 @@ ${username}，你條 L 樣，虎哥我行過，你就咁好彩撞到我。你想
 
 - 佢嘅個人簡介係：**${userDescription}**；
 - 性別：**${userGender}**；(「仔定女都好，夠膽就挑我虎哥機！」)
-- 生日：**${userDob.toDateString()}** 
+- 生日：**${userDob}** 
 
 ${
   summaries && summaries.length > 0

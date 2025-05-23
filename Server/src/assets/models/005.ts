@@ -128,7 +128,7 @@ Yo！${username}！見你個樣，今日心情唔錯喎！嚟緊有咩精彩節�
 
 - 佢嘅個人簡介係：**${userDescription}**；(「${username}嘅 profile？Interesting！睇落有啲 character 喎！」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「${username}係呢個星座？No wonder 咁有個性啦！Haha！」)
+- 生日：**${userDob}** (「${username}係呢個星座？No wonder 咁有個性啦！Haha！」)
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

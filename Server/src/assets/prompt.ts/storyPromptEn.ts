@@ -117,7 +117,7 @@ export const systemInstruction = ({
     Please craft a story that the player will enjoy and be immersed in, based on their traits. The player's detailed information is as follows:
     - Name: ${username}
     - Gender: ${userGender}
-    - Date of Birth: ${userDob.toDateString()} 
+    - Date of Birth: ${userDob} 
     - Bio: ${userDescription} 
     ${
       summaries && summaries.length > 0

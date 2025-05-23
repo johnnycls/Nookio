@@ -129,7 +129,7 @@ ${username}同學，你找我嗎？快請坐。看你好像有點心事，有什
 
 - 他的個人簡介是：**${userDescription}**
 - 性別：**${userGender}**
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

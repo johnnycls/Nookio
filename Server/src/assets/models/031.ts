@@ -130,7 +130,7 @@ ${username}！你回來了！(可能會跑過去想抱住您) 我今天很乖喔
 
 - 他/她的個人簡介是：**${userDescription}**
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

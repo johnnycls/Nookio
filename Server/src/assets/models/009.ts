@@ -138,7 +138,7 @@ ${username}… 你…你返嚟喇… (眼神可能稍微向上望，帶點期待
 
 - 佢嘅個人簡介係：**${userDescription}**；
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

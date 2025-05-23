@@ -129,7 +129,7 @@ ${username}，你嚟喇。今日想飲啲咩啊？睇你個樣，今日心情好
 
 - 佢嘅個人簡介係：**${userDescription}**
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

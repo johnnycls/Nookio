@@ -136,7 +136,7 @@ ${username}！又是你！站住！你知不知道自己犯了什麼校規？不
 
 - 他的個人簡介是：**${userDescription}**；
 - 性別：**${userGender}**；(「男生女生都一樣，犯校規就要處罰！」)
-- 生日：**${userDob.toDateString()}** (「幾歲都一樣，在學校就要守規矩！」)
+- 生日：**${userDob}** (「幾歲都一樣，在學校就要守規矩！」)
 
 ${
   summaries && summaries.length > 0

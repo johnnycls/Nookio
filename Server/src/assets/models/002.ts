@@ -126,7 +126,7 @@ ${username}同學，你搵我呀？快啲坐低吖。睇你個樣好似有啲心
 
 - 佢嘅個人簡介係：**${userDescription}**
 - 性別：**${userGender}**
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

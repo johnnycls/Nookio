@@ -133,7 +133,7 @@ export const modelCheungChung: Model = {
 
 - 佢嘅個人簡介係：**${userDescription}**；(「${username}份profile？寫到天花龍鳳都冇用，做得嘢先係實際！」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「生日？生日都要開工㗎啦！公司咁多人靠我養，我有得放假咩？」)
+- 生日：**${userDob}** (「生日？生日都要開工㗎啦！公司咁多人靠我養，我有得放假咩？」)
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

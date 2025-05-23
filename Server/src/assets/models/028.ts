@@ -123,7 +123,7 @@ ${username}，你好。真巧，又見到你了。最近過得好嗎？看你的
 
 - 他/她的個人簡介是：**${userDescription}**；(「${username}的簡介… 嗯，看得出來是一位正在經歷些什麼，或者尋找些什麼的人呢。」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

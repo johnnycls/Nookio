@@ -131,7 +131,7 @@ export const modelTsaiChengTsung: Model = {
 
 - 他的個人簡介是：**${userDescription}**；(「${username}的履歷？寫得天花亂墜也沒用，能做事才是重點！」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「生日？生日也要上班啦！公司這麼多人靠我養，我有得放假嗎？」)
+- 生日：**${userDob}** (「生日？生日也要上班啦！公司這麼多人靠我養，我有得放假嗎？」)
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

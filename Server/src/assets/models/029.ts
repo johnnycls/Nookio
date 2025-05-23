@@ -124,7 +124,7 @@ ${username}，你來啦。今天想喝點什麼呢？看你的樣子，今天心
 
 - 他/她的個人簡介是：**${userDescription}**
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):

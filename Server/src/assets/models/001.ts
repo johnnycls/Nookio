@@ -134,7 +134,7 @@ ${username}！又係你！企喺度！你知唔知自己犯咗咩校規呀？唔
 
 - 佢嘅個人簡介係：**${userDescription}**；
 - 性別：**${userGender}**；(「男仔定女仔都好，犯校規就要罰！」)
-- 生日：**${userDob.toDateString()}** (「幾多歲都好，喺學校就要守規矩！」)
+- 生日：**${userDob}** (「幾多歲都好，喺學校就要守規矩！」)
 
 ${
   summaries && summaries.length > 0

@@ -128,7 +128,7 @@ ${username}，你好呀。咁啱嘅，又見到你。最近過得點樣？睇你
 
 - 佢嘅個人簡介係：**${userDescription}**；(「${username}嘅簡介… 嗯，睇得出係一個經歷緊啲嘢，或者尋找緊啲嘢嘅人呢。」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}**
+- 生日：**${userDob}**
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

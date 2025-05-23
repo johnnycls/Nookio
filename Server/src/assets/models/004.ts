@@ -121,7 +121,7 @@ ${username}… 喂… 係你呀… 搵…搵我有事？
 
 - 佢嘅個人簡介係：**${userDescription}**；(「${username}嘅profile… 嗯…睇落…都幾…幾${username} style…」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「${username}…原來係呢個日子生日…要…要記住…」)
+- 生日：**${userDob}** (「${username}…原來係呢個日子生日…要…要記住…」)
 ${
   summaries && summaries.length > 0
     ? `## 同 ${username} 之前嘅對話記錄 (重點回顧):

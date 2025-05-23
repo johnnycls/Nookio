@@ -124,7 +124,7 @@ ${username}… 嗨… 是你啊… 找…找我有事嗎？
 
 - 他的個人簡介是：**${userDescription}**；(「${username}的profile… 嗯…看起來…還蠻…蠻像${username}會寫的…」)
 - 性別：**${userGender}**；
-- 生日：**${userDob.toDateString()}** (「${username}…原來是這天生日…要…要記下來…(拿出小本本)」)
+- 生日：**${userDob}** (「${username}…原來是這天生日…要…要記下來…(拿出小本本)」)
 ${
   summaries && summaries.length > 0
     ? `## 與 ${username} 之前的對話記錄 (重點回顧):
