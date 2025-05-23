@@ -65,18 +65,25 @@ i18n
             title: "Error",
             message: "An error occurred",
           },
-          loginError: "An error occurred while logging in",
-          fetchProfileError: "An error occurred while fetching profile",
-          fetchChatroomsError: "An error occurred while fetching chatrooms",
-          purchaseCreditsError: "An error occurred while purchasing credits",
-          paymentError: "Payment failed. Please try again.",
-          updateProfileError: "An error occurred while updating your profile",
-          deleteChatroomError: "An error occurred while deleting chatrooms",
+          loginError:
+            "An error occurred while logging in, please try again later",
+          fetchProfileError:
+            "An error occurred while fetching profile, please try again later",
+          fetchChatroomsError:
+            "An error occurred while fetching chatrooms, please try again later",
+          purchaseCreditsError:
+            "An error occurred while purchasing credits, please try again later",
+          paymentError: "Payment failed. Please try again later",
+          updateProfileError:
+            "An error occurred while updating your profile, please try again later",
+          deleteChatroomError:
+            "An error occurred while deleting chatrooms, please try again later",
           fetchChatroomDetailError:
-            "An error occurred while fetching chatroom detail",
+            "An error occurred while fetching chatroom detail, please try again later",
           createChatroomError:
-            "An error occurred while creating chatroom, please try again",
-          sendMsgError: "An error occurred while sending message: {{error}}",
+            "An error occurred while creating chatroom, please try again later",
+          sendMsgError:
+            "An error occurred while sending message, please try again later",
 
           home: {
             newChatroom: {
@@ -216,18 +223,18 @@ i18n
           },
           error: {
             title: "錯誤",
-            message: "發生錯誤",
+            message: "發生錯誤，請稍後再試",
           },
-          loginError: "登入時發生錯誤",
-          fetchProfileError: "擷取個人資料時發生錯誤",
-          fetchChatroomsError: "擷取聊天室時發生錯誤",
-          purchaseCreditsError: "購買點數時發生錯誤",
-          paymentError: "付款失敗。請再試一次。",
-          updateProfileError: "更新個人資料時發生錯誤",
-          deleteChatroomError: "刪除聊天室時發生錯誤",
-          fetchChatroomDetailError: "擷取聊天室詳細資訊時發生錯誤",
-          createChatroomError: "創建聊天室時發生錯誤，請再試一次",
-          sendMsgError: "傳送訊息時發生錯誤：{{error}}",
+          loginError: "登入時發生錯誤，請稍後再試",
+          fetchProfileError: "擷取個人資料時發生錯誤，請稍後再試",
+          fetchChatroomsError: "擷取聊天室時發生錯誤，請稍後再試",
+          purchaseCreditsError: "購買點數時發生錯誤，請稍後再試",
+          paymentError: "付款失敗，請稍後再試",
+          updateProfileError: "更新個人資料時發生錯誤，請稍後再試",
+          deleteChatroomError: "刪除聊天室時發生錯誤，請稍後再試",
+          fetchChatroomDetailError: "擷取聊天室詳細資訊時發生錯誤，請稍後再試",
+          createChatroomError: "創建聊天室時發生錯誤，請稍後再試",
+          sendMsgError: "傳送訊息時發生錯誤，請稍後再試",
           home: {
             newChatroom: {
               title: "選擇角色",
@@ -358,16 +365,16 @@ i18n
             title: "Bug咗",
             message: "Bug L咗",
           },
-          loginError: "登入嘅時候Bug L咗",
-          fetchProfileError: "fetch profile嘅時候Bug L咗",
-          fetchChatroomsError: "fetch chatrooms嘅時候Bug L咗",
-          purchaseCreditsError: "買點數嘅時候Bug L咗",
-          paymentError: "俾錢嘅時候Bug L咗",
-          updateProfileError: "更新profile嘅時候Bug L咗",
-          deleteChatroomError: "剷chatroom嘅時候Bug L咗",
-          fetchChatroomDetailError: "攞chatroom詳情嘅時候Bug L咗",
-          createChatroomError: "創建chatroom嘅時候Bug L咗，請再試一次",
-          sendMsgError: "send msg嘅時候Bug L咗：{{error}}",
+          loginError: "登入嘅時候Bug L咗，請稍後再試",
+          fetchProfileError: "fetch profile嘅時候Bug L咗，請稍後再試",
+          fetchChatroomsError: "fetch chatrooms嘅時候Bug L咗，請稍後再試",
+          purchaseCreditsError: "買點數嘅時候Bug L咗，請稍後再試",
+          paymentError: "俾錢嘅時候Bug L咗，請稍後再試",
+          updateProfileError: "更新profile嘅時候Bug L咗，請稍後再試",
+          deleteChatroomError: "剷chatroom嘅時候Bug L咗，請稍後再試",
+          fetchChatroomDetailError: "攞chatroom詳情嘅時候Bug L咗，請稍後再試",
+          createChatroomError: "創建chatroom嘅時候Bug L咗，請稍後再試",
+          sendMsgError: "send msg嘅時候Bug L咗，請稍後再試",
           home: {
             newChatroom: {
               title: "選擇角色",

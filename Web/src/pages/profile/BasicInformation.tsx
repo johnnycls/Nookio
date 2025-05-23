@@ -99,9 +99,15 @@ const BasicInformation: React.FC<{
           <Calendar
             required
             value={new Date(dob)}
-            onChange={(e) =>
-              setDob(e.value?.toISOString() || new Date().toISOString())
-            }
+            onChange={(e) => {
+              if (e.value) {
+                const date = new Date(e.value);
+                date.setHours(12);
+                setDob(date.toISOString());
+              } else {
+                setDob(new Date().toISOString());
+              }
+            }}
             placeholder={t("profile.basicInfo.dob.placeholder")}
           />
         </div>

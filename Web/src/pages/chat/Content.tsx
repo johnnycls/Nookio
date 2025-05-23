@@ -42,7 +42,7 @@ const Content: React.FC<{
     if (isSendingError) {
       toast.current?.show({
         severity: "error",
-        summary: t("sendMsgError", { error: JSON.stringify(error) }),
+        summary: t("sendMsgError"),
       });
     }
   }, [isSendingError]);

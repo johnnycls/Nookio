@@ -110,7 +110,7 @@ export const systemInstruction = ({
     請根據玩家嘅特質，作一個玩家會鐘意、會沉迷嘅【${genre}】故事。玩家嘅詳細資料如下：
     - 姓名：${username}
     - 性別：${userGender} 
-    - 生日：${userDob} 
+    - 生日：${userDob.toDateString()} 
     - 簡介：${userDescription} 
     ${
       summaries && summaries.length > 0
