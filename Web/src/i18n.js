@@ -74,6 +74,8 @@ i18n
           deleteChatroomError: "An error occurred while deleting chatrooms",
           fetchChatroomDetailError:
             "An error occurred while fetching chatroom detail",
+          createChatroomError:
+            "An error occurred while creating chatroom, please try again",
           sendMsgError: "An error occurred while sending message: {{error}}",
 
           home: {
@@ -224,6 +226,7 @@ i18n
           updateProfileError: "更新個人資料時發生錯誤",
           deleteChatroomError: "刪除聊天室時發生錯誤",
           fetchChatroomDetailError: "擷取聊天室詳細資訊時發生錯誤",
+          createChatroomError: "創建聊天室時發生錯誤，請再試一次",
           sendMsgError: "傳送訊息時發生錯誤：{{error}}",
           home: {
             newChatroom: {
@@ -363,6 +366,7 @@ i18n
           updateProfileError: "更新profile嘅時候Bug L咗",
           deleteChatroomError: "剷chatroom嘅時候Bug L咗",
           fetchChatroomDetailError: "攞chatroom詳情嘅時候Bug L咗",
+          createChatroomError: "創建chatroom嘅時候Bug L咗，請再試一次",
           sendMsgError: "send msg嘅時候Bug L咗：{{error}}",
           home: {
             newChatroom: {

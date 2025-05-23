@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { useTranslation } from "react-i18next";
 import { Button } from "primereact/button";
@@ -8,6 +8,7 @@ import { Dropdown } from "primereact/dropdown";
 import LoadingScreen from "../../components/LoadingScreen";
 import { langs } from "../../assets/langs";
 import { hasIntersection } from "../../utils/general";
+import { Toast } from "primereact/toast";
 
 function matchLang(model: Model, lang: string) {
   if (lang === "all") return true;
@@ -33,7 +34,8 @@ const NewChatroomDialog: React.FC<{
   setIsOpen: (isOpen: boolean) => void;
 }> = ({ userLang, existingModelIds, isOpen, setIsOpen }) => {
   const { t } = useTranslation();
-  const [createChatroom, { isLoading, isSuccess }] =
+  const toast = useRef<Toast>(null);
+  const [createChatroom, { isLoading, isSuccess, isError, error }] =
     useCreateChatroomMutation();
 
   const [selectedLang, setSelectedLang] = useState<string>("all");
@@ -58,6 +60,16 @@ const NewChatroomDialog: React.FC<{
       return selectedLang === "all" || serie.langs.includes(selectedLang);
     }).map((serie) => serie._id),
   ];
+
+  useEffect(() => {
+    if (isError) {
+      toast.current?.show({
+        severity: "error",
+        summary: t("createChatroomError"),
+        detail: JSON.stringify(error),
+      });
+    }
+  }, [isError]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -124,6 +136,7 @@ const NewChatroomDialog: React.FC<{
       onHide={() => setIsOpen(false)}
       className="w-full"
     >
+      <Toast ref={toast} />
       {isLoading && <LoadingScreen isLoading={isLoading} />}
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 flex-wrap">
