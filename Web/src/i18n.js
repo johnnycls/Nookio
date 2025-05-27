@@ -125,7 +125,13 @@ i18n
             query:
               "If you have any questions, please contact us: contacttrymenow@gmail.com",
           },
-
+          chat: {
+            gamePlaceholder:
+              "Type here if you don't want to choose the options above",
+          },
+          natural: {
+            description: "I haven't heard of anyone who can win this game.",
+          },
           profile: {
             title: "Profile Setup",
             basicInfo: {
@@ -268,6 +274,8 @@ i18n
             },
             query: "如有任何問題，請聯絡contacttrymenow@gmail.com",
           },
+          chat: { gamePlaceholder: "如果你不想選上面的選項可以在這裏輸入" },
+          natural: { description: "我暫時未見過有人可以贏到這個遊戲" },
           profile: {
             title: "設定個人資料",
             basicInfo: {
@@ -409,6 +417,8 @@ i18n
             },
             query: "如有任何問題，請聯絡contacttrymenow@gmail.com",
           },
+          chat: { gamePlaceholder: "如果上面啲Options都唔啱嘅話可以喺度打字" },
+          natural: { description: "我暫時未見過有人可以贏到依個遊戲" },
           profile: {
             title: "set個人資料",
             basicInfo: {

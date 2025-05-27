@@ -87,7 +87,12 @@ const Content: React.FC<{
       ) && (
         <div className="w-full flex gap-2 p-2 pb-4">
           <InputTextarea
-            className="flex-1 "
+            className="flex-1"
+            placeholder={
+              isParsableJSON(lastMessageContent)
+                ? t("chat.gamePlaceholder")
+                : ""
+            }
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             autoResize

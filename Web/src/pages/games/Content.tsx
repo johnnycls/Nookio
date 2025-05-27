@@ -37,6 +37,7 @@ const Content: React.FC<{}> = ({}) => {
               setIsNaturalOpen(true);
             }}
           >
+            <h2 className="text-xl">{t("natural.description")}</h2>
             <img src="/NaturalSelectionUniversityWeb/cover.png" />
           </div>
         )}
